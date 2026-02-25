@@ -312,44 +312,44 @@ Assets/
 **Branch:** `feature/step5-ink-types`
 
 ### PhysicsMaterial2D Oluşturma
-- [ ] `Assets/_Game/PhysicsMaterials/Ice.physicsMaterial2D` — friction: 0.02, bounciness: 0.05
-- [ ] `Assets/_Game/PhysicsMaterials/Sticky.physicsMaterial2D` — friction: 0.9, bounciness: 0
-- [ ] `Assets/_Game/PhysicsMaterials/Bouncy.physicsMaterial2D` — friction: 0.1, bounciness: 0.9
+- [x] `Assets/_Game/PhysicsMaterials/Ice.physicsMaterial2D` — friction: 0.02, bounciness: 0.05
+- [x] `Assets/_Game/PhysicsMaterials/Sticky.physicsMaterial2D` — friction: 0.9, bounciness: 0
+- [x] `Assets/_Game/PhysicsMaterials/Bouncy.physicsMaterial2D` — friction: 0.1, bounciness: 0.9
 
 ### InkLine'a Tip Atama
-- [ ] `InkLine.cs` — `InkType currentType` alanı ekle
-- [ ] `SetInkType(InkType type)` metodu: EdgeCollider2D'ye uygun PhysicsMaterial2D ata
-- [ ] Her ink tipi için farklı renk: Ice → Mavi (#00BFFF), Sticky → Turuncu (#FF8C00), Bouncy → Yeşil (#32CD32)
-- [ ] LineRenderer rengini ink tipine göre ayarla
+- [x] `InkLine.cs` — `InkType currentType` alanı ekle
+- [x] `SetInkType(InkType type)` metodu: EdgeCollider2D'ye uygun PhysicsMaterial2D ata
+- [x] Her ink tipi için farklı renk: Ice → Mavi (#00BFFF), Sticky → Turuncu (#FF8C00), Bouncy → Yeşil (#32CD32)
+- [x] LineRenderer rengini ink tipine göre ayarla
 
 ### InkInventory Script
-- [ ] `Assets/_Game/Scripts/Ink/InkInventory.cs` oluştur
-- [ ] `[SerializeField] private int totalInkPoints = 100`
-- [ ] `ConsumeInk(int amount)` — çizim sırasında her segment için puan düş
-- [ ] `HasInk()` — kontrol
-- [ ] `ResetInk()` — level restart
-- [ ] `OnInkChanged` event (UI güncelleme için)
-- [ ] Seçili ink tipi takibi: `currentInkType`
+- [x] `Assets/_Game/Scripts/Ink/InkInventory.cs` oluştur
+- [x] `[SerializeField] private int totalInkPoints = 100`
+- [x] `ConsumeInk(int amount)` — çizim sırasında her segment için puan düş
+- [x] `HasInk()` — kontrol
+- [x] `ResetInk()` — level restart
+- [x] `OnInkChanged` event (UI güncelleme için)
+- [x] Seçili ink tipi takibi: `currentInkType`
 
 ### DrawSystem — Ink Entegrasyonu
-- [ ] DrawSystem'e `InkInventory` referansı ekle
-- [ ] Çizim sırasında ink puanı tüket (her yeni nokta = 1 puan)
-- [ ] Ink bitince çizimi durdur
-- [ ] Yeni InkLine spawn'larken seçili ink tipini ata
+- [x] DrawSystem'e `InkInventory` referansı ekle
+- [x] Çizim sırasında ink puanı tüket (her yeni nokta = 1 puan)
+- [x] Ink bitince çizimi durdur
+- [x] Yeni InkLine spawn'larken seçili ink tipini ata
 
 ### UI — Ink Seçim Butonları (Temel)
-- [ ] UI Canvas'a 3 buton ekle (alt bar): Ice / Sticky / Bouncy
-- [ ] Buton sprite'ları: `kenney_ui-pack` butonları (mavi, turuncu, yeşil)
-- [ ] Seçili buton vurgusu (scale veya border)
-- [ ] Buton tıklama → `InkInventory.currentInkType` değiştir
+- [x] UI Canvas'a 3 buton ekle (alt bar): Ice / Sticky / Bouncy
+- [x] Buton sprite'ları: `kenney_ui-pack` butonları (mavi, turuncu, yeşil)
+- [x] Seçili buton vurgusu (scale veya border)
+- [x] Buton tıklama → `InkInventory.currentInkType` değiştir
 
 ### Doğrulama
-- [ ] 3 farklı renkle çizgi çizilebiliyor
-- [ ] Ice çizgisinde Ball kayıyor (düşük sürtünme)
-- [ ] Sticky çizgisinde Ball yavaşlıyor/duruyor
-- [ ] Bouncy çizgisinde Ball belirgin şekilde sekiyor
-- [ ] Ink puanı azalıyor, bitince çizim duruyor
-- [ ] UI'dan ink tipi değiştirilebiliyor
+- [x] 3 farklı renkle çizgi çizilebiliyor
+- [x] Ice çizgisinde Ball kayıyor (düşük sürtünme)
+- [x] Sticky çizgisinde Ball yavaşlıyor/duruyor
+- [x] Bouncy çizgisinde Ball belirgin şekilde sekiyor
+- [x] Ink puanı azalıyor, bitince çizim duruyor
+- [x] UI'dan ink tipi değiştirilebiliyor
 
 ---
 

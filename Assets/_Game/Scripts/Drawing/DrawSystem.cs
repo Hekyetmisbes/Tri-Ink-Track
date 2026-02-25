@@ -1,4 +1,5 @@
 using TriInkTrack.Core;
+using TriInkTrack.Ink;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ namespace TriInkTrack.Drawing
         [SerializeField] private Camera gameplayCamera;
         [SerializeField] private InkLine inkLinePrefab;
         [SerializeField] private Transform lineRoot;
+        [SerializeField] private InkInventory inkInventory;
 
         [Header("Drawing")]
         [SerializeField] private bool allowDrawInReadyState = true;
@@ -23,12 +25,20 @@ namespace TriInkTrack.Drawing
         [SerializeField] private int maxActiveLines = 30;
         [SerializeField] private bool removeOldestLineWhenLimitReached = true;
 
+        [Header("Play Area")]
+        [SerializeField] private bool restrictDrawingToPlayArea = true;
+        [SerializeField] private Collider2D playAreaCollider;
+        [SerializeField] private float playAreaPadding = 0.05f;
+
         private bool canDraw;
         private bool isDrawing;
         private int activePointerId = -1;
         private InkLine activeLine;
         private Vector3 lastPoint;
         private readonly List<InkLine> activeLines = new List<InkLine>(32);
+        private readonly List<RaycastResult> uiRaycastResults = new List<RaycastResult>(8);
+        private bool hasComputedPlayAreaBounds;
+        private Bounds computedPlayAreaBounds;
 
         private void Awake()
         {
@@ -37,7 +47,23 @@ namespace TriInkTrack.Drawing
                 gameplayCamera = Camera.main;
             }
 
+            if (inkInventory == null)
+            {
+                inkInventory = InkInventory.Instance;
+            }
+
+            if (inkInventory == null)
+            {
+                inkInventory = FindFirstObjectByType<InkInventory>();
+                if (inkInventory == null)
+                {
+                    GameObject inventoryObject = new GameObject("InkInventory");
+                    inkInventory = inventoryObject.AddComponent<InkInventory>();
+                }
+            }
+
             ApplyConfigOverrides();
+            ResolvePlayAreaBoundsIfNeeded();
         }
 
         private void OnEnable()
@@ -106,7 +132,7 @@ namespace TriInkTrack.Drawing
 
                 if (phase == UnityEngine.InputSystem.TouchPhase.Began)
                 {
-                    if (IsPointerOverUI(touchId))
+                    if (IsScreenPositionOverUI(touchPos))
                     {
                         continue;
                     }
@@ -142,12 +168,13 @@ namespace TriInkTrack.Drawing
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
-                if (IsPointerOverUI(-1))
+                Vector2 mousePos = Mouse.current.position.ReadValue();
+                if (IsScreenPositionOverUI(mousePos))
                 {
                     return;
                 }
 
-                StartDrawing(Mouse.current.position.ReadValue(), -1);
+                StartDrawing(mousePos, -1);
             }
 
             if (isDrawing && Mouse.current.leftButton.isPressed)
@@ -192,6 +219,11 @@ namespace TriInkTrack.Drawing
                 return;
             }
 
+            if (inkInventory != null && !inkInventory.HasInk())
+            {
+                return;
+            }
+
             InkLine newLine = CreateLineInstance();
             if (newLine == null)
             {
@@ -199,10 +231,28 @@ namespace TriInkTrack.Drawing
             }
 
             Vector3 worldPoint = ScreenToWorld(screenPosition);
+            if (!IsPointInPlayArea(worldPoint))
+            {
+                return;
+            }
+
             activeLine = newLine;
             activeLine.ResetLine();
             activeLine.SetMaxPoints(maxPointsPerLine);
+            if (inkInventory != null)
+            {
+                activeLine.SetInkType(inkInventory.CurrentInkType);
+            }
+
+            if (inkInventory != null && !inkInventory.HasInk())
+            {
+                DestroyLine(activeLine);
+                ResetDrawingState();
+                return;
+            }
+
             activeLine.AddPoint(worldPoint);
+
             RegisterLine(activeLine);
             lastPoint = worldPoint;
             activePointerId = pointerId;
@@ -217,6 +267,11 @@ namespace TriInkTrack.Drawing
             }
 
             Vector3 worldPoint = ScreenToWorld(screenPosition);
+            if (!IsPointInPlayArea(worldPoint))
+            {
+                return;
+            }
+
             float sqrDistance = (worldPoint - lastPoint).sqrMagnitude;
             float minDistSqr = minPointDist * minPointDist;
             if (sqrDistance < minDistSqr)
@@ -224,8 +279,19 @@ namespace TriInkTrack.Drawing
                 return;
             }
 
+            if (inkInventory != null && !inkInventory.HasInk())
+            {
+                EndDrawing();
+                return;
+            }
+
             if (activeLine.AddPoint(worldPoint))
             {
+                if (inkInventory != null)
+                {
+                    inkInventory.ConsumeInk(1);
+                }
+
                 lastPoint = worldPoint;
 
                 if (activeLine.IsAtMaxPoints)
@@ -298,19 +364,21 @@ namespace TriInkTrack.Drawing
             return world;
         }
 
-        private bool IsPointerOverUI(int pointerId)
+        private bool IsScreenPositionOverUI(Vector2 screenPos)
         {
             if (EventSystem.current == null)
             {
                 return false;
             }
 
-            if (pointerId >= 0)
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
-                return EventSystem.current.IsPointerOverGameObject(pointerId);
-            }
+                position = screenPos
+            };
 
-            return EventSystem.current.IsPointerOverGameObject();
+            uiRaycastResults.Clear();
+            EventSystem.current.RaycastAll(pointerData, uiRaycastResults);
+            return uiRaycastResults.Count > 0;
         }
 
         private void HandleGameStateChanged(GameState state)
@@ -387,6 +455,79 @@ namespace TriInkTrack.Drawing
                 {
                     activeLines.RemoveAt(i);
                 }
+            }
+        }
+
+        private bool IsPointInPlayArea(Vector3 worldPoint)
+        {
+            if (!restrictDrawingToPlayArea)
+            {
+                return true;
+            }
+
+            if (playAreaCollider != null)
+            {
+                return playAreaCollider.OverlapPoint(worldPoint);
+            }
+
+            if (hasComputedPlayAreaBounds)
+            {
+                float minX = computedPlayAreaBounds.min.x + playAreaPadding;
+                float maxX = computedPlayAreaBounds.max.x - playAreaPadding;
+                float minY = computedPlayAreaBounds.min.y + playAreaPadding;
+                float maxY = computedPlayAreaBounds.max.y - playAreaPadding;
+
+                return worldPoint.x >= minX &&
+                       worldPoint.x <= maxX &&
+                       worldPoint.y >= minY &&
+                       worldPoint.y <= maxY;
+            }
+
+            return true;
+        }
+
+        private void ResolvePlayAreaBoundsIfNeeded()
+        {
+            hasComputedPlayAreaBounds = false;
+
+            if (playAreaCollider != null)
+            {
+                return;
+            }
+
+            Collider2D[] colliders = FindObjectsByType<Collider2D>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            Bounds bounds = default;
+            bool foundAny = false;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Collider2D col = colliders[i];
+                if (col == null || !col.enabled || col.isTrigger)
+                {
+                    continue;
+                }
+
+                string name = col.gameObject.name;
+                if (name.IndexOf("wall", System.StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    continue;
+                }
+
+                if (!foundAny)
+                {
+                    bounds = col.bounds;
+                    foundAny = true;
+                }
+                else
+                {
+                    bounds.Encapsulate(col.bounds);
+                }
+            }
+
+            if (foundAny)
+            {
+                computedPlayAreaBounds = bounds;
+                hasComputedPlayAreaBounds = true;
             }
         }
     }

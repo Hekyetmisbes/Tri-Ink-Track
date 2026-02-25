@@ -209,5 +209,13 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   edgeCollider: {fileID: 0}
   lineWidth: 0.1
-  lineColor: {r: 0, g: 0.75, b: 1, a: 1}
+  roundCapVertices: 8
+  roundCornerVertices: 6
+  iceColor: {r: 0, g: 0.7490196, b: 1, a: 1}
+  stickyColor: {r: 1, g: 0.54901963, b: 0, a: 1}
+  bouncyColor: {r: 0.19607843, g: 0.8039216, b: 0.19607843, a: 1}
   maxPoints: 60
+  currentType: 0
+  iceMaterial: {fileID: 6200000, guid: b6762c2e4a11dd24590696c56f18e1a9, type: 2}
+  stickyMaterial: {fileID: 6200000, guid: f22adc4f7d73d164a9523a0c538d3af2, type: 2}
+  bouncyMaterial: {fileID: 6200000, guid: df87b52f0abcbe247a25bb8117e8f825, type: 2}
