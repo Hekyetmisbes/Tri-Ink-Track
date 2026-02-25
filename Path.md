@@ -285,26 +285,26 @@ Assets/
 **Branch:** `feature/step4-collider-polish`
 
 ### Collider Senkronizasyonu
-- [ ] `InkLine.cs` — EdgeCollider2D güncelleme optimizasyonu
-- [ ] World → Local dönüşümü doğrulaması: `transform.InverseTransformPoint()`
-- [ ] Çizgi objesinin pozisyonu (0,0,0) olmalı veya offset hesaplanmalı
-- [ ] Collider noktalarının LineRenderer ile birebir eşleştiğini doğrula
+- [x] `InkLine.cs` — EdgeCollider2D güncelleme optimizasyonu
+- [x] World → Local dönüşümü doğrulaması: `transform.InverseTransformPoint()`
+- [x] Çizgi objesinin pozisyonu (0,0,0) olmalı veya offset hesaplanmalı
+- [x] Collider noktalarının LineRenderer ile birebir eşleştiğini doğrula
 
 ### Segment Limiti
-- [ ] `maxPoints` aşılınca çizimi otomatik bitir (pointer up simüle)
-- [ ] Toplam aktif çizgi sayısı kontrolü: `maxActiveLines` (30)
-- [ ] Limit aşılınca en eski çizgiyi kaldır veya yeni çizim engelle
+- [x] `maxPoints` aşılınca çizimi otomatik bitir (pointer up simüle)
+- [x] Toplam aktif çizgi sayısı kontrolü: `maxActiveLines` (30)
+- [x] Limit aşılınca en eski çizgiyi kaldır veya yeni çizim engelle
 
 ### Çizim Kalitesi
-- [ ] `minPointDist` parametresini GameConfig'den oku
-- [ ] Çok kısa çizgileri (< 3 nokta) otomatik sil
-- [ ] LineRenderer corner vertices ve end cap ayarları (Round)
+- [x] `minPointDist` parametresini GameConfig'den oku
+- [x] Çok kısa çizgileri (< 3 nokta) otomatik sil
+- [x] LineRenderer corner vertices ve end cap ayarları (Round)
 
 ### Doğrulama
-- [ ] Collider tam olarak çizginin üstünde
-- [ ] Ball çizginin her noktasında çarpışıyor
-- [ ] Segment patlaması yok (çok fazla nokta oluşmuyor)
-- [ ] 30+ çizgi çizilince sistem stabil
+- [x] Collider tam olarak çizginin üstünde
+- [x] Ball çizginin her noktasında çarpışıyor
+- [x] Segment patlaması yok (çok fazla nokta oluşmuyor)
+- [x] 30+ çizgi çizilince sistem stabil
 
 ---
 
