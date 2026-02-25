@@ -16,6 +16,7 @@ namespace TriInkTrack.Core
         public static GameManager Instance { get; private set; }
 
         [SerializeField] private GameConfig config;
+        [SerializeField] private bool autoStartOnSceneLoad = true;
 
         public GameState CurrentState { get; private set; }
         public event Action<GameState> OnGameStateChanged;
@@ -35,6 +36,11 @@ namespace TriInkTrack.Core
         private void Start()
         {
             SetState(GameState.Ready);
+
+            if (autoStartOnSceneLoad)
+            {
+                StartGame();
+            }
         }
 
         private void SetState(GameState newState)
