@@ -189,50 +189,50 @@ Assets/
 **Branch:** `feature/step2-ball-target`
 
 ### Ball Prefab
-- [ ] `Assets/_Game/Prefabs/Ball.prefab` oluştur
-- [ ] Sprite: `kenney_rolling-ball-assets/PNG/Default/ball_blue_large.png`
-- [ ] Bileşenler: `SpriteRenderer`, `Rigidbody2D`, `CircleCollider2D`
-- [ ] Rigidbody2D ayarları: `gravityScale = 0`, `linearDrag = 0.1–0.4` (tweak), `angularDrag = 0.5`, `collisionDetection = Continuous`
-- [ ] Tag: `Ball`
+- [x] `Assets/_Game/Prefabs/Ball.prefab` oluştur
+- [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/ball_blue_large.png`
+- [x] Bileşenler: `SpriteRenderer`, `Rigidbody2D`, `CircleCollider2D`
+- [x] Rigidbody2D ayarları: `gravityScale = 0`, `linearDrag = 0.1–0.4` (tweak), `angularDrag = 0.5`, `collisionDetection = Continuous`
+- [x] Tag: `Ball`
 
 ### BallController Script
-- [ ] `Assets/_Game/Scripts/Ball/BallController.cs` oluştur
-- [ ] `[SerializeField] private float targetSpeed = 5f` (4–7 arası tweak)
-- [ ] `[SerializeField] private Vector2 initialDirection = Vector2.right`
-- [ ] `FixedUpdate` içinde hız normalizasyonu: `rb.velocity = rb.velocity.normalized * targetSpeed`
-- [ ] Çok düşük hız fallback'i: velocity.magnitude < 0.1f ise `initialDirection * targetSpeed` uygula
-- [ ] Bouncy çarpışma sonrası `maxSpeed` clamp (aşırı hız önleme)
-- [ ] `ResetBall()` metodu: pozisyon ve hız sıfırlama (level restart için)
-- [ ] Başlangıç pozisyonu kaydetme (`spawnPosition`)
-- [ ] Level prefab'ından spawn pozisyonu ve başlangıç yönü okuma
+- [x] `Assets/_Game/Scripts/Ball/BallController.cs` oluştur
+- [x] `[SerializeField] private float targetSpeed = 5f` (4–7 arası tweak)
+- [x] `[SerializeField] private Vector2 initialDirection = Vector2.right`
+- [x] `FixedUpdate` içinde hız normalizasyonu: `rb.velocity = rb.velocity.normalized * targetSpeed`
+- [x] Çok düşük hız fallback'i: velocity.magnitude < 0.1f ise `initialDirection * targetSpeed` uygula
+- [x] Bouncy çarpışma sonrası `maxSpeed` clamp (aşırı hız önleme)
+- [x] `ResetBall()` metodu: pozisyon ve hız sıfırlama (level restart için)
+- [x] Başlangıç pozisyonu kaydetme (`spawnPosition`)
+- [x] Level prefab'ından spawn pozisyonu ve başlangıç yönü okuma
 
 ### Target Prefab
-- [ ] `Assets/_Game/Prefabs/Target.prefab` oluştur
-- [ ] Sprite: `kenney_rolling-ball-assets/PNG/Default/hole_end.png`
-- [ ] Bileşenler: `SpriteRenderer`, `CircleCollider2D (isTrigger = true)`
-- [ ] Basit pulse animasyonu (scale ping-pong, script veya Animation)
+- [x] `Assets/_Game/Prefabs/Target.prefab` oluştur
+- [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/hole_small_end.png`
+- [x] Bileşenler: `SpriteRenderer`, `CircleCollider2D (isTrigger = true)`
+- [x] Basit pulse animasyonu (scale ping-pong, script veya Animation)
 
 ### Win Trigger
-- [ ] Target prefab'a `OnTriggerEnter2D` ile Ball teması algılama ekle (Tag: "Ball")
-- [ ] Temas olduğunda `GameManager.Instance.OnWin()` çağır
-- [ ] Ball'a "Ball" tag'i ata
+- [x] Target prefab'a `OnTriggerEnter2D` ile Ball teması algılama ekle (Tag: "Ball")
+- [x] Temas olduğunda `GameManager.Instance.OnWin()` çağır
+- [x] Ball'a "Ball" tag'i ata
 
 ### Wall Prefab
-- [ ] `Assets/_Game/Prefabs/Wall.prefab` oluştur
-- [ ] Sprite: `kenney_rolling-ball-assets/PNG/Default/block_large.png` (tiling)
-- [ ] Bileşen: `BoxCollider2D`
-- [ ] Farklı boyutlar için ölçeklenebilir yapı
+- [x] `Assets/_Game/Prefabs/Wall.prefab` oluştur
+- [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/block_large.png` (tiling)
+- [x] Bileşen: `BoxCollider2D`
+- [x] Farklı boyutlar için ölçeklenebilir yapı
 
 ### Test Level Düzeni
-- [ ] GameScene'de basit dikdörtgen alan: 4 duvar + Ball + Target
-- [ ] Ball sol tarafta, Target sağ tarafta
-- [ ] Play modunda Ball otomatik hareket ediyor ve duvarlara çarpıyor
+- [x] GameScene'de basit dikdörtgen alan: 4 duvar + Ball + Target
+- [x] Ball sol tarafta, Target sağ tarafta
+- [x] Play modunda Ball otomatik hareket ediyor ve duvarlara çarpıyor
 
 ### Doğrulama
-- [ ] Ball otomatik hareket ediyor, hızı sabit kalıyor
-- [ ] Duvarlara çarpınca sekmesi doğal
-- [ ] Target'a ulaşınca Win state tetikleniyor
-- [ ] Console'da Win log'u görünüyor
+- [x] Ball otomatik hareket ediyor, hızı sabit kalıyor
+- [x] Duvarlara çarpınca sekmesi doğal
+- [x] Target'a ulaşınca Win state tetikleniyor
+- [x] Console'da Win log'u görünüyor
 
 ---
 
