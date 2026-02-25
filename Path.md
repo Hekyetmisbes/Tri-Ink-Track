@@ -155,28 +155,28 @@ Assets/
 **Branch:** `feature/step1-bootstrap`
 
 ### Klasör ve Sahne Hazırlığı
-- [ ] `Assets/_Game/` ana klasör yapısını oluştur (Art, Audio, Scripts, Prefabs, Scenes, PhysicsMaterials, ScriptableObjects, UI)
-- [ ] `SampleScene.unity` → `GameScene.unity` olarak yeniden adlandır ve `Assets/_Game/Scenes/` altına taşı
-- [ ] EditorBuildSettings'e GameScene'i ekle
-- [ ] Kamera ayarlarını doğrula: Orthographic, 2D, uygun size (10–12)
-- [ ] Global Light 2D ayarlarını doğrula
+- [x] `Assets/_Game/` ana klasör yapısını oluştur (Art, Audio, Scripts, Prefabs, Scenes, PhysicsMaterials, ScriptableObjects, UI)
+- [x] `Assets/_Game/Scenes/GameScene.unity` oluştur (SampleScene içeriği temel alındı; SampleScene yerinde kaldı)
+- [x] EditorBuildSettings'e GameScene'i ekle
+- [x] Kamera ayarlarını doğrula: Orthographic, 2D, size = 10
+- [x] Global Light 2D ayarlarını doğrula
 
 ### GameManager (State Machine)
-- [ ] `Assets/_Game/Scripts/Core/GameManager.cs` oluştur
-- [ ] `GameState` enum tanımla: `Ready, Playing, Win, Fail`
-- [ ] Singleton pattern uygula (DontDestroyOnLoad kullanma — tek sahne MVP)
-- [ ] State geçiş metodları: `StartGame()`, `OnWin()`, `OnFail()`, `Retry()`, `NextLevel()`
-- [ ] `OnGameStateChanged` event tanımla (diğer sistemlerin dinlemesi için)
+- [x] `Assets/_Game/Scripts/Core/GameManager.cs` oluştur
+- [x] `GameState` enum tanımla: `Ready, Playing, Win, Fail`
+- [x] Singleton pattern uygula (DontDestroyOnLoad kullanma — tek sahne MVP)
+- [x] State geçiş metodları: `StartGame()`, `OnWin()`, `OnFail()`, `Retry()`, `NextLevel()`
+- [x] `OnGameStateChanged` event tanımla (diğer sistemlerin dinlemesi için)
 
 ### GameConfig (ScriptableObject)
-- [ ] `Assets/_Game/Scripts/Config/GameConfig.cs` oluştur
-- [ ] Temel parametreler: `ballSpeed`, `inkLifetime`, `maxActiveLines`, `maxPointsPerLine`, `minPointDist`, `totalInkPoints`
-- [ ] `Assets/_Game/ScriptableObjects/GameConfig.asset` oluştur
+- [x] `Assets/_Game/Scripts/Config/GameConfig.cs` oluştur
+- [x] Temel parametreler: `ballSpeed`, `inkLifetime`, `maxActiveLines`, `maxPointsPerLine`, `minPointDist`, `totalInkPoints`
+- [x] `Assets/_Game/ScriptableObjects/GameConfig.asset` oluştur
 
 ### Sahne Hiyerarşisi
-- [ ] GameScene'de boş GameObject'ler oluştur: `GameManager`, `LevelRoot`, `DrawSystem`, `UI Canvas`
-- [ ] GameManager script'ini GameManager objesine ata
-- [ ] GameConfig asset'ini GameManager'a referans olarak bağla
+- [x] GameScene'de boş GameObject'ler oluştur: `GameManager`, `LevelRoot`, `DrawSystem`, `UI Canvas`
+- [x] GameManager script'ini GameManager objesine ata
+- [x] GameConfig asset'ini GameManager'a referans olarak bağla
 
 ### Doğrulama
 - [ ] Play modunda GameManager singleton erişilebilir
