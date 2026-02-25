@@ -240,44 +240,44 @@ Assets/
 **Branch:** `feature/step3-draw-system`
 
 ### InkType Enum
-- [ ] `Assets/_Game/Scripts/Ink/InkType.cs` oluştur
-- [ ] `public enum InkType { Ice, Sticky, Bouncy }`
+- [x] `Assets/_Game/Scripts/Ink/InkType.cs` oluştur
+- [x] `public enum InkType { Ice, Sticky, Bouncy }`
 
 ### DrawSystem Script
-- [ ] `Assets/_Game/Scripts/Drawing/DrawSystem.cs` oluştur
-- [ ] Mouse/Touch input algılama (Input System veya legacy — MVP için legacy tercih)
-- [ ] `Camera.main.ScreenToWorldPoint()` ile screen → world dönüşümü
-- [ ] Nokta örnekleme: yeni nokta ancak `minPointDist` (0.15) uzaklıkta ise ekle
-- [ ] `isDrawing` flag ile pointer down/move/up yönetimi
-- [ ] UI üstüne çizim engelleme: `EventSystem.current.IsPointerOverGameObject()` kontrolü
-- [ ] Mobil touch için: `EventSystem.current.IsPointerOverGameObject(touch.fingerId)`
+- [x] `Assets/_Game/Scripts/Drawing/DrawSystem.cs` oluştur
+- [x] Mouse/Touch input algılama (Input System veya legacy — MVP için legacy tercih)
+- [x] `Camera.main.ScreenToWorldPoint()` ile screen → world dönüşümü
+- [x] Nokta örnekleme: yeni nokta ancak `minPointDist` (0.15) uzaklıkta ise ekle
+- [x] `isDrawing` flag ile pointer down/move/up yönetimi
+- [x] UI üstüne çizim engelleme: `EventSystem.current.IsPointerOverGameObject()` kontrolü
+- [x] Mobil touch için: `EventSystem.current.IsPointerOverGameObject(touch.fingerId)`
 
 ### InkLine Script
-- [ ] `Assets/_Game/Scripts/Drawing/InkLine.cs` oluştur
-- [ ] `LineRenderer` referansı ve ayarları (width, color, material)
-- [ ] `EdgeCollider2D` referansı
-- [ ] `AddPoint(Vector3 worldPos)` metodu
-- [ ] LineRenderer güncelleme: `SetPositionCount()`, `SetPosition()`
-- [ ] EdgeCollider2D sync: world → local dönüşümü ile `points` dizisi güncelle
-- [ ] `maxPoints` limiti (60)
+- [x] `Assets/_Game/Scripts/Drawing/InkLine.cs` oluştur
+- [x] `LineRenderer` referansı ve ayarları (width, color, material)
+- [x] `EdgeCollider2D` referansı
+- [x] `AddPoint(Vector3 worldPos)` metodu
+- [x] LineRenderer güncelleme: `SetPositionCount()`, `SetPosition()`
+- [x] EdgeCollider2D sync: world → local dönüşümü ile `points` dizisi güncelle
+- [x] `maxPoints` limiti (60)
 
 ### InkLine Prefab
-- [ ] `Assets/_Game/Prefabs/InkLine.prefab` oluştur
-- [ ] Bileşenler: `LineRenderer`, `EdgeCollider2D`, `InkLine` script
-- [ ] LineRenderer ayarları: width 0.08–0.12, Sprites-Default material
-- [ ] EdgeCollider2D: başlangıçta boş
+- [x] `Assets/_Game/Prefabs/InkLine.prefab` oluştur
+- [x] Bileşenler: `LineRenderer`, `EdgeCollider2D`, `InkLine` script
+- [x] LineRenderer ayarları: width 0.08–0.12, Sprites-Default material
+- [x] EdgeCollider2D: başlangıçta boş
 
 ### Çizim Akışı
-- [ ] Pointer Down → yeni InkLine instantiate (veya pool'dan al)
-- [ ] Pointer Move → `InkLine.AddPoint()`
-- [ ] Pointer Up → çizgiyi "kilitle" (çizim durur, ömür geri sayımı başlar)
-- [ ] Minimum 2 nokta yoksa çizgiyi sil/iade et
+- [x] Pointer Down → yeni InkLine instantiate (veya pool'dan al)
+- [x] Pointer Move → `InkLine.AddPoint()`
+- [x] Pointer Up → çizgiyi "kilitle" (çizim durur, ömür geri sayımı başlar)
+- [x] Minimum 2 nokta yoksa çizgiyi sil/iade et
 
 ### Doğrulama
-- [ ] Mouse ile sürükleyince pürüzsüz çizgi oluşuyor
-- [ ] Çizgi kalınlığı tutarlı
-- [ ] Ball çizgiye çarpıyor (EdgeCollider2D çalışıyor)
-- [ ] UI butonlarına tıklayınca çizim başlamıyor
+- [x] Mouse ile sürükleyince pürüzsüz çizgi oluşuyor
+- [x] Çizgi kalınlığı tutarlı
+- [x] Ball çizgiye çarpıyor (EdgeCollider2D çalışıyor)
+- [x] UI butonlarına tıklayınca çizim başlamıyor
 
 ---
 
