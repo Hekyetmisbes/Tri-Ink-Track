@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TriInkTrack.Ink;
 using UnityEngine;
 
 namespace TriInkTrack.Drawing
@@ -15,12 +16,20 @@ namespace TriInkTrack.Drawing
 
         [Header("Visual")]
         [SerializeField] private float lineWidth = 0.1f;
-        [SerializeField] private Color lineColor = new Color(0f, 0.75f, 1f, 1f);
         [SerializeField] private int roundCapVertices = 8;
         [SerializeField] private int roundCornerVertices = 6;
+        [SerializeField] private Color iceColor = new Color(0f, 0.749f, 1f, 1f);
+        [SerializeField] private Color stickyColor = new Color(1f, 0.549f, 0f, 1f);
+        [SerializeField] private Color bouncyColor = new Color(0.196f, 0.804f, 0.196f, 1f);
 
         [Header("Limits")]
         [SerializeField] private int maxPoints = 60;
+
+        [Header("Ink Physics")]
+        [SerializeField] private InkType currentType = InkType.Ice;
+        [SerializeField] private PhysicsMaterial2D iceMaterial;
+        [SerializeField] private PhysicsMaterial2D stickyMaterial;
+        [SerializeField] private PhysicsMaterial2D bouncyMaterial;
 
         private readonly List<Vector3> worldPoints = new List<Vector3>(64);
         private readonly List<Vector2> localPoints = new List<Vector2>(64);
@@ -29,6 +38,7 @@ namespace TriInkTrack.Drawing
         public int PointCount => worldPoints.Count;
         public int MaxPoints => maxPoints;
         public bool IsAtMaxPoints => worldPoints.Count >= maxPoints;
+        public InkType CurrentType => currentType;
 
         public void SetMaxPoints(int value)
         {
@@ -53,6 +63,7 @@ namespace TriInkTrack.Drawing
 
             lineRenderer.positionCount = 0;
             ClearCollider();
+            ApplyInkVisualsAndPhysics();
         }
 
         public bool AddPoint(Vector3 worldPos)
@@ -74,6 +85,12 @@ namespace TriInkTrack.Drawing
         public void LockLine()
         {
             isLocked = true;
+        }
+
+        public void SetInkType(InkType type)
+        {
+            currentType = type;
+            ApplyInkVisualsAndPhysics();
         }
 
         private void SyncCollider()
@@ -125,9 +142,6 @@ namespace TriInkTrack.Drawing
             lineRenderer.numCornerVertices = roundCornerVertices;
             lineRenderer.alignment = LineAlignment.View;
 
-            lineRenderer.startColor = lineColor;
-            lineRenderer.endColor = lineColor;
-
             if (lineRenderer.sharedMaterial == null)
             {
                 Shader shader = Shader.Find("Sprites/Default");
@@ -135,6 +149,44 @@ namespace TriInkTrack.Drawing
                 {
                     lineRenderer.sharedMaterial = new Material(shader);
                 }
+            }
+
+            ApplyInkVisualsAndPhysics();
+        }
+
+        private void ApplyInkVisualsAndPhysics()
+        {
+            Color color = GetColorForType(currentType);
+            lineRenderer.startColor = color;
+            lineRenderer.endColor = color;
+            edgeCollider.sharedMaterial = GetMaterialForType(currentType);
+        }
+
+        private PhysicsMaterial2D GetMaterialForType(InkType type)
+        {
+            switch (type)
+            {
+                case InkType.Sticky:
+                    return stickyMaterial;
+                case InkType.Bouncy:
+                    return bouncyMaterial;
+                case InkType.Ice:
+                default:
+                    return iceMaterial;
+            }
+        }
+
+        private Color GetColorForType(InkType type)
+        {
+            switch (type)
+            {
+                case InkType.Sticky:
+                    return stickyColor;
+                case InkType.Bouncy:
+                    return bouncyColor;
+                case InkType.Ice:
+                default:
+                    return iceColor;
             }
         }
     }

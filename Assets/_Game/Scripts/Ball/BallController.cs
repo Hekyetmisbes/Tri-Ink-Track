@@ -58,13 +58,15 @@ namespace TriInkTrack.Ball
             if (speed < minSpeedThreshold)
             {
                 Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
-                rb.linearVelocity = fallback.normalized * targetSpeed;
+                rb.linearVelocity = fallback.normalized * minSpeedThreshold;
                 return;
             }
 
-            Vector2 normalized = velocity / speed;
-            float clampedSpeed = Mathf.Min(targetSpeed, maxSpeed);
-            rb.linearVelocity = normalized * clampedSpeed;
+            if (speed > maxSpeed)
+            {
+                Vector2 normalized = velocity / speed;
+                rb.linearVelocity = normalized * maxSpeed;
+            }
         }
 
         public void ResetBall()
