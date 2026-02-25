@@ -684,6 +684,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectIce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectIce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &472127367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1192,7 @@ MonoBehaviour:
   inkSlider: {fileID: 0}
   selectedScale: 1.08
   unselectedScale: 1
+  unselectedAlpha: 0.45
 --- !u!114 &750384892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,6 +1438,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectSticky
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectSticky
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 750384891}
         m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
         m_MethodName: SelectSticky
@@ -2022,6 +2071,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectBouncy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 750384891}
+        m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
+        m_MethodName: SelectBouncy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 750384891}
         m_TargetAssemblyTypeName: TriInkTrack.UI.InkSelectionUI, Assembly-CSharp
         m_MethodName: SelectBouncy
