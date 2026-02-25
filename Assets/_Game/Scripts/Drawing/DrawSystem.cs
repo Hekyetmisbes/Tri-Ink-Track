@@ -1,4 +1,5 @@
 using TriInkTrack.Core;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 #if ENABLE_INPUT_SYSTEM
@@ -17,13 +18,17 @@ namespace TriInkTrack.Drawing
         [Header("Drawing")]
         [SerializeField] private bool allowDrawInReadyState = true;
         [SerializeField] private float minPointDist = 0.15f;
-        [SerializeField] private int minPointsToKeep = 2;
+        [SerializeField] private int minPointsToKeep = 3;
+        [SerializeField] private int maxPointsPerLine = 60;
+        [SerializeField] private int maxActiveLines = 30;
+        [SerializeField] private bool removeOldestLineWhenLimitReached = true;
 
         private bool canDraw;
         private bool isDrawing;
         private int activePointerId = -1;
         private InkLine activeLine;
         private Vector3 lastPoint;
+        private readonly List<InkLine> activeLines = new List<InkLine>(32);
 
         private void Awake()
         {
@@ -53,6 +58,11 @@ namespace TriInkTrack.Drawing
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+            }
+
+            if (isDrawing)
+            {
+                EndDrawing();
             }
         }
 
@@ -177,6 +187,11 @@ namespace TriInkTrack.Drawing
                 EndDrawing();
             }
 
+            if (!TryResolveLineLimit())
+            {
+                return;
+            }
+
             InkLine newLine = CreateLineInstance();
             if (newLine == null)
             {
@@ -186,7 +201,9 @@ namespace TriInkTrack.Drawing
             Vector3 worldPoint = ScreenToWorld(screenPosition);
             activeLine = newLine;
             activeLine.ResetLine();
+            activeLine.SetMaxPoints(maxPointsPerLine);
             activeLine.AddPoint(worldPoint);
+            RegisterLine(activeLine);
             lastPoint = worldPoint;
             activePointerId = pointerId;
             isDrawing = true;
@@ -210,6 +227,11 @@ namespace TriInkTrack.Drawing
             if (activeLine.AddPoint(worldPoint))
             {
                 lastPoint = worldPoint;
+
+                if (activeLine.IsAtMaxPoints)
+                {
+                    EndDrawing();
+                }
             }
             else
             {
@@ -227,7 +249,7 @@ namespace TriInkTrack.Drawing
 
             if (activeLine.PointCount < minPointsToKeep)
             {
-                Destroy(activeLine.gameObject);
+                DestroyLine(activeLine);
             }
             else
             {
@@ -246,17 +268,27 @@ namespace TriInkTrack.Drawing
 
         private InkLine CreateLineInstance()
         {
+            Transform parent = lineRoot != null ? lineRoot : transform;
+            InkLine line;
+
             if (inkLinePrefab != null)
             {
-                Transform parent = lineRoot != null ? lineRoot : transform;
-                return Instantiate(inkLinePrefab, parent);
+                line = Instantiate(inkLinePrefab, parent);
+            }
+            else
+            {
+                GameObject runtimeLine = new GameObject("InkLine_Runtime");
+                runtimeLine.transform.SetParent(parent, false);
+                runtimeLine.AddComponent<LineRenderer>();
+                runtimeLine.AddComponent<EdgeCollider2D>();
+                line = runtimeLine.AddComponent<InkLine>();
             }
 
-            GameObject runtimeLine = new GameObject("InkLine_Runtime");
-            runtimeLine.transform.SetParent(lineRoot != null ? lineRoot : transform, false);
-            runtimeLine.AddComponent<LineRenderer>();
-            runtimeLine.AddComponent<EdgeCollider2D>();
-            return runtimeLine.AddComponent<InkLine>();
+            line.transform.localPosition = Vector3.zero;
+            line.transform.localRotation = Quaternion.identity;
+            line.transform.localScale = Vector3.one;
+
+            return line;
         }
 
         private Vector3 ScreenToWorld(Vector2 screenPoint)
@@ -294,6 +326,68 @@ namespace TriInkTrack.Drawing
             }
 
             minPointDist = GameManager.Instance.Config.MinPointDist;
+            maxPointsPerLine = Mathf.Max(2, GameManager.Instance.Config.MaxPointsPerLine);
+            maxActiveLines = Mathf.Max(1, GameManager.Instance.Config.MaxActiveLines);
+        }
+
+        private void RegisterLine(InkLine line)
+        {
+            if (line == null || activeLines.Contains(line))
+            {
+                return;
+            }
+
+            activeLines.Add(line);
+        }
+
+        private void DestroyLine(InkLine line)
+        {
+            if (line == null)
+            {
+                return;
+            }
+
+            activeLines.Remove(line);
+            Destroy(line.gameObject);
+        }
+
+        private bool TryResolveLineLimit()
+        {
+            CleanupMissingLines();
+
+            if (activeLines.Count < maxActiveLines)
+            {
+                return true;
+            }
+
+            if (!removeOldestLineWhenLimitReached)
+            {
+                return false;
+            }
+
+            while (activeLines.Count >= maxActiveLines)
+            {
+                InkLine oldest = activeLines[0];
+                activeLines.RemoveAt(0);
+                if (oldest != null)
+                {
+                    Destroy(oldest.gameObject);
+                    return true;
+                }
+            }
+
+            return activeLines.Count < maxActiveLines;
+        }
+
+        private void CleanupMissingLines()
+        {
+            for (int i = activeLines.Count - 1; i >= 0; i--)
+            {
+                if (activeLines[i] == null)
+                {
+                    activeLines.RemoveAt(i);
+                }
+            }
         }
     }
 }

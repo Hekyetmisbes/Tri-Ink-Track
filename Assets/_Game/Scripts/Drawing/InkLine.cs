@@ -7,7 +7,7 @@ namespace TriInkTrack.Drawing
     [RequireComponent(typeof(EdgeCollider2D))]
     public class InkLine : MonoBehaviour
     {
-        private static readonly Vector2[] EmptyPoints = new Vector2[0];
+        private static readonly Vector2[] EmptyPoints = System.Array.Empty<Vector2>();
 
         [Header("References")]
         [SerializeField] private LineRenderer lineRenderer;
@@ -16,6 +16,8 @@ namespace TriInkTrack.Drawing
         [Header("Visual")]
         [SerializeField] private float lineWidth = 0.1f;
         [SerializeField] private Color lineColor = new Color(0f, 0.75f, 1f, 1f);
+        [SerializeField] private int roundCapVertices = 8;
+        [SerializeField] private int roundCornerVertices = 6;
 
         [Header("Limits")]
         [SerializeField] private int maxPoints = 60;
@@ -26,6 +28,12 @@ namespace TriInkTrack.Drawing
 
         public int PointCount => worldPoints.Count;
         public int MaxPoints => maxPoints;
+        public bool IsAtMaxPoints => worldPoints.Count >= maxPoints;
+
+        public void SetMaxPoints(int value)
+        {
+            maxPoints = Mathf.Max(2, value);
+        }
 
         private void Awake()
         {
@@ -39,10 +47,12 @@ namespace TriInkTrack.Drawing
             isLocked = false;
             worldPoints.Clear();
             localPoints.Clear();
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
 
             lineRenderer.positionCount = 0;
-            edgeCollider.enabled = true;
-            edgeCollider.points = EmptyPoints;
+            ClearCollider();
         }
 
         public bool AddPoint(Vector3 worldPos)
@@ -70,10 +80,11 @@ namespace TriInkTrack.Drawing
         {
             if (worldPoints.Count < 2)
             {
-                edgeCollider.points = EmptyPoints;
+                ClearCollider();
                 return;
             }
 
+            edgeCollider.enabled = true;
             localPoints.Clear();
             int count = worldPoints.Count;
             for (int i = 0; i < count; i++)
@@ -83,6 +94,12 @@ namespace TriInkTrack.Drawing
             }
 
             edgeCollider.SetPoints(localPoints);
+        }
+
+        private void ClearCollider()
+        {
+            edgeCollider.enabled = false;
+            edgeCollider.points = EmptyPoints;
         }
 
         private void EnsureReferences()
@@ -104,8 +121,8 @@ namespace TriInkTrack.Drawing
             lineRenderer.startWidth = lineWidth;
             lineRenderer.endWidth = lineWidth;
             lineRenderer.positionCount = 0;
-            lineRenderer.numCapVertices = 4;
-            lineRenderer.numCornerVertices = 2;
+            lineRenderer.numCapVertices = roundCapVertices;
+            lineRenderer.numCornerVertices = roundCornerVertices;
             lineRenderer.alignment = LineAlignment.View;
 
             lineRenderer.startColor = lineColor;
