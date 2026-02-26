@@ -28,7 +28,10 @@ namespace TriInkTrack.Audio
 
         [Header("Volume")]
         [SerializeField] [Range(0f, 1f)] private float sfxVolume = 1f;
-        [SerializeField] [Range(0f, 1f)] private float uiVolume = 0.8f;
+
+        private const string VolumeKey = "TriInkTrack_SfxVolume";
+        private const string MuteKey   = "TriInkTrack_Muted";
+        private bool isMuted;
 
         private void Awake()
         {
@@ -39,6 +42,8 @@ namespace TriInkTrack.Audio
             }
 
             Instance = this;
+            sfxVolume = PlayerPrefs.GetFloat(VolumeKey, sfxVolume);
+            isMuted   = PlayerPrefs.GetInt(MuteKey, 0) == 1;
             EnsureAudioSources();
         }
 
@@ -55,7 +60,7 @@ namespace TriInkTrack.Audio
 
         private void PlayOnSFX(AudioClip clip)
         {
-            if (clip == null || sfxSource == null)
+            if (isMuted || clip == null || sfxSource == null)
             {
                 return;
             }
@@ -65,13 +70,28 @@ namespace TriInkTrack.Audio
 
         private void PlayOnUI(AudioClip clip)
         {
-            if (clip == null || uiSource == null)
+            if (isMuted || clip == null || uiSource == null)
             {
                 return;
             }
 
-            uiSource.PlayOneShot(clip, uiVolume);
+            uiSource.PlayOneShot(clip, sfxVolume);
         }
+
+        public void SetVolume(float v)
+        {
+            sfxVolume = Mathf.Clamp01(v);
+            PlayerPrefs.SetFloat(VolumeKey, sfxVolume);
+        }
+
+        public void SetMute(bool m)
+        {
+            isMuted = m;
+            PlayerPrefs.SetInt(MuteKey, m ? 1 : 0);
+        }
+
+        public float Volume => sfxVolume;
+        public bool  IsMuted => isMuted;
 
         private void EnsureAudioSources()
         {
