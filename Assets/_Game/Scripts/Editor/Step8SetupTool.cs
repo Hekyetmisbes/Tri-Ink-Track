@@ -23,6 +23,8 @@ namespace TriInkTrack.EditorTools
         private const string YellowButtonSpritePath = "Assets/kenney_ui-pack/PNG/Yellow/Default/button_rectangle_flat.png";
         private const string GreenButtonSpritePath = "Assets/kenney_ui-pack/PNG/Green/Default/button_rectangle_flat.png";
         private const string GreyButtonSpritePath = "Assets/kenney_ui-pack/PNG/Grey/Default/button_rectangle_flat.png";
+        private const string RetryIconSpritePath = "Assets/kenney_ui-pack/PNG/Grey/Default/icon_circle.png";
+        private const string NextArrowSpritePath = "Assets/kenney_ui-pack/PNG/Green/Default/arrow_basic_e.png";
         private const string PanelSpritePath = "Assets/kenney_ui-pack/PNG/Grey/Default/button_round_depth_flat.png";
         private const string StarSpritePath = "Assets/kenney_rolling-ball-assets/PNG/Default/star.png";
         private const string KenneyFutureFontPath = "Assets/kenney_ui-pack/Font/Kenney Future.ttf";
@@ -46,6 +48,8 @@ namespace TriInkTrack.EditorTools
             Sprite yellowButton = AssetDatabase.LoadAssetAtPath<Sprite>(YellowButtonSpritePath);
             Sprite greenButton = AssetDatabase.LoadAssetAtPath<Sprite>(GreenButtonSpritePath);
             Sprite greyButton = AssetDatabase.LoadAssetAtPath<Sprite>(GreyButtonSpritePath);
+            Sprite retryIconSprite = AssetDatabase.LoadAssetAtPath<Sprite>(RetryIconSpritePath);
+            Sprite nextArrowSprite = AssetDatabase.LoadAssetAtPath<Sprite>(NextArrowSpritePath);
             Sprite panelSprite = AssetDatabase.LoadAssetAtPath<Sprite>(PanelSpritePath);
             Sprite starSprite = AssetDatabase.LoadAssetAtPath<Sprite>(StarSpritePath);
             Font uiFont = AssetDatabase.LoadAssetAtPath<Font>(KenneyFutureFontPath);
@@ -61,11 +65,9 @@ namespace TriInkTrack.EditorTools
             hudRootRect.offsetMin = Vector2.zero;
             hudRootRect.offsetMax = Vector2.zero;
 
-            // Reuse existing Step 5 elements when available.
-            GameObject inkBar = FindOrCreateChild(canvas.transform, "InkSelectionBar");
-            GameObject inkMeter = FindOrCreateChild(canvas.transform, "InkMeter");
-            inkBar.transform.SetParent(hudRoot.transform, false);
-            inkMeter.transform.SetParent(hudRoot.transform, false);
+            // Reuse Step 5 elements when available and deduplicate repeated runs.
+            GameObject inkBar = FindOrCreateUniqueUnderCanvas(canvas.transform, hudRoot.transform, "InkSelectionBar");
+            GameObject inkMeter = FindOrCreateUniqueUnderCanvas(canvas.transform, hudRoot.transform, "InkMeter");
 
             RectTransform inkBarRect = EnsureRectTransform(inkBar);
             inkBarRect.anchorMin = new Vector2(0.5f, 0f);
@@ -141,6 +143,8 @@ namespace TriInkTrack.EditorTools
             Button winRetryButton = CreatePanelButton(winPanel.transform, "WinRetryButton", "RETRY", blueButton, uiFont, new Vector2(0f, -195f));
             Button failRetryButton = CreatePanelButton(failPanel.transform, "FailRetryButton", "RETRY", blueButton, uiFont, new Vector2(0f, -120f));
             Button gameCompleteRetryButton = CreatePanelButton(gameCompletePanel.transform, "GameCompleteRetryButton", "RETRY", blueButton, uiFont, new Vector2(0f, -120f));
+            DecorateRetryButton(retryButton, retryIconSprite, uiFont);
+            DecorateNextButton(nextButton, nextArrowSprite);
 
             GameObject pausePanel = CreateResultPanel(canvas.transform, "PausePanel", "Paused", panelSprite, uiFont);
             Button resumeButton = CreatePanelButton(pausePanel.transform, "ResumeButton", "RESUME", greenButton, uiFont, new Vector2(0f, -120f));
@@ -379,6 +383,85 @@ namespace TriInkTrack.EditorTools
             return button;
         }
 
+        private static void DecorateRetryButton(Button retryButton, Sprite iconSprite, Font font)
+        {
+            if (retryButton == null || iconSprite == null)
+            {
+                return;
+            }
+
+            Image icon = CreateOrUpdateIcon(retryButton.transform, "RetryIcon", iconSprite, new Vector2(28f, 0f), new Vector2(42f, 42f));
+            if (icon != null)
+            {
+                icon.color = Color.white;
+            }
+
+            Text label = CreateOrUpdateText(retryButton.transform, "RetryIconLabel", "R", font, 24, TextAnchor.MiddleCenter);
+            RectTransform labelRect = label.rectTransform;
+            labelRect.anchorMin = new Vector2(0f, 0.5f);
+            labelRect.anchorMax = new Vector2(0f, 0.5f);
+            labelRect.pivot = new Vector2(0f, 0.5f);
+            labelRect.anchoredPosition = new Vector2(28f, 0f);
+            labelRect.sizeDelta = new Vector2(42f, 42f);
+            label.color = new Color(0.15f, 0.15f, 0.15f, 1f);
+
+            Transform labelTransform = retryButton.transform.Find("Label");
+            Text buttonLabel = labelTransform != null ? labelTransform.GetComponent<Text>() : null;
+            if (buttonLabel != null)
+            {
+                RectTransform buttonLabelRect = buttonLabel.rectTransform;
+                buttonLabelRect.offsetMin = new Vector2(58f, 0f);
+            }
+        }
+
+        private static void DecorateNextButton(Button nextButton, Sprite arrowSprite)
+        {
+            if (nextButton == null || arrowSprite == null)
+            {
+                return;
+            }
+
+            Image icon = CreateOrUpdateIcon(nextButton.transform, "NextIcon", arrowSprite, new Vector2(-28f, 0f), new Vector2(30f, 30f), anchorRight: true);
+            if (icon != null)
+            {
+                icon.color = Color.white;
+            }
+
+            Transform labelTransform = nextButton.transform.Find("Label");
+            Text buttonLabel = labelTransform != null ? labelTransform.GetComponent<Text>() : null;
+            if (buttonLabel != null)
+            {
+                RectTransform buttonLabelRect = buttonLabel.rectTransform;
+                buttonLabelRect.offsetMax = new Vector2(-54f, 0f);
+            }
+        }
+
+        private static Image CreateOrUpdateIcon(Transform parent, string name, Sprite sprite, Vector2 anchoredPosition, Vector2 size, bool anchorRight = false)
+        {
+            if (parent == null || sprite == null)
+            {
+                return null;
+            }
+
+            GameObject iconObject = FindOrCreateChild(parent, name);
+            RectTransform iconRect = EnsureRectTransform(iconObject);
+            iconRect.anchorMin = anchorRight ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
+            iconRect.anchorMax = anchorRight ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
+            iconRect.pivot = anchorRight ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
+            iconRect.anchoredPosition = anchoredPosition;
+            iconRect.sizeDelta = size;
+
+            Image iconImage = iconObject.GetComponent<Image>();
+            if (iconImage == null)
+            {
+                iconImage = iconObject.AddComponent<Image>();
+            }
+
+            iconImage.sprite = sprite;
+            iconImage.type = Image.Type.Simple;
+            return iconImage;
+        }
+
         private static Button CreateOrUpdateLabeledButton(Transform parent, string name, string label, Sprite sprite, Font font)
         {
             GameObject buttonObject = FindOrCreateChild(parent, name);
@@ -553,6 +636,40 @@ namespace TriInkTrack.EditorTools
             GameObject obj = new GameObject(childName);
             obj.transform.SetParent(parent, false);
             return obj;
+        }
+
+        private static GameObject FindOrCreateUniqueUnderCanvas(Transform canvasRoot, Transform targetParent, string objectName)
+        {
+            GameObject primary = null;
+            Transform[] allChildren = canvasRoot.GetComponentsInChildren<Transform>(true);
+            for (int index = 0; index < allChildren.Length; index++)
+            {
+                Transform child = allChildren[index];
+                if (child == null || child == canvasRoot || child.name != objectName)
+                {
+                    continue;
+                }
+
+                if (primary == null)
+                {
+                    primary = child.gameObject;
+                    continue;
+                }
+
+                Object.DestroyImmediate(child.gameObject);
+            }
+
+            if (primary == null)
+            {
+                primary = new GameObject(objectName);
+            }
+
+            if (primary.transform.parent != targetParent)
+            {
+                primary.transform.SetParent(targetParent, false);
+            }
+
+            return primary;
         }
 
         private static RectTransform EnsureRectTransform(GameObject obj)
