@@ -1,3 +1,4 @@
+using TriInkTrack.Audio;
 using TriInkTrack.Core;
 using TriInkTrack.Ink;
 using UnityEngine;
@@ -104,6 +105,7 @@ namespace TriInkTrack.UI
 
         public void OnRetryPressed()
         {
+            AudioManager.Instance?.PlayButtonClick();
             ResumeGameIfPaused();
             SetPanelActive(gameCompletePanel, false);
 
@@ -115,6 +117,7 @@ namespace TriInkTrack.UI
 
         public void OnNextPressed()
         {
+            AudioManager.Instance?.PlayButtonClick();
             ResumeGameIfPaused();
             SetPanelActive(gameCompletePanel, false);
 
@@ -131,12 +134,14 @@ namespace TriInkTrack.UI
                 return;
             }
 
+            AudioManager.Instance?.PlayButtonClick();
             bool nextPauseState = !isPaused;
             SetPause(nextPauseState);
         }
 
         public void OnResumePressed()
         {
+            AudioManager.Instance?.PlayButtonClick();
             ResumeGameIfPaused();
         }
 

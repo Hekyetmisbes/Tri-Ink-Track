@@ -1,3 +1,4 @@
+using TriInkTrack.Audio;
 using TriInkTrack.Ball;
 using TriInkTrack.Drawing;
 using TriInkTrack.Ink;
@@ -138,6 +139,8 @@ namespace TriInkTrack.Core
             {
                 hudController.SetGameCompleteVisible(false);
             }
+
+            AudioManager.Instance?.PlayLevelStart();
 
             if (updateUnlockProgress)
             {

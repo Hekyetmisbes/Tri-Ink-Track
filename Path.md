@@ -579,28 +579,28 @@ Her level prefab ÅŸunlarÄ± iÃ§erir:
 **Branch:** `feature/step10-audio`
 
 ### AudioManager Script
-- [ ] `Assets/_Game/Scripts/Audio/AudioManager.cs` oluÅŸtur
-- [ ] Singleton pattern
-- [ ] `AudioSource` bileÅŸeni (veya birden fazla â€” SFX + UI)
-- [ ] `PlaySFX(AudioClip clip)` metodu
-- [ ] Ses referanslarÄ±: `[SerializeField]` ile inspector'dan atanacak
+- [x] `Assets/_Game/Scripts/Audio/AudioManager.cs` oluÅŸtur
+- [x] Singleton pattern
+- [x] `AudioSource` bileÅŸeni (veya birden fazla â€” SFX + UI)
+- [x] `PlaySFX(AudioClip clip)` metodu
+- [x] Ses referanslarÄ±: `[SerializeField]` ile inspector'dan atanacak
 
 ### Ses EÅŸleÅŸtirmeleri
-- [ ] Ã‡izim baÅŸlangÄ±cÄ±: `scratch_003.ogg`
-- [ ] Ã‡izim bitiÅŸi: `drop_002.ogg`
-- [ ] Ink seÃ§im deÄŸiÅŸikliÄŸi: `switch_003.ogg`
-- [ ] Ball-Ã§izgi Ã§arpÄ±ÅŸmasÄ± (Bouncy): `glass_002.ogg`
-- [ ] Win: `confirmation_002.ogg`
-- [ ] Fail: `error_004.ogg`
-- [ ] Buton tÄ±klama: `click_003.ogg`
-- [ ] Level baÅŸlangÄ±cÄ±: `maximize_003.ogg`
+- [x] Ã‡izim baÅŸlangÄ±cÄ±: `scratch_003.ogg`
+- [x] Ã‡izim bitiÅŸi: `drop_002.ogg`
+- [x] Ink seÃ§im deÄŸiÅŸikliÄŸi: `switch_003.ogg`
+- [x] Ball-Ã§izgi Ã§arpÄ±ÅŸmasÄ± (Bouncy): `glass_002.ogg`
+- [x] Win: `confirmation_002.ogg`
+- [x] Fail: `error_004.ogg`
+- [x] Buton tÄ±klama: `click_003.ogg`
+- [x] Level baÅŸlangÄ±cÄ±: `maximize_003.ogg`
 
 ### Entegrasyon
-- [ ] DrawSystem â†’ Ã§izim baÅŸlangÄ±Ã§/bitiÅŸ sesi
-- [ ] InkInventory â†’ ink deÄŸiÅŸim sesi
-- [ ] GameManager â†’ Win/Fail sesleri
-- [ ] UIHudController â†’ buton tÄ±klama sesleri
-- [ ] BallController â†’ Bouncy Ã§arpÄ±ÅŸma sesi (opsiyonel)
+- [x] DrawSystem â†’ Ã§izim baÅŸlangÄ±Ã§/bitiÅŸ sesi
+- [x] InkInventory â†’ ink deÄŸiÅŸim sesi
+- [x] GameManager â†’ Win/Fail sesleri
+- [x] UIHudController â†’ buton tÄ±klama sesleri
+- [x] BallController â†’ Bouncy Ã§arpÄ±ÅŸma sesi (opsiyonel)
 
 ### DoÄŸrulama
 - [ ] TÃ¼m ses efektleri doÄŸru zamanda Ã§alÄ±yor
