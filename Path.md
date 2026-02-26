@@ -396,30 +396,30 @@ Assets/
 **Branch:** `feature/step7-fail-conditions`
 
 ### Hazard Prefab
-- [ ] `Assets/_Game/Prefabs/Hazard.prefab` oluştur
-- [ ] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kırmızı tint uygulanmış blok
-- [ ] Bileşenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
-- [ ] "Hazard" tag'i ata
+- [x] `Assets/_Game/Prefabs/Hazard.prefab` oluştur
+- [x] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kırmızı tint uygulanmış blok
+- [x] Bileşenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
+- [x] "Hazard" tag'i ata
 
 ### Out-of-Bounds Algılama
-- [ ] Kamera sınırlarını hesapla veya sabit sınır collider'ları oluştur
-- [ ] 4 kenar trigger (ekran dışı) — büyük BoxCollider2D (isTrigger)
-- [ ] "Boundary" tag'i ata
+- [x] Kamera sınırlarını hesapla veya sabit sınır collider'ları oluştur
+- [x] 4 kenar trigger (ekran dışı) — büyük BoxCollider2D (isTrigger)
+- [x] "Boundary" tag'i ata
 
 ### BallController — Fail Tetikleme
-- [ ] `OnTriggerEnter2D` — "Hazard" veya "Boundary" tag'i kontrolü
-- [ ] Temas → `GameManager.Instance.OnFail()`
+- [x] `OnTriggerEnter2D` — "Hazard" veya "Boundary" tag'i kontrolü
+- [x] Temas → `GameManager.Instance.OnFail()`
 
 ### GameManager — Fail State
-- [ ] `OnFail()` → state = Fail, event tetikle
-- [ ] Ball hareketi durdur (veya kinematic yap)
-- [ ] Retry butonu aktif
+- [x] `OnFail()` → state = Fail, event tetikle
+- [x] Ball hareketi durdur (veya kinematic yap)
+- [x] Retry butonu aktif
 
 ### Doğrulama
-- [ ] Ball hazard'a değince Fail state
-- [ ] Ball ekran dışına çıkınca Fail state
-- [ ] Fail durumunda Ball duruyor
-- [ ] Console'da Fail log'u
+- [x] Ball hazard'a değince Fail state
+- [x] Ball ekran dışına çıkınca Fail state
+- [x] Fail durumunda Ball duruyor
+- [x] Console'da Fail log'u
 
 ---
 
