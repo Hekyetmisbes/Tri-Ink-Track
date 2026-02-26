@@ -66,14 +66,13 @@ namespace TriInkTrack.Ball
             if (speed < minSpeedThreshold)
             {
                 Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
-                rb.linearVelocity = fallback.normalized * minSpeedThreshold;
-                return;
+                rb.linearVelocity = fallback.normalized * targetSpeed;
             }
-
-            if (speed > maxSpeed)
+            else
             {
                 Vector2 normalized = velocity / speed;
-                rb.linearVelocity = normalized * maxSpeed;
+                float desiredSpeed = Mathf.Min(targetSpeed, maxSpeed);
+                rb.linearVelocity = normalized * desiredSpeed;
             }
 
             if (failWhenOutOfCameraBounds && IsOutOfBounds())
@@ -90,6 +89,25 @@ namespace TriInkTrack.Ball
 
             Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
             rb.linearVelocity = fallback.normalized * targetSpeed;
+        }
+
+        public void RefreshSpawnPointFromScene(bool resetBall = true)
+        {
+            CacheSpawnData();
+            if (resetBall)
+            {
+                ResetBall();
+            }
+        }
+
+        public void SetSpawnData(Vector3 position, Vector2 direction, bool resetBall = true)
+        {
+            spawnPosition = position;
+            spawnDirection = direction.sqrMagnitude > 0f ? direction.normalized : initialDirection.normalized;
+            if (resetBall)
+            {
+                ResetBall();
+            }
         }
 
         private bool CanMove()
