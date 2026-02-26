@@ -53,6 +53,11 @@ namespace TriInkTrack.Core
                 ? Mathf.Clamp(PlayerPrefs.GetInt(LastUnlockedLevelKey, startLevelIndex), 0, Mathf.Max(0, LevelCount - 1))
                 : Mathf.Clamp(startLevelIndex, 0, Mathf.Max(0, LevelCount - 1));
 
+            if (DevLevelSelection.TryConsumeSelectedLevelIndex(out int selectedLevel))
+            {
+                initialLevel = Mathf.Clamp(selectedLevel, 0, Mathf.Max(0, LevelCount - 1));
+            }
+
             LoadLevel(initialLevel);
         }
 
