@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using TriInkTrack.Audio;
+using TriInkTrack.Core;
 using TriInkTrack.Level;
 using TriInkTrack.Vfx;
 using UnityEditor;
