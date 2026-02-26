@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d2b8636ae4be4a9b16bce7f3f2d90, type: 3}
   m_Name: Level_01_Def
   m_EditorClassIdentifier: Assembly-CSharp::TriInkTrack.Core.LevelDefinition
-  levelName: Level 01 - Duz Yol
+  levelName: Level 01 - Giris
   levelPrefab: {fileID: 2147101589915800380, guid: fd95071491279874286b93d8e87ad660, type: 3}
   allowIce: 0
   allowSticky: 1
   allowBouncy: 0
-  inkBudget: 100
+  inkBudget: 80
   targetTime: 0

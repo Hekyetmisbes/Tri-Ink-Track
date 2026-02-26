@@ -17,5 +17,5 @@ MonoBehaviour:
   allowIce: 0
   allowSticky: 1
   allowBouncy: 1
-  inkBudget: 80
+  inkBudget: 70
   targetTime: 0

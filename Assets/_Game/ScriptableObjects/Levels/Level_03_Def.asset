@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d2b8636ae4be4a9b16bce7f3f2d90, type: 3}
   m_Name: Level_03_Def
   m_EditorClassIdentifier: Assembly-CSharp::TriInkTrack.Core.LevelDefinition
-  levelName: Level 03 - Kaygan Zemin
+  levelName: Level 03 - Kaygan Yol
   levelPrefab: {fileID: 6790212116634859599, guid: 6836940899a4136479f87c453114d758, type: 3}
   allowIce: 1
   allowSticky: 0

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d2b8636ae4be4a9b16bce7f3f2d90, type: 3}
   m_Name: Level_04_Def
   m_EditorClassIdentifier: Assembly-CSharp::TriInkTrack.Core.LevelDefinition
-  levelName: Level 04 - Ucunu Birlestir
+  levelName: Level 04 - Iki Bariyer
   levelPrefab: {fileID: 5443202468547806330, guid: 6681b50533c39544493177341f55c51f, type: 3}
   allowIce: 1
   allowSticky: 1
-  allowBouncy: 1
-  inkBudget: 100
+  allowBouncy: 0
+  inkBudget: 80
   targetTime: 0

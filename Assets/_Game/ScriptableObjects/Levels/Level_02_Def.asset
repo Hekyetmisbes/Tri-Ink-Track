@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d2b8636ae4be4a9b16bce7f3f2d90, type: 3}
   m_Name: Level_02_Def
   m_EditorClassIdentifier: Assembly-CSharp::TriInkTrack.Core.LevelDefinition
-  levelName: Level 02 - Ilk Donus
+  levelName: Level 02 - Ilk Sektirme
   levelPrefab: {fileID: 6966156199803217928, guid: fb03fcfe9aeda2746936feceb308fa5f, type: 3}
   allowIce: 0
   allowSticky: 0
   allowBouncy: 1
-  inkBudget: 80
+  inkBudget: 70
   targetTime: 0
