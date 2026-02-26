@@ -19,6 +19,7 @@ namespace TriInkTrack.Core
         [SerializeField] private GameConfig config;
         [SerializeField] private bool autoStartOnSceneLoad = true;
         [SerializeField] private bool reloadSceneOnRetry = true;
+        [SerializeField] private LevelManager levelManager;
 
         public GameState CurrentState { get; private set; }
         public event Action<GameState> OnGameStateChanged;
@@ -33,6 +34,11 @@ namespace TriInkTrack.Core
                 return;
             }
             Instance = this;
+
+            if (levelManager == null)
+            {
+                levelManager = FindFirstObjectByType<LevelManager>();
+            }
         }
 
         private void Start()
@@ -74,9 +80,18 @@ namespace TriInkTrack.Core
 
         public void Retry()
         {
+            Time.timeScale = 1f;
+
+            if (levelManager != null)
+            {
+                levelManager.RestartLevel();
+                SetState(GameState.Ready);
+                StartGame();
+                return;
+            }
+
             if (reloadSceneOnRetry)
             {
-                Time.timeScale = 1f;
                 Scene activeScene = SceneManager.GetActiveScene();
                 if (activeScene.buildIndex >= 0)
                 {
@@ -95,6 +110,16 @@ namespace TriInkTrack.Core
 
         public void NextLevel()
         {
+            if (levelManager != null)
+            {
+                if (levelManager.NextLevel())
+                {
+                    SetState(GameState.Ready);
+                    StartGame();
+                }
+                return;
+            }
+
             SetState(GameState.Ready);
             StartGame();
         }

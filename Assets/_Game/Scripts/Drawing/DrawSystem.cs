@@ -586,5 +586,10 @@ namespace TriInkTrack.Drawing
                 hasComputedPlayAreaBounds = true;
             }
         }
+
+        public void RebuildPlayAreaBounds()
+        {
+            ResolvePlayAreaBoundsIfNeeded();
+        }
     }
 }
