@@ -356,6 +356,7 @@ namespace TriInkTrack.EditorTools
                 if (boxCollider != null)
                 {
                     boxCollider.isTrigger = trigger;
+                    boxCollider.size = Vector2.one; // scale × 1 = gerçek boyut
                 }
 
                 if (trigger && instance.GetComponent<HazardZone>() == null)
@@ -412,42 +413,44 @@ namespace TriInkTrack.EditorTools
         {
             return new[]
             {
+                // Level 01 — Giriş: Sticky ile düz çizgi çekmeyi öğren
                 new LevelPlan
                 {
                     AssetName = "Level_01",
-                    DisplayName = "Level 01 - Duz Yol",
-                    SpawnPosition = new Vector2(-7.5f, 0f),
+                    DisplayName = "Level 01 - Giris",
+                    SpawnPosition = new Vector2(-7f, 0f),
                     SpawnDirection = Vector2.right,
-                    TargetPosition = new Vector2(7.5f, 0f),
-                    InkBudget = 100,
+                    TargetPosition = new Vector2(7f, 0f),
+                    InkBudget = 80,
                     AllowIce = false,
                     AllowSticky = true,
                     AllowBouncy = false,
                     Walls = new RectSpec[0],
                     Hazards = new RectSpec[0]
                 },
+                // Level 02 — İlk Sektirme: Bouncy ile yatay duvarı aş
                 new LevelPlan
                 {
                     AssetName = "Level_02",
-                    DisplayName = "Level 02 - Ilk Donus",
+                    DisplayName = "Level 02 - Ilk Sektirme",
                     SpawnPosition = new Vector2(-7f, 3f),
                     SpawnDirection = Vector2.right,
                     TargetPosition = new Vector2(7f, -3f),
-                    InkBudget = 80,
+                    InkBudget = 70,
                     AllowIce = false,
                     AllowSticky = false,
                     AllowBouncy = true,
                     Walls = new[]
                     {
-                        new RectSpec(0f, 2f, 11f, 0.8f),
-                        new RectSpec(4f, -1f, 0.8f, 6f)
+                        new RectSpec(0f, 0.8f, 10f, 0.8f)
                     },
                     Hazards = new RectSpec[0]
                 },
+                // Level 03 — Kaygan Yol: Ice ile dikey bariyer etrafından geç
                 new LevelPlan
                 {
                     AssetName = "Level_03",
-                    DisplayName = "Level 03 - Kaygan Zemin",
+                    DisplayName = "Level 03 - Kaygan Yol",
                     SpawnPosition = new Vector2(-7f, -3f),
                     SpawnDirection = Vector2.right,
                     TargetPosition = new Vector2(7f, 3f),
@@ -457,32 +460,36 @@ namespace TriInkTrack.EditorTools
                     AllowBouncy = false,
                     Walls = new[]
                     {
-                        new RectSpec(-1f, 0f, 0.8f, 6.5f)
-                    },
-                    Hazards = new RectSpec[0]
-                },
-                new LevelPlan
-                {
-                    AssetName = "Level_04",
-                    DisplayName = "Level 04 - Ucunu Birlestir",
-                    SpawnPosition = new Vector2(-7f, 2.8f),
-                    SpawnDirection = Vector2.right,
-                    TargetPosition = new Vector2(7f, -2.8f),
-                    InkBudget = 100,
-                    AllowIce = true,
-                    AllowSticky = true,
-                    AllowBouncy = true,
-                    Walls = new[]
-                    {
-                        new RectSpec(-1f, 1.2f, 7f, 0.8f),
-                        new RectSpec(2.2f, -1.3f, 7f, 0.8f),
-                        new RectSpec(0.8f, 0.1f, 0.8f, 3.5f)
+                        new RectSpec(-1f, 0f, 0.8f, 5f)
                     },
                     Hazards = new[]
                     {
-                        new RectSpec(0f, -3.7f, 2.5f, 0.8f)
+                        new RectSpec(3f, 2.5f, 2f, 0.8f)
                     }
                 },
+                // Level 04 — İki Bariyer: Ice + Sticky ile çapraz zigzag
+                new LevelPlan
+                {
+                    AssetName = "Level_04",
+                    DisplayName = "Level 04 - Iki Bariyer",
+                    SpawnPosition = new Vector2(-7f, 0f),
+                    SpawnDirection = Vector2.right,
+                    TargetPosition = new Vector2(7f, 3f),
+                    InkBudget = 80,
+                    AllowIce = true,
+                    AllowSticky = true,
+                    AllowBouncy = false,
+                    Walls = new[]
+                    {
+                        new RectSpec(-2f, -1.5f, 0.8f, 5f),
+                        new RectSpec(3f, 1.5f, 0.8f, 5f)
+                    },
+                    Hazards = new[]
+                    {
+                        new RectSpec(0.5f, 0f, 2f, 0.8f)
+                    }
+                },
+                // Level 05 — Labirent Başlangıcı: Sticky + Bouncy ile almaşık geçitler
                 new LevelPlan
                 {
                     AssetName = "Level_05",
@@ -490,7 +497,7 @@ namespace TriInkTrack.EditorTools
                     SpawnPosition = new Vector2(-7f, 0f),
                     SpawnDirection = Vector2.right,
                     TargetPosition = new Vector2(7f, 0f),
-                    InkBudget = 80,
+                    InkBudget = 70,
                     AllowIce = false,
                     AllowSticky = true,
                     AllowBouncy = true,
@@ -507,73 +514,76 @@ namespace TriInkTrack.EditorTools
                         new RectSpec(3.5f, 0f, 1.5f, 0.8f)
                     }
                 },
+                // Level 06 — Hız Tuzağı: Ice + Sticky ile uzun bariyeri aş
                 new LevelPlan
                 {
                     AssetName = "Level_06",
                     DisplayName = "Level 06 - Hiz Tuzagi",
-                    SpawnPosition = new Vector2(-7.5f, 0f),
+                    SpawnPosition = new Vector2(-7f, -3f),
                     SpawnDirection = Vector2.right,
-                    TargetPosition = new Vector2(7.5f, 3.2f),
+                    TargetPosition = new Vector2(7f, 3f),
                     InkBudget = 60,
                     AllowIce = true,
                     AllowSticky = true,
                     AllowBouncy = false,
                     Walls = new[]
                     {
-                        new RectSpec(3.5f, 1.6f, 8f, 0.8f),
-                        new RectSpec(1f, -2.8f, 6f, 0.8f)
+                        new RectSpec(0f, 1f, 12f, 0.8f)
                     },
                     Hazards = new[]
                     {
-                        new RectSpec(6.2f, 0f, 1.8f, 2f)
+                        new RectSpec(4.5f, -0.5f, 2f, 2f)
                     }
                 },
+                // Level 07 — Pinball Köşeleri: Ice + Bouncy ile merkezi kare çerçeve
                 new LevelPlan
                 {
                     AssetName = "Level_07",
                     DisplayName = "Level 07 - Pinball Koseleri",
                     SpawnPosition = new Vector2(-7f, -3f),
                     SpawnDirection = new Vector2(1f, 1f),
-                    TargetPosition = Vector2.zero,
+                    TargetPosition = new Vector2(6f, 3f),
                     InkBudget = 70,
                     AllowIce = true,
                     AllowSticky = false,
                     AllowBouncy = true,
                     Walls = new[]
                     {
-                        new RectSpec(-3.5f, 0f, 0.8f, 4.2f),
-                        new RectSpec(3.5f, 0f, 0.8f, 4.2f),
-                        new RectSpec(0f, 3.5f, 4.2f, 0.8f),
-                        new RectSpec(0f, -3.5f, 4.2f, 0.8f)
+                        new RectSpec(-3f, 0f, 0.8f, 4.5f),
+                        new RectSpec(3f, 0f, 0.8f, 4.5f),
+                        new RectSpec(0f, 2.5f, 4.5f, 0.8f),
+                        new RectSpec(0f, -2.5f, 4.5f, 0.8f)
                     },
                     Hazards = new[]
                     {
                         new RectSpec(0f, 0f, 1.2f, 1.2f)
                     }
                 },
+                // Level 08 — Dar Geçit: Sticky + Bouncy ile almaşık dar geçitler
                 new LevelPlan
                 {
                     AssetName = "Level_08",
                     DisplayName = "Level 08 - Dar Gecit",
-                    SpawnPosition = new Vector2(-7f, 3.2f),
+                    SpawnPosition = new Vector2(-7f, 3.5f),
                     SpawnDirection = Vector2.right,
-                    TargetPosition = new Vector2(7f, -3.2f),
+                    TargetPosition = new Vector2(7f, -3.5f),
                     InkBudget = 50,
                     AllowIce = false,
                     AllowSticky = true,
                     AllowBouncy = true,
                     Walls = new[]
                     {
-                        new RectSpec(-3f, 1f, 0.8f, 6f),
-                        new RectSpec(0f, -1f, 0.8f, 6f),
-                        new RectSpec(3f, 1f, 0.8f, 6f)
+                        new RectSpec(-3f, 1.5f, 0.8f, 5.5f),
+                        new RectSpec(0f, -1.5f, 0.8f, 5.5f),
+                        new RectSpec(3f, 1.5f, 0.8f, 5.5f)
                     },
                     Hazards = new[]
                     {
-                        new RectSpec(-1.5f, -3f, 2f, 0.8f),
-                        new RectSpec(1.5f, 3f, 2f, 0.8f)
+                        new RectSpec(-1.5f, -3.5f, 2f, 0.8f),
+                        new RectSpec(1.5f, 3.5f, 2f, 0.8f)
                     }
                 },
+                // Level 09 — Spiral: Ice + Sticky + Bouncy ile spiral yol
                 new LevelPlan
                 {
                     AssetName = "Level_09",
@@ -588,23 +598,24 @@ namespace TriInkTrack.EditorTools
                     Walls = new[]
                     {
                         new RectSpec(0f, 3f, 12f, 0.8f),
-                        new RectSpec(4.5f, 0f, 0.8f, 6f),
+                        new RectSpec(4.5f, 0f, 0.8f, 5.5f),
                         new RectSpec(0f, -3f, 9f, 0.8f),
-                        new RectSpec(-3.5f, 0f, 0.8f, 6f),
-                        new RectSpec(0f, 1.2f, 6f, 0.8f)
+                        new RectSpec(-3.5f, 0f, 0.8f, 5.5f),
+                        new RectSpec(0f, 1.2f, 5.5f, 0.8f)
                     },
                     Hazards = new[]
                     {
-                        new RectSpec(0f, -1.2f, 3.2f, 0.8f)
+                        new RectSpec(0f, -1.2f, 3f, 0.8f)
                     }
                 },
+                // Level 10 — Final: Tüm ink tipleri ile çoklu bariyer
                 new LevelPlan
                 {
                     AssetName = "Level_10",
                     DisplayName = "Level 10 - Final",
                     SpawnPosition = new Vector2(-7.5f, -3.8f),
                     SpawnDirection = Vector2.right,
-                    TargetPosition = new Vector2(7.2f, 3.6f),
+                    TargetPosition = new Vector2(7.5f, 3.8f),
                     InkBudget = 80,
                     AllowIce = true,
                     AllowSticky = true,
@@ -620,8 +631,8 @@ namespace TriInkTrack.EditorTools
                     Hazards = new[]
                     {
                         new RectSpec(-5.5f, 2.8f, 2f, 0.8f),
-                        new RectSpec(-1f, -3.1f, 2f, 0.8f),
-                        new RectSpec(4.8f, -0.2f, 2f, 0.8f)
+                        new RectSpec(-1f, -3.5f, 2f, 0.8f),
+                        new RectSpec(4.8f, 0f, 2f, 0.8f)
                     }
                 }
             };
