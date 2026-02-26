@@ -39,6 +39,8 @@ namespace TriInkTrack.Drawing
         public int MaxPoints => maxPoints;
         public bool IsAtMaxPoints => worldPoints.Count >= maxPoints;
         public InkType CurrentType => currentType;
+        public LineRenderer CachedLineRenderer => lineRenderer;
+        public EdgeCollider2D CachedEdgeCollider => edgeCollider;
 
         public void SetMaxPoints(int value)
         {

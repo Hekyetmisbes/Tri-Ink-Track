@@ -1,5 +1,6 @@
 using TriInkTrack.Core;
 using TriInkTrack.Ink;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,6 +17,7 @@ namespace TriInkTrack.Drawing
         [SerializeField] private InkLine inkLinePrefab;
         [SerializeField] private Transform lineRoot;
         [SerializeField] private InkInventory inkInventory;
+        [SerializeField] private InkLinePool inkLinePool;
 
         [Header("Drawing")]
         [SerializeField] private bool allowDrawInReadyState = true;
@@ -24,6 +26,8 @@ namespace TriInkTrack.Drawing
         [SerializeField] private int maxPointsPerLine = 60;
         [SerializeField] private int maxActiveLines = 30;
         [SerializeField] private bool removeOldestLineWhenLimitReached = true;
+        [SerializeField] private float lineLifetimeSeconds = 7f;
+        [SerializeField] private float lineFadeDuration = 0.5f;
 
         [Header("Play Area")]
         [SerializeField] private bool restrictDrawingToPlayArea = true;
@@ -63,11 +67,17 @@ namespace TriInkTrack.Drawing
             }
 
             ApplyConfigOverrides();
+            EnsureLinePool();
             ResolvePlayAreaBoundsIfNeeded();
         }
 
         private void OnEnable()
         {
+            if (inkLinePool != null)
+            {
+                inkLinePool.OnLineReturned += HandleLineReturned;
+            }
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
@@ -81,6 +91,11 @@ namespace TriInkTrack.Drawing
 
         private void OnDisable()
         {
+            if (inkLinePool != null)
+            {
+                inkLinePool.OnLineReturned -= HandleLineReturned;
+            }
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
@@ -233,6 +248,7 @@ namespace TriInkTrack.Drawing
             Vector3 worldPoint = ScreenToWorld(screenPosition);
             if (!IsPointInPlayArea(worldPoint))
             {
+                DestroyLine(newLine);
                 return;
             }
 
@@ -320,6 +336,7 @@ namespace TriInkTrack.Drawing
             else
             {
                 activeLine.LockLine();
+                StartLineLifetime(activeLine);
             }
 
             ResetDrawingState();
@@ -334,26 +351,19 @@ namespace TriInkTrack.Drawing
 
         private InkLine CreateLineInstance()
         {
+            EnsureLinePool();
+            if (inkLinePool != null)
+            {
+                return inkLinePool.Get();
+            }
+
             Transform parent = lineRoot != null ? lineRoot : transform;
-            InkLine line;
-
-            if (inkLinePrefab != null)
-            {
-                line = Instantiate(inkLinePrefab, parent);
-            }
-            else
-            {
-                GameObject runtimeLine = new GameObject("InkLine_Runtime");
-                runtimeLine.transform.SetParent(parent, false);
-                runtimeLine.AddComponent<LineRenderer>();
-                runtimeLine.AddComponent<EdgeCollider2D>();
-                line = runtimeLine.AddComponent<InkLine>();
-            }
-
-            line.transform.localPosition = Vector3.zero;
-            line.transform.localRotation = Quaternion.identity;
-            line.transform.localScale = Vector3.one;
-
+            GameObject runtimeLine = new GameObject("InkLine_Runtime");
+            runtimeLine.transform.SetParent(parent, false);
+            runtimeLine.AddComponent<LineRenderer>();
+            runtimeLine.AddComponent<EdgeCollider2D>();
+            InkLine line = runtimeLine.AddComponent<InkLine>();
+            runtimeLine.AddComponent<InkLineLifetime>();
             return line;
         }
 
@@ -396,6 +406,8 @@ namespace TriInkTrack.Drawing
             minPointDist = GameManager.Instance.Config.MinPointDist;
             maxPointsPerLine = Mathf.Max(2, GameManager.Instance.Config.MaxPointsPerLine);
             maxActiveLines = Mathf.Max(1, GameManager.Instance.Config.MaxActiveLines);
+            lineLifetimeSeconds = Mathf.Max(0.5f, GameManager.Instance.Config.InkLifetime);
+            lineFadeDuration = Mathf.Max(0.05f, GameManager.Instance.Config.FadeDuration);
         }
 
         private void RegisterLine(InkLine line)
@@ -416,6 +428,12 @@ namespace TriInkTrack.Drawing
             }
 
             activeLines.Remove(line);
+            if (inkLinePool != null)
+            {
+                inkLinePool.Return(line);
+                return;
+            }
+
             Destroy(line.gameObject);
         }
 
@@ -439,7 +457,7 @@ namespace TriInkTrack.Drawing
                 activeLines.RemoveAt(0);
                 if (oldest != null)
                 {
-                    Destroy(oldest.gameObject);
+                    DestroyLine(oldest);
                     return true;
                 }
             }
@@ -451,11 +469,49 @@ namespace TriInkTrack.Drawing
         {
             for (int i = activeLines.Count - 1; i >= 0; i--)
             {
-                if (activeLines[i] == null)
+                InkLine line = activeLines[i];
+                if (line == null || !line.gameObject.activeInHierarchy)
                 {
                     activeLines.RemoveAt(i);
                 }
             }
+        }
+
+        private void StartLineLifetime(InkLine line)
+        {
+            if (line == null)
+            {
+                return;
+            }
+
+            InkLineLifetime lifetime = line.GetComponent<InkLineLifetime>();
+            if (lifetime == null)
+            {
+                lifetime = line.gameObject.AddComponent<InkLineLifetime>();
+            }
+
+            lifetime.BeginLifetime(lineLifetimeSeconds, lineFadeDuration, inkLinePool);
+        }
+
+        private void HandleLineReturned(InkLine line)
+        {
+            activeLines.Remove(line);
+        }
+
+        private void EnsureLinePool()
+        {
+            if (inkLinePool == null)
+            {
+                inkLinePool = GetComponent<InkLinePool>();
+            }
+
+            if (inkLinePool == null)
+            {
+                inkLinePool = gameObject.AddComponent<InkLinePool>();
+            }
+
+            Transform root = lineRoot != null ? lineRoot : transform;
+            inkLinePool.Configure(inkLinePrefab, root);
         }
 
         private bool IsPointInPlayArea(Vector3 worldPoint)
@@ -508,7 +564,7 @@ namespace TriInkTrack.Drawing
                 }
 
                 string name = col.gameObject.name;
-                if (name.IndexOf("wall", System.StringComparison.OrdinalIgnoreCase) < 0)
+                if (name.IndexOf("wall", StringComparison.OrdinalIgnoreCase) < 0)
                 {
                     continue;
                 }

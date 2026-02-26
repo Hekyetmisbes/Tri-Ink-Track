@@ -357,38 +357,38 @@ Assets/
 **Branch:** `feature/step6-lifetime-pooling`
 
 ### InkLineLifetime Script
-- [ ] `Assets/_Game/Scripts/Drawing/InkLineLifetime.cs` oluştur
-- [ ] `lifeSeconds` (5–10 sn, GameConfig'den oku)
-- [ ] `fadeDuration` (0.5 sn)
-- [ ] `spawnTime` kaydı
-- [ ] Ömür dolunca fade başlat: LineRenderer alpha 1→0 (Coroutine veya Update)
-- [ ] Fade bitince EdgeCollider2D disable
-- [ ] Pool'a iade: `gameObject.SetActive(false)` + pool'a geri koy
+- [x] `Assets/_Game/Scripts/Drawing/InkLineLifetime.cs` oluştur
+- [x] `lifeSeconds` (5–10 sn, GameConfig'den oku)
+- [x] `fadeDuration` (0.5 sn)
+- [x] `spawnTime` kaydı
+- [x] Ömür dolunca fade başlat: LineRenderer alpha 1→0 (Coroutine veya Update)
+- [x] Fade bitince EdgeCollider2D disable
+- [x] Pool'a iade: `gameObject.SetActive(false)` + pool'a geri koy
 
 ### InkLinePool Script
-- [ ] `Assets/_Game/Scripts/Drawing/InkLinePool.cs` oluştur
-- [ ] `Queue<InkLine>` pool yapısı
-- [ ] `Get()` — pool'dan al veya yeni oluştur
-- [ ] `Return(InkLine line)` — sıfırla ve pool'a koy
-- [ ] Başlangıçta `initialPoolSize` (10) kadar pre-spawn
-- [ ] InkLine sıfırlama: pozisyon, nokta sayısı, renk, collider temizle
+- [x] `Assets/_Game/Scripts/Drawing/InkLinePool.cs` oluştur
+- [x] `Queue<InkLine>` pool yapısı
+- [x] `Get()` — pool'dan al veya yeni oluştur
+- [x] `Return(InkLine line)` — sıfırla ve pool'a koy
+- [x] Başlangıçta `initialPoolSize` (10) kadar pre-spawn
+- [x] InkLine sıfırlama: pozisyon, nokta sayısı, renk, collider temizle
 
 ### DrawSystem — Pool Entegrasyonu
-- [ ] `Instantiate` yerine `InkLinePool.Get()` kullan
-- [ ] Çizgi ömrü dolunca otomatik pool'a dönüş
-- [ ] Aktif çizgi sayısı takibi
+- [x] `Instantiate` yerine `InkLinePool.Get()` kullan
+- [x] Çizgi ömrü dolunca otomatik pool'a dönüş
+- [x] Aktif çizgi sayısı takibi
 
 ### Performans Kontrolleri
-- [ ] `Update`/`FixedUpdate` içinde allocation olmaması
-- [ ] `List<Vector3>` yeniden kullanımı (clear + reuse)
-- [ ] Profiler ile GC spike kontrolü
+- [x] `Update`/`FixedUpdate` içinde allocation olmaması
+- [x] `List<Vector3>` yeniden kullanımı (clear + reuse)
+- [x] Profiler ile GC spike kontrolü
 
 ### Doğrulama
-- [ ] Çizgiler 5–10 sn sonra fade oluyor
-- [ ] Fade sırasında görsel yumuşak geçiş
-- [ ] Collider fade bitince kapanıyor (Ball artık geçiyor)
-- [ ] Aynı çizgiyi tekrar çizince pool'dan alınıyor (Instantiate yok)
-- [ ] 50+ çizgi çizip silme döngüsünde performans stabil
+- [x] Çizgiler 5–10 sn sonra fade oluyor
+- [x] Fade sırasında görsel yumuşak geçiş
+- [x] Collider fade bitince kapanıyor (Ball artık geçiyor)
+- [x] Aynı çizgiyi tekrar çizince pool'dan alınıyor (Instantiate yok)
+- [x] 50+ çizgi çizip silme döngüsünde performans stabil
 
 ---
 
@@ -396,30 +396,30 @@ Assets/
 **Branch:** `feature/step7-fail-conditions`
 
 ### Hazard Prefab
-- [ ] `Assets/_Game/Prefabs/Hazard.prefab` oluştur
-- [ ] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kırmızı tint uygulanmış blok
-- [ ] Bileşenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
-- [ ] "Hazard" tag'i ata
+- [x] `Assets/_Game/Prefabs/Hazard.prefab` oluştur
+- [x] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kırmızı tint uygulanmış blok
+- [x] Bileşenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
+- [x] "Hazard" tag'i ata
 
 ### Out-of-Bounds Algılama
-- [ ] Kamera sınırlarını hesapla veya sabit sınır collider'ları oluştur
-- [ ] 4 kenar trigger (ekran dışı) — büyük BoxCollider2D (isTrigger)
-- [ ] "Boundary" tag'i ata
+- [x] Kamera sınırlarını hesapla veya sabit sınır collider'ları oluştur
+- [x] 4 kenar trigger (ekran dışı) — büyük BoxCollider2D (isTrigger)
+- [x] "Boundary" tag'i ata
 
 ### BallController — Fail Tetikleme
-- [ ] `OnTriggerEnter2D` — "Hazard" veya "Boundary" tag'i kontrolü
-- [ ] Temas → `GameManager.Instance.OnFail()`
+- [x] `OnTriggerEnter2D` — "Hazard" veya "Boundary" tag'i kontrolü
+- [x] Temas → `GameManager.Instance.OnFail()`
 
 ### GameManager — Fail State
-- [ ] `OnFail()` → state = Fail, event tetikle
-- [ ] Ball hareketi durdur (veya kinematic yap)
-- [ ] Retry butonu aktif
+- [x] `OnFail()` → state = Fail, event tetikle
+- [x] Ball hareketi durdur (veya kinematic yap)
+- [x] Retry butonu aktif
 
 ### Doğrulama
-- [ ] Ball hazard'a değince Fail state
-- [ ] Ball ekran dışına çıkınca Fail state
-- [ ] Fail durumunda Ball duruyor
-- [ ] Console'da Fail log'u
+- [x] Ball hazard'a değince Fail state
+- [x] Ball ekran dışına çıkınca Fail state
+- [x] Fail durumunda Ball duruyor
+- [x] Console'da Fail log'u
 
 ---
 
