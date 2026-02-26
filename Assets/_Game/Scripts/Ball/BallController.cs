@@ -3,6 +3,7 @@ using TriInkTrack.Core;
 using TriInkTrack.Drawing;
 using TriInkTrack.Ink;
 using TriInkTrack.Level;
+using TriInkTrack.Vfx;
 using UnityEngine;
 
 namespace TriInkTrack.Ball
@@ -18,7 +19,10 @@ namespace TriInkTrack.Ball
         [SerializeField] private bool failWhenOutOfCameraBounds = true;
         [SerializeField] private float outOfBoundsPadding = 1.5f;
 
+        [SerializeField] private TrailRenderer trailRenderer;
+
         private Rigidbody2D rb;
+        private SpriteRenderer spriteRenderer;
         private Vector3 spawnPosition;
         private Vector2 spawnDirection;
         private Vector2 moveDirection;
@@ -34,6 +38,7 @@ namespace TriInkTrack.Ball
         {
             rb = GetComponent<Rigidbody2D>();
             rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+            spriteRenderer = GetComponent<SpriteRenderer>();
             gameplayCamera = Camera.main;
             CacheSpawnData();
             moveDirection = GetFallbackDirection();
@@ -100,6 +105,8 @@ namespace TriInkTrack.Ball
             Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
             moveDirection = fallback.sqrMagnitude > 0f ? fallback.normalized : Vector2.right;
             rb.linearVelocity = moveDirection * targetSpeed;
+
+            if (trailRenderer != null) trailRenderer.Clear();
         }
 
         public void RefreshSpawnPointFromScene(bool resetBall = true)
@@ -149,6 +156,9 @@ namespace TriInkTrack.Ball
 
         private void HandleGameStateChanged(GameState state)
         {
+            if (trailRenderer != null)
+                trailRenderer.enabled = state == GameState.Playing;
+
             if (state == GameState.Fail || state == GameState.Win)
             {
                 rb.linearVelocity = Vector2.zero;
@@ -173,6 +183,8 @@ namespace TriInkTrack.Ball
             if (inkLine != null && inkLine.CurrentType == InkType.Bouncy)
             {
                 AudioManager.Instance?.PlayBouncyHit();
+                Color ballColor = spriteRenderer != null ? spriteRenderer.color : Color.white;
+                VfxManager.Instance?.PlayInkHit(ballColor, collision.contacts[0].point);
                 nextBouncyHitTime = Time.time + BouncyHitCooldown;
             }
         }

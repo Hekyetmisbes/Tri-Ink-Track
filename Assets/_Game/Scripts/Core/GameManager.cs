@@ -1,5 +1,6 @@
 using System;
 using TriInkTrack.Audio;
+using TriInkTrack.Vfx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,6 +36,7 @@ namespace TriInkTrack.Core
                 return;
             }
             Instance = this;
+            Application.targetFrameRate = 60;
 
             if (levelManager == null)
             {
@@ -60,10 +62,12 @@ namespace TriInkTrack.Core
             if (newState == GameState.Win)
             {
                 AudioManager.Instance?.PlayWin();
+                VfxManager.Instance?.PlayWin();
             }
             else if (newState == GameState.Fail)
             {
                 AudioManager.Instance?.PlayFail();
+                VfxManager.Instance?.PlayFail();
             }
 
 #if UNITY_EDITOR
