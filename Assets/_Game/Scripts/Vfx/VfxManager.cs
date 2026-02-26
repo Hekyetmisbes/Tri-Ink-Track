@@ -1,4 +1,3 @@
-using TriInkTrack.Ink;
 using UnityEngine;
 
 namespace TriInkTrack.Vfx
@@ -11,9 +10,7 @@ namespace TriInkTrack.Vfx
 
         [SerializeField] private ParticleSystem winEffect;
         [SerializeField] private ParticleSystem failEffect;
-        [SerializeField] private ParticleSystem inkHitIce;
-        [SerializeField] private ParticleSystem inkHitSticky;
-        [SerializeField] private ParticleSystem inkHitBouncy;
+        [SerializeField] private ParticleSystem inkHitEffect;
 
         private void Awake()
         {
@@ -40,24 +37,16 @@ namespace TriInkTrack.Vfx
             failEffect.Play();
         }
 
-        public void PlayInkHit(InkType type, Vector3 position)
+        public void PlayInkHit(Color color, Vector3 position)
         {
-            ParticleSystem ps = GetInkHitSystem(type);
-            if (ps == null) return;
-            ps.transform.position = position;
-            if (ps.isPlaying) ps.Stop();
-            ps.Play();
-        }
+            if (inkHitEffect == null) return;
+            inkHitEffect.transform.position = position;
 
-        private ParticleSystem GetInkHitSystem(InkType type)
-        {
-            switch (type)
-            {
-                case InkType.Sticky: return inkHitSticky;
-                case InkType.Bouncy: return inkHitBouncy;
-                case InkType.Ice:
-                default: return inkHitIce;
-            }
+            ParticleSystem.MainModule main = inkHitEffect.main;
+            main.startColor = color;
+
+            if (inkHitEffect.isPlaying) inkHitEffect.Stop();
+            inkHitEffect.Play();
         }
 
         private void EnsureParticleSystems()
@@ -66,12 +55,8 @@ namespace TriInkTrack.Vfx
                 winEffect = CreateParticleSystem("WinEffect", new Color(1f, 0.92f, 0.016f), 25, 0.3f);
             if (failEffect == null)
                 failEffect = CreateParticleSystem("FailEffect", new Color(1f, 0.2f, 0.2f), 15, 0.25f);
-            if (inkHitIce == null)
-                inkHitIce = CreateParticleSystem("InkHitIce", new Color(0f, 0.749f, 1f), 8, 0.15f);
-            if (inkHitSticky == null)
-                inkHitSticky = CreateParticleSystem("InkHitSticky", new Color(1f, 0.549f, 0f), 8, 0.15f);
-            if (inkHitBouncy == null)
-                inkHitBouncy = CreateParticleSystem("InkHitBouncy", new Color(0.196f, 0.804f, 0.196f), 8, 0.15f);
+            if (inkHitEffect == null)
+                inkHitEffect = CreateParticleSystem("InkHitEffect", Color.white, 8, 0.15f);
         }
 
         private ParticleSystem CreateParticleSystem(string psName, Color color, int burstCount, float startSize)

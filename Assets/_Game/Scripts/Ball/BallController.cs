@@ -22,6 +22,7 @@ namespace TriInkTrack.Ball
         [SerializeField] private TrailRenderer trailRenderer;
 
         private Rigidbody2D rb;
+        private SpriteRenderer spriteRenderer;
         private Vector3 spawnPosition;
         private Vector2 spawnDirection;
         private Vector2 moveDirection;
@@ -37,6 +38,7 @@ namespace TriInkTrack.Ball
         {
             rb = GetComponent<Rigidbody2D>();
             rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+            spriteRenderer = GetComponent<SpriteRenderer>();
             gameplayCamera = Camera.main;
             CacheSpawnData();
             moveDirection = GetFallbackDirection();
@@ -181,7 +183,8 @@ namespace TriInkTrack.Ball
             if (inkLine != null && inkLine.CurrentType == InkType.Bouncy)
             {
                 AudioManager.Instance?.PlayBouncyHit();
-                VfxManager.Instance?.PlayInkHit(InkType.Bouncy, collision.contacts[0].point);
+                Color ballColor = spriteRenderer != null ? spriteRenderer.color : Color.white;
+                VfxManager.Instance?.PlayInkHit(ballColor, collision.contacts[0].point);
                 nextBouncyHitTime = Time.time + BouncyHitCooldown;
             }
         }
