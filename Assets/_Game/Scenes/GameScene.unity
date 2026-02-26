@@ -5711,7 +5711,6 @@ MonoBehaviour:
   levelStartClip: {fileID: 8300000, guid: 1f40be39db67ab948bb7fc5c0b31f22b, type: 3}
   buttonClickClip: {fileID: 8300000, guid: ff1a3f5ca8864e14d962ebead6e0b504, type: 3}
   sfxVolume: 1
-  uiVolume: 0.8
 --- !u!4 &1851561953
 Transform:
   m_ObjectHideFlags: 0
