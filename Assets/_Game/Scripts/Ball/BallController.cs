@@ -12,14 +12,21 @@ namespace TriInkTrack.Ball
         [SerializeField] private float minSpeedThreshold = 0.1f;
         [SerializeField] private float maxSpeed = 8f;
         [SerializeField] private Vector2 initialDirection = Vector2.right;
+        [SerializeField] private bool failWhenOutOfCameraBounds = true;
+        [SerializeField] private float outOfBoundsPadding = 1.5f;
 
         private Rigidbody2D rb;
         private Vector3 spawnPosition;
         private Vector2 spawnDirection;
+        private Camera gameplayCamera;
+
+        private const string HazardTag = "Hazard";
+        private const string BoundaryTag = "Boundary";
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            gameplayCamera = Camera.main;
             CacheSpawnData();
         }
 
@@ -42,6 +49,7 @@ namespace TriInkTrack.Ball
         private void Start()
         {
             ApplyConfigOverrides();
+            EnsureBoundarySystemExists();
             ResetBall();
         }
 
@@ -66,6 +74,11 @@ namespace TriInkTrack.Ball
             {
                 Vector2 normalized = velocity / speed;
                 rb.linearVelocity = normalized * maxSpeed;
+            }
+
+            if (failWhenOutOfCameraBounds && IsOutOfBounds())
+            {
+                TryFail();
             }
         }
 
@@ -118,6 +131,70 @@ namespace TriInkTrack.Ball
             {
                 ResetBall();
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+
+            if (other.CompareTag(HazardTag) ||
+                other.CompareTag(BoundaryTag) ||
+                other.GetComponent<HazardZone>() != null ||
+                other.GetComponent<BoundaryTrigger>() != null)
+            {
+                TryFail();
+            }
+        }
+
+        private bool IsOutOfBounds()
+        {
+            if (gameplayCamera == null)
+            {
+                gameplayCamera = Camera.main;
+                if (gameplayCamera == null || !gameplayCamera.orthographic)
+                {
+                    return false;
+                }
+            }
+
+            float halfHeight = gameplayCamera.orthographicSize + outOfBoundsPadding;
+            float halfWidth = (gameplayCamera.orthographicSize * gameplayCamera.aspect) + outOfBoundsPadding;
+            Vector3 cameraPos = gameplayCamera.transform.position;
+            Vector3 pos = transform.position;
+
+            return pos.x < cameraPos.x - halfWidth ||
+                   pos.x > cameraPos.x + halfWidth ||
+                   pos.y < cameraPos.y - halfHeight ||
+                   pos.y > cameraPos.y + halfHeight;
+        }
+
+        private void TryFail()
+        {
+            if (GameManager.Instance == null)
+            {
+                return;
+            }
+
+            if (GameManager.Instance.CurrentState != GameState.Playing)
+            {
+                return;
+            }
+
+            GameManager.Instance.OnFail();
+        }
+
+        private static void EnsureBoundarySystemExists()
+        {
+            if (FindFirstObjectByType<BoundarySystem>() != null)
+            {
+                return;
+            }
+
+            GameObject boundaryObject = new GameObject("BoundarySystem");
+            boundaryObject.AddComponent<BoundarySystem>();
         }
 
         private void ApplyConfigOverrides()
