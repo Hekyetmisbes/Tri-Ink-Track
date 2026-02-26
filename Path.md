@@ -1,7 +1,7 @@
-# Tri‑Ink Track — Geliştirme Yol Haritası
+﻿# Triâ€‘Ink Track â€” GeliÅŸtirme Yol HaritasÄ±
 
-> **Proje:** Tri‑Ink Track (Üç Mürekkep Parkuru)
-> **Engine:** Unity 6000.3.9f1 — URP 2D
+> **Proje:** Triâ€‘Ink Track (ÃœÃ§ MÃ¼rekkep Parkuru)
+> **Engine:** Unity 6000.3.9f1 â€” URP 2D
 > **Platform:** iOS / Android (Mobil)
 > **Tarih:** 2026-02-25
 
@@ -12,138 +12,138 @@
 | Kategori | Durum |
 |---|---|
 | Unity Projesi | Kurulu (URP 2D, Input System) |
-| Sahne | `SampleScene.unity` — Kamera + Global Light 2D |
+| Sahne | `SampleScene.unity` â€” Kamera + Global Light 2D |
 | Sprite'lar | Kenney Physics Assets, Rolling Ball Assets (~500+ sprite) |
 | UI Elementleri | Kenney UI Pack (butonlar, checkbox'lar, slider'lar) |
 | Fontlar | Kenney Future, Kenney Future Narrow |
 | Ses Efektleri | Kenney Interface Sounds (100+ OGG) |
-| Parçacık Efektleri | Unity Particle Pack (örnek) |
-| Oyun Script'leri | **YOK — Sıfırdan yazılacak** |
-| Fizik Materyalleri | **YOK — Oluşturulacak** |
-| Prefab'lar | **YOK — Oluşturulacak** |
-| Level Tasarımları | **YOK — Tasarlanacak** |
+| ParÃ§acÄ±k Efektleri | Unity Particle Pack (Ã¶rnek) |
+| Oyun Script'leri | **YOK â€” SÄ±fÄ±rdan yazÄ±lacak** |
+| Fizik Materyalleri | **YOK â€” OluÅŸturulacak** |
+| Prefab'lar | **YOK â€” OluÅŸturulacak** |
+| Level TasarÄ±mlarÄ± | **YOK â€” Tasarlanacak** |
 
 ---
 
-## Hedef Klasör Yapısı
+## Hedef KlasÃ¶r YapÄ±sÄ±
 
 ```
 Assets/
-├── _Game/
-│   ├── Art/
-│   │   ├── Sprites/          ← Ball, Target, Hazard, Ink görselleri
-│   │   └── Backgrounds/      ← Level arka planları
-│   ├── Audio/
-│   │   ├── SFX/              ← Oyun sesleri (çizim, çarpma, win, fail)
-│   │   └── Music/            ← (MVP sonrası)
-│   ├── Fonts/                ← Kenney Future fontları (referans)
-│   ├── PhysicsMaterials/     ← Ice, Sticky, Bouncy
-│   ├── Prefabs/
-│   │   ├── Ball.prefab
-│   │   ├── Target.prefab
-│   │   ├── InkLine.prefab
-│   │   ├── Hazard.prefab
-│   │   ├── Wall.prefab
-│   │   └── Levels/
-│   │       ├── Level_01.prefab … Level_10.prefab
-│   ├── Scenes/
-│   │   └── GameScene.unity
-│   ├── Scripts/
-│   │   ├── Core/
-│   │   │   ├── GameManager.cs
-│   │   │   └── LevelManager.cs
-│   │   ├── Ball/
-│   │   │   └── BallController.cs
-│   │   ├── Drawing/
-│   │   │   ├── DrawSystem.cs
-│   │   │   ├── InkLine.cs
-│   │   │   ├── InkLineLifetime.cs
-│   │   │   └── InkLinePool.cs
-│   │   ├── Ink/
-│   │   │   ├── InkType.cs           (enum)
-│   │   │   └── InkInventory.cs
-│   │   ├── UI/
-│   │   │   └── UIHudController.cs
-│   │   ├── Audio/
-│   │   │   └── AudioManager.cs
-│   │   ├── Vfx/
-│   │   │   └── VfxManager.cs       (opsiyonel MVP)
-│   │   └── Config/
-│   │       ├── GameConfig.cs         (ScriptableObject)
-│   │       └── LevelDefinition.cs    (ScriptableObject)
-│   ├── ScriptableObjects/
-│   │   ├── GameConfig.asset
-│   │   └── Levels/
-│   │       ├── Level_01_Def.asset … Level_10_Def.asset
-│   └── UI/
-│       ├── HUD.prefab
-│       └── Sprites/          ← UI ikonları (ink seçim, retry, vb.)
-├── kenney_physics-assets/     ← (Mevcut)
-├── kenney_rolling-ball-assets/ ← (Mevcut)
-├── kenney_ui-pack/            ← (Mevcut)
-├── kenney_interface-sounds/   ← (Mevcut)
-└── Settings/                  ← (Mevcut — URP ayarları)
+â”œâ”€â”€ _Game/
+â”‚   â”œâ”€â”€ Art/
+â”‚   â”‚   â”œâ”€â”€ Sprites/          â† Ball, Target, Hazard, Ink gÃ¶rselleri
+â”‚   â”‚   â””â”€â”€ Backgrounds/      â† Level arka planlarÄ±
+â”‚   â”œâ”€â”€ Audio/
+â”‚   â”‚   â”œâ”€â”€ SFX/              â† Oyun sesleri (Ã§izim, Ã§arpma, win, fail)
+â”‚   â”‚   â””â”€â”€ Music/            â† (MVP sonrasÄ±)
+â”‚   â”œâ”€â”€ Fonts/                â† Kenney Future fontlarÄ± (referans)
+â”‚   â”œâ”€â”€ PhysicsMaterials/     â† Ice, Sticky, Bouncy
+â”‚   â”œâ”€â”€ Prefabs/
+â”‚   â”‚   â”œâ”€â”€ Ball.prefab
+â”‚   â”‚   â”œâ”€â”€ Target.prefab
+â”‚   â”‚   â”œâ”€â”€ InkLine.prefab
+â”‚   â”‚   â”œâ”€â”€ Hazard.prefab
+â”‚   â”‚   â”œâ”€â”€ Wall.prefab
+â”‚   â”‚   â””â”€â”€ Levels/
+â”‚   â”‚       â”œâ”€â”€ Level_01.prefab â€¦ Level_10.prefab
+â”‚   â”œâ”€â”€ Scenes/
+â”‚   â”‚   â””â”€â”€ GameScene.unity
+â”‚   â”œâ”€â”€ Scripts/
+â”‚   â”‚   â”œâ”€â”€ Core/
+â”‚   â”‚   â”‚   â”œâ”€â”€ GameManager.cs
+â”‚   â”‚   â”‚   â””â”€â”€ LevelManager.cs
+â”‚   â”‚   â”œâ”€â”€ Ball/
+â”‚   â”‚   â”‚   â””â”€â”€ BallController.cs
+â”‚   â”‚   â”œâ”€â”€ Drawing/
+â”‚   â”‚   â”‚   â”œâ”€â”€ DrawSystem.cs
+â”‚   â”‚   â”‚   â”œâ”€â”€ InkLine.cs
+â”‚   â”‚   â”‚   â”œâ”€â”€ InkLineLifetime.cs
+â”‚   â”‚   â”‚   â””â”€â”€ InkLinePool.cs
+â”‚   â”‚   â”œâ”€â”€ Ink/
+â”‚   â”‚   â”‚   â”œâ”€â”€ InkType.cs           (enum)
+â”‚   â”‚   â”‚   â””â”€â”€ InkInventory.cs
+â”‚   â”‚   â”œâ”€â”€ UI/
+â”‚   â”‚   â”‚   â””â”€â”€ UIHudController.cs
+â”‚   â”‚   â”œâ”€â”€ Audio/
+â”‚   â”‚   â”‚   â””â”€â”€ AudioManager.cs
+â”‚   â”‚   â”œâ”€â”€ Vfx/
+â”‚   â”‚   â”‚   â””â”€â”€ VfxManager.cs       (opsiyonel MVP)
+â”‚   â”‚   â””â”€â”€ Config/
+â”‚   â”‚       â”œâ”€â”€ GameConfig.cs         (ScriptableObject)
+â”‚   â”‚       â””â”€â”€ LevelDefinition.cs    (ScriptableObject)
+â”‚   â”œâ”€â”€ ScriptableObjects/
+â”‚   â”‚   â”œâ”€â”€ GameConfig.asset
+â”‚   â”‚   â””â”€â”€ Levels/
+â”‚   â”‚       â”œâ”€â”€ Level_01_Def.asset â€¦ Level_10_Def.asset
+â”‚   â””â”€â”€ UI/
+â”‚       â”œâ”€â”€ HUD.prefab
+â”‚       â””â”€â”€ Sprites/          â† UI ikonlarÄ± (ink seÃ§im, retry, vb.)
+â”œâ”€â”€ kenney_physics-assets/     â† (Mevcut)
+â”œâ”€â”€ kenney_rolling-ball-assets/ â† (Mevcut)
+â”œâ”€â”€ kenney_ui-pack/            â† (Mevcut)
+â”œâ”€â”€ kenney_interface-sounds/   â† (Mevcut)
+â””â”€â”€ Settings/                  â† (Mevcut â€” URP ayarlarÄ±)
 ```
 
 ---
 
-## Kullanılacak Mevcut Asset Eşleştirmesi
+## KullanÄ±lacak Mevcut Asset EÅŸleÅŸtirmesi
 
 | Oyun Elementi | Kaynak Asset | Dosya Yolu |
 |---|---|---|
 | Bilye (Ball) | `ball_blue_large.png` | `kenney_rolling-ball-assets/PNG/Default/ball_blue_large.png` |
 | Hedef (Target) | `hole_end.png` | `kenney_rolling-ball-assets/PNG/Default/hole_end.png` |
-| Başlangıç | `hole_start.png` | `kenney_rolling-ball-assets/PNG/Default/hole_start.png` |
-| Duvar blokları | `block_large.png`, `block_narrow.png` | `kenney_rolling-ball-assets/PNG/Default/block_*.png` |
+| BaÅŸlangÄ±Ã§ | `hole_start.png` | `kenney_rolling-ball-assets/PNG/Default/hole_start.png` |
+| Duvar bloklarÄ± | `block_large.png`, `block_narrow.png` | `kenney_rolling-ball-assets/PNG/Default/block_*.png` |
 | Sabit engeller | `locked_*` | `kenney_rolling-ball-assets/PNG/Default/locked_*.png` |
 | Arka plan | `background_blue.png` vb. | `kenney_rolling-ball-assets/PNG/Default/background_*.png` |
-| Yıldız (skor) | `star.png`, `star_outline.png` | `kenney_rolling-ball-assets/PNG/Default/star*.png` |
-| UI butonları | `button_rectangle_flat.png` | `kenney_ui-pack/PNG/*/button_rectangle_*.png` |
-| Ink seçim ikonları | `icon_circle.png` (renklendirilmiş) | `kenney_ui-pack/PNG/*/icon_circle*.png` |
+| YÄ±ldÄ±z (skor) | `star.png`, `star_outline.png` | `kenney_rolling-ball-assets/PNG/Default/star*.png` |
+| UI butonlarÄ± | `button_rectangle_flat.png` | `kenney_ui-pack/PNG/*/button_rectangle_*.png` |
+| Ink seÃ§im ikonlarÄ± | `icon_circle.png` (renklendirilmiÅŸ) | `kenney_ui-pack/PNG/*/icon_circle*.png` |
 | Checkbox | `checkbox_*.png` | `kenney_ui-pack/PNG/*/checkbox_*.png` |
 | Retry/Next buton | `button_round_depth_flat.png` | `kenney_ui-pack/PNG/*/button_round_*.png` |
 | Font | Kenney Future | `kenney_ui-pack/Fonts/Kenney Future.ttf` |
-| Tıklama sesi | `click_003.ogg` | `kenney_interface-sounds/Audio/click_003.ogg` |
-| Çizim sesi | `scratch_003.ogg` | `kenney_interface-sounds/Audio/scratch_003.ogg` |
+| TÄ±klama sesi | `click_003.ogg` | `kenney_interface-sounds/Audio/click_003.ogg` |
+| Ã‡izim sesi | `scratch_003.ogg` | `kenney_interface-sounds/Audio/scratch_003.ogg` |
 | Win sesi | `confirmation_002.ogg` | `kenney_interface-sounds/Audio/confirmation_002.ogg` |
 | Fail sesi | `error_004.ogg` | `kenney_interface-sounds/Audio/error_004.ogg` |
 | Buton hover | `select_002.ogg` | `kenney_interface-sounds/Audio/select_002.ogg` |
-| Ink seçim sesi | `switch_003.ogg` | `kenney_interface-sounds/Audio/switch_003.ogg` |
+| Ink seÃ§im sesi | `switch_003.ogg` | `kenney_interface-sounds/Audio/switch_003.ogg` |
 | Bouncy sekme | `glass_002.ogg` | `kenney_interface-sounds/Audio/glass_002.ogg` |
 
 ---
 
-## Script Listesi ve Sorumlulukları
+## Script Listesi ve SorumluluklarÄ±
 
 | Script | Sorumluluk |
 |---|---|
-| `GameManager.cs` | Game state yönetimi (Ready → Playing → Win/Fail → Retry/Next) |
-| `LevelManager.cs` | Level yükleme, sıfırlama, ilerleme kaydetme |
-| `BallController.cs` | Rigidbody2D auto-move, hız normalizasyonu, reset |
-| `DrawSystem.cs` | Touch/mouse input → point sampling → InkLine spawn |
+| `GameManager.cs` | Game state yÃ¶netimi (Ready â†’ Playing â†’ Win/Fail â†’ Retry/Next) |
+| `LevelManager.cs` | Level yÃ¼kleme, sÄ±fÄ±rlama, ilerleme kaydetme |
+| `BallController.cs` | Rigidbody2D auto-move, hÄ±z normalizasyonu, reset |
+| `DrawSystem.cs` | Touch/mouse input â†’ point sampling â†’ InkLine spawn |
 | `InkLine.cs` | LineRenderer + EdgeCollider2D senkronizasyonu |
 | `InkLineLifetime.cs` | Timer, fade animasyonu, collider disable, pool'a iade |
-| `InkLinePool.cs` | Object pooling (ink tipi başına) |
+| `InkLinePool.cs` | Object pooling (ink tipi baÅŸÄ±na) |
 | `InkType.cs` | `enum InkType { Ice, Sticky, Bouncy }` |
-| `InkInventory.cs` | Ink puanı tüketimi ve kalan miktar takibi |
-| `UIHudController.cs` | Ink seçim butonları, ink bar, retry/next UI |
+| `InkInventory.cs` | Ink puanÄ± tÃ¼ketimi ve kalan miktar takibi |
+| `UIHudController.cs` | Ink seÃ§im butonlarÄ±, ink bar, retry/next UI |
 | `AudioManager.cs` | SFX tetikleme (singleton) |
-| `GameConfig.cs` | ScriptableObject — global oyun parametreleri |
-| `LevelDefinition.cs` | ScriptableObject — level başına konfigürasyon |
-| `VfxManager.cs` | Basit VFX tetikleme — win/fail parçacık efektleri (opsiyonel MVP) |
+| `GameConfig.cs` | ScriptableObject â€” global oyun parametreleri |
+| `LevelDefinition.cs` | ScriptableObject â€” level baÅŸÄ±na konfigÃ¼rasyon |
+| `VfxManager.cs` | Basit VFX tetikleme â€” win/fail parÃ§acÄ±k efektleri (opsiyonel MVP) |
 
 ---
 
-## Kod Standartları (Referans)
+## Kod StandartlarÄ± (Referans)
 
-> AGENT.md Bölüm 11'den — tüm adımlarda uygulanacak kurallar.
+> AGENT.md BÃ¶lÃ¼m 11'den â€” tÃ¼m adÄ±mlarda uygulanacak kurallar.
 
 - Public API minimize: `[SerializeField] private` tercih et
-- `Update`/`FixedUpdate` içinde allocation yapma (no `new`, no `string +`)
-- Pooling: `Instantiate`/`Destroy` döngüsünden kaçın
-- Çizgi noktaları için `List<Vector3>` yeniden kullan (`Clear()` + reuse)
+- `Update`/`FixedUpdate` iÃ§inde allocation yapma (no `new`, no `string +`)
+- Pooling: `Instantiate`/`Destroy` dÃ¶ngÃ¼sÃ¼nden kaÃ§Ä±n
+- Ã‡izgi noktalarÄ± iÃ§in `List<Vector3>` yeniden kullan (`Clear()` + reuse)
 - Parametreleri `ScriptableObject` veya `[Serializable]` config struct ile tek yerde topla
-- Debug logları `#if UNITY_EDITOR` ile kontrol et
+- Debug loglarÄ± `#if UNITY_EDITOR` ile kontrol et
 
 ---
 
@@ -151,552 +151,552 @@ Assets/
 
 ---
 
-## Step 1 — Bootstrap: Proje Altyapısı ve GameScene
+## Step 1 â€” Bootstrap: Proje AltyapÄ±sÄ± ve GameScene
 **Branch:** `feature/step1-bootstrap`
 
-### Klasör ve Sahne Hazırlığı
-- [x] `Assets/_Game/` ana klasör yapısını oluştur (Art, Audio, Scripts, Prefabs, Scenes, PhysicsMaterials, ScriptableObjects, UI)
-- [x] `Assets/_Game/Scenes/GameScene.unity` oluştur (SampleScene içeriği temel alındı; SampleScene yerinde kaldı)
+### KlasÃ¶r ve Sahne HazÄ±rlÄ±ÄŸÄ±
+- [x] `Assets/_Game/` ana klasÃ¶r yapÄ±sÄ±nÄ± oluÅŸtur (Art, Audio, Scripts, Prefabs, Scenes, PhysicsMaterials, ScriptableObjects, UI)
+- [x] `Assets/_Game/Scenes/GameScene.unity` oluÅŸtur (SampleScene iÃ§eriÄŸi temel alÄ±ndÄ±; SampleScene yerinde kaldÄ±)
 - [x] EditorBuildSettings'e GameScene'i ekle
-- [x] Kamera ayarlarını doğrula: Orthographic, 2D, size = 10
-- [x] Global Light 2D ayarlarını doğrula
+- [x] Kamera ayarlarÄ±nÄ± doÄŸrula: Orthographic, 2D, size = 10
+- [x] Global Light 2D ayarlarÄ±nÄ± doÄŸrula
 
 ### GameManager (State Machine)
-- [x] `Assets/_Game/Scripts/Core/GameManager.cs` oluştur
-- [x] `GameState` enum tanımla: `Ready, Playing, Win, Fail`
-- [x] Singleton pattern uygula (DontDestroyOnLoad kullanma — tek sahne MVP)
-- [x] State geçiş metodları: `StartGame()`, `OnWin()`, `OnFail()`, `Retry()`, `NextLevel()`
-- [x] `OnGameStateChanged` event tanımla (diğer sistemlerin dinlemesi için)
+- [x] `Assets/_Game/Scripts/Core/GameManager.cs` oluÅŸtur
+- [x] `GameState` enum tanÄ±mla: `Ready, Playing, Win, Fail`
+- [x] Singleton pattern uygula (DontDestroyOnLoad kullanma â€” tek sahne MVP)
+- [x] State geÃ§iÅŸ metodlarÄ±: `StartGame()`, `OnWin()`, `OnFail()`, `Retry()`, `NextLevel()`
+- [x] `OnGameStateChanged` event tanÄ±mla (diÄŸer sistemlerin dinlemesi iÃ§in)
 
 ### GameConfig (ScriptableObject)
-- [x] `Assets/_Game/Scripts/Config/GameConfig.cs` oluştur
+- [x] `Assets/_Game/Scripts/Config/GameConfig.cs` oluÅŸtur
 - [x] Temel parametreler: `ballSpeed`, `inkLifetime`, `maxActiveLines`, `maxPointsPerLine`, `minPointDist`, `totalInkPoints`
-- [x] `Assets/_Game/ScriptableObjects/GameConfig.asset` oluştur
+- [x] `Assets/_Game/ScriptableObjects/GameConfig.asset` oluÅŸtur
 
-### Sahne Hiyerarşisi
-- [x] GameScene'de boş GameObject'ler oluştur: `GameManager`, `LevelRoot`, `DrawSystem`, `UI Canvas`
+### Sahne HiyerarÅŸisi
+- [x] GameScene'de boÅŸ GameObject'ler oluÅŸtur: `GameManager`, `LevelRoot`, `DrawSystem`, `UI Canvas`
 - [x] GameManager script'ini GameManager objesine ata
-- [x] GameConfig asset'ini GameManager'a referans olarak bağla
+- [x] GameConfig asset'ini GameManager'a referans olarak baÄŸla
 
-### Doğrulama
-- [ ] Play modunda GameManager singleton erişilebilir
-- [ ] State geçişleri Console'da loglanıyor
-- [ ] Proje hatasız derleniyor
+### DoÄŸrulama
+- [ ] Play modunda GameManager singleton eriÅŸilebilir
+- [ ] State geÃ§iÅŸleri Console'da loglanÄ±yor
+- [ ] Proje hatasÄ±z derleniyor
 
 ---
 
-## Step 2 — Ball + Target: Temel Hareket ve Win Koşulu
+## Step 2 â€” Ball + Target: Temel Hareket ve Win KoÅŸulu
 **Branch:** `feature/step2-ball-target`
 
 ### Ball Prefab
-- [x] `Assets/_Game/Prefabs/Ball.prefab` oluştur
+- [x] `Assets/_Game/Prefabs/Ball.prefab` oluÅŸtur
 - [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/ball_blue_large.png`
-- [x] Bileşenler: `SpriteRenderer`, `Rigidbody2D`, `CircleCollider2D`
-- [x] Rigidbody2D ayarları: `gravityScale = 0`, `linearDrag = 0.1–0.4` (tweak), `angularDrag = 0.5`, `collisionDetection = Continuous`
+- [x] BileÅŸenler: `SpriteRenderer`, `Rigidbody2D`, `CircleCollider2D`
+- [x] Rigidbody2D ayarlarÄ±: `gravityScale = 0`, `linearDrag = 0.1â€“0.4` (tweak), `angularDrag = 0.5`, `collisionDetection = Continuous`
 - [x] Tag: `Ball`
 
 ### BallController Script
-- [x] `Assets/_Game/Scripts/Ball/BallController.cs` oluştur
-- [x] `[SerializeField] private float targetSpeed = 5f` (4–7 arası tweak)
+- [x] `Assets/_Game/Scripts/Ball/BallController.cs` oluÅŸtur
+- [x] `[SerializeField] private float targetSpeed = 5f` (4â€“7 arasÄ± tweak)
 - [x] `[SerializeField] private Vector2 initialDirection = Vector2.right`
-- [x] `FixedUpdate` içinde hız normalizasyonu: `rb.velocity = rb.velocity.normalized * targetSpeed`
-- [x] Çok düşük hız fallback'i: velocity.magnitude < 0.1f ise `initialDirection * targetSpeed` uygula
-- [x] Bouncy çarpışma sonrası `maxSpeed` clamp (aşırı hız önleme)
-- [x] `ResetBall()` metodu: pozisyon ve hız sıfırlama (level restart için)
-- [x] Başlangıç pozisyonu kaydetme (`spawnPosition`)
-- [x] Level prefab'ından spawn pozisyonu ve başlangıç yönü okuma
+- [x] `FixedUpdate` iÃ§inde hÄ±z normalizasyonu: `rb.velocity = rb.velocity.normalized * targetSpeed`
+- [x] Ã‡ok dÃ¼ÅŸÃ¼k hÄ±z fallback'i: velocity.magnitude < 0.1f ise `initialDirection * targetSpeed` uygula
+- [x] Bouncy Ã§arpÄ±ÅŸma sonrasÄ± `maxSpeed` clamp (aÅŸÄ±rÄ± hÄ±z Ã¶nleme)
+- [x] `ResetBall()` metodu: pozisyon ve hÄ±z sÄ±fÄ±rlama (level restart iÃ§in)
+- [x] BaÅŸlangÄ±Ã§ pozisyonu kaydetme (`spawnPosition`)
+- [x] Level prefab'Ä±ndan spawn pozisyonu ve baÅŸlangÄ±Ã§ yÃ¶nÃ¼ okuma
 
 ### Target Prefab
-- [x] `Assets/_Game/Prefabs/Target.prefab` oluştur
+- [x] `Assets/_Game/Prefabs/Target.prefab` oluÅŸtur
 - [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/hole_small_end.png`
-- [x] Bileşenler: `SpriteRenderer`, `CircleCollider2D (isTrigger = true)`
+- [x] BileÅŸenler: `SpriteRenderer`, `CircleCollider2D (isTrigger = true)`
 - [x] Basit pulse animasyonu (scale ping-pong, script veya Animation)
 
 ### Win Trigger
-- [x] Target prefab'a `OnTriggerEnter2D` ile Ball teması algılama ekle (Tag: "Ball")
-- [x] Temas olduğunda `GameManager.Instance.OnWin()` çağır
+- [x] Target prefab'a `OnTriggerEnter2D` ile Ball temasÄ± algÄ±lama ekle (Tag: "Ball")
+- [x] Temas olduÄŸunda `GameManager.Instance.OnWin()` Ã§aÄŸÄ±r
 - [x] Ball'a "Ball" tag'i ata
 
 ### Wall Prefab
-- [x] `Assets/_Game/Prefabs/Wall.prefab` oluştur
+- [x] `Assets/_Game/Prefabs/Wall.prefab` oluÅŸtur
 - [x] Sprite: `kenney_rolling-ball-assets/PNG/Default/block_large.png` (tiling)
-- [x] Bileşen: `BoxCollider2D`
-- [x] Farklı boyutlar için ölçeklenebilir yapı
+- [x] BileÅŸen: `BoxCollider2D`
+- [x] FarklÄ± boyutlar iÃ§in Ã¶lÃ§eklenebilir yapÄ±
 
-### Test Level Düzeni
-- [x] GameScene'de basit dikdörtgen alan: 4 duvar + Ball + Target
-- [x] Ball sol tarafta, Target sağ tarafta
-- [x] Play modunda Ball otomatik hareket ediyor ve duvarlara çarpıyor
+### Test Level DÃ¼zeni
+- [x] GameScene'de basit dikdÃ¶rtgen alan: 4 duvar + Ball + Target
+- [x] Ball sol tarafta, Target saÄŸ tarafta
+- [x] Play modunda Ball otomatik hareket ediyor ve duvarlara Ã§arpÄ±yor
 
-### Doğrulama
-- [x] Ball otomatik hareket ediyor, hızı sabit kalıyor
-- [x] Duvarlara çarpınca sekmesi doğal
-- [x] Target'a ulaşınca Win state tetikleniyor
-- [x] Console'da Win log'u görünüyor
+### DoÄŸrulama
+- [x] Ball otomatik hareket ediyor, hÄ±zÄ± sabit kalÄ±yor
+- [x] Duvarlara Ã§arpÄ±nca sekmesi doÄŸal
+- [x] Target'a ulaÅŸÄ±nca Win state tetikleniyor
+- [x] Console'da Win log'u gÃ¶rÃ¼nÃ¼yor
 
 ---
 
-## Step 3 — DrawSystem v1: Çizim Mekaniği
+## Step 3 â€” DrawSystem v1: Ã‡izim MekaniÄŸi
 **Branch:** `feature/step3-draw-system`
 
 ### InkType Enum
-- [x] `Assets/_Game/Scripts/Ink/InkType.cs` oluştur
+- [x] `Assets/_Game/Scripts/Ink/InkType.cs` oluÅŸtur
 - [x] `public enum InkType { Ice, Sticky, Bouncy }`
 
 ### DrawSystem Script
-- [x] `Assets/_Game/Scripts/Drawing/DrawSystem.cs` oluştur
-- [x] Mouse/Touch input algılama (Input System veya legacy — MVP için legacy tercih)
-- [x] `Camera.main.ScreenToWorldPoint()` ile screen → world dönüşümü
-- [x] Nokta örnekleme: yeni nokta ancak `minPointDist` (0.15) uzaklıkta ise ekle
-- [x] `isDrawing` flag ile pointer down/move/up yönetimi
-- [x] UI üstüne çizim engelleme: `EventSystem.current.IsPointerOverGameObject()` kontrolü
-- [x] Mobil touch için: `EventSystem.current.IsPointerOverGameObject(touch.fingerId)`
+- [x] `Assets/_Game/Scripts/Drawing/DrawSystem.cs` oluÅŸtur
+- [x] Mouse/Touch input algÄ±lama (Input System veya legacy â€” MVP iÃ§in legacy tercih)
+- [x] `Camera.main.ScreenToWorldPoint()` ile screen â†’ world dÃ¶nÃ¼ÅŸÃ¼mÃ¼
+- [x] Nokta Ã¶rnekleme: yeni nokta ancak `minPointDist` (0.15) uzaklÄ±kta ise ekle
+- [x] `isDrawing` flag ile pointer down/move/up yÃ¶netimi
+- [x] UI Ã¼stÃ¼ne Ã§izim engelleme: `EventSystem.current.IsPointerOverGameObject()` kontrolÃ¼
+- [x] Mobil touch iÃ§in: `EventSystem.current.IsPointerOverGameObject(touch.fingerId)`
 
 ### InkLine Script
-- [x] `Assets/_Game/Scripts/Drawing/InkLine.cs` oluştur
-- [x] `LineRenderer` referansı ve ayarları (width, color, material)
-- [x] `EdgeCollider2D` referansı
+- [x] `Assets/_Game/Scripts/Drawing/InkLine.cs` oluÅŸtur
+- [x] `LineRenderer` referansÄ± ve ayarlarÄ± (width, color, material)
+- [x] `EdgeCollider2D` referansÄ±
 - [x] `AddPoint(Vector3 worldPos)` metodu
-- [x] LineRenderer güncelleme: `SetPositionCount()`, `SetPosition()`
-- [x] EdgeCollider2D sync: world → local dönüşümü ile `points` dizisi güncelle
+- [x] LineRenderer gÃ¼ncelleme: `SetPositionCount()`, `SetPosition()`
+- [x] EdgeCollider2D sync: world â†’ local dÃ¶nÃ¼ÅŸÃ¼mÃ¼ ile `points` dizisi gÃ¼ncelle
 - [x] `maxPoints` limiti (60)
 
 ### InkLine Prefab
-- [x] `Assets/_Game/Prefabs/InkLine.prefab` oluştur
-- [x] Bileşenler: `LineRenderer`, `EdgeCollider2D`, `InkLine` script
-- [x] LineRenderer ayarları: width 0.08–0.12, Sprites-Default material
-- [x] EdgeCollider2D: başlangıçta boş
+- [x] `Assets/_Game/Prefabs/InkLine.prefab` oluÅŸtur
+- [x] BileÅŸenler: `LineRenderer`, `EdgeCollider2D`, `InkLine` script
+- [x] LineRenderer ayarlarÄ±: width 0.08â€“0.12, Sprites-Default material
+- [x] EdgeCollider2D: baÅŸlangÄ±Ã§ta boÅŸ
 
-### Çizim Akışı
-- [x] Pointer Down → yeni InkLine instantiate (veya pool'dan al)
-- [x] Pointer Move → `InkLine.AddPoint()`
-- [x] Pointer Up → çizgiyi "kilitle" (çizim durur, ömür geri sayımı başlar)
-- [x] Minimum 2 nokta yoksa çizgiyi sil/iade et
+### Ã‡izim AkÄ±ÅŸÄ±
+- [x] Pointer Down â†’ yeni InkLine instantiate (veya pool'dan al)
+- [x] Pointer Move â†’ `InkLine.AddPoint()`
+- [x] Pointer Up â†’ Ã§izgiyi "kilitle" (Ã§izim durur, Ã¶mÃ¼r geri sayÄ±mÄ± baÅŸlar)
+- [x] Minimum 2 nokta yoksa Ã§izgiyi sil/iade et
 
-### Doğrulama
-- [x] Mouse ile sürükleyince pürüzsüz çizgi oluşuyor
-- [x] Çizgi kalınlığı tutarlı
-- [x] Ball çizgiye çarpıyor (EdgeCollider2D çalışıyor)
-- [x] UI butonlarına tıklayınca çizim başlamıyor
+### DoÄŸrulama
+- [x] Mouse ile sÃ¼rÃ¼kleyince pÃ¼rÃ¼zsÃ¼z Ã§izgi oluÅŸuyor
+- [x] Ã‡izgi kalÄ±nlÄ±ÄŸÄ± tutarlÄ±
+- [x] Ball Ã§izgiye Ã§arpÄ±yor (EdgeCollider2D Ã§alÄ±ÅŸÄ±yor)
+- [x] UI butonlarÄ±na tÄ±klayÄ±nca Ã§izim baÅŸlamÄ±yor
 
 ---
 
-## Step 4 — EdgeCollider2D Doğruluğu ve Çizgi İyileştirmesi
+## Step 4 â€” EdgeCollider2D DoÄŸruluÄŸu ve Ã‡izgi Ä°yileÅŸtirmesi
 **Branch:** `feature/step4-collider-polish`
 
 ### Collider Senkronizasyonu
-- [x] `InkLine.cs` — EdgeCollider2D güncelleme optimizasyonu
-- [x] World → Local dönüşümü doğrulaması: `transform.InverseTransformPoint()`
-- [x] Çizgi objesinin pozisyonu (0,0,0) olmalı veya offset hesaplanmalı
-- [x] Collider noktalarının LineRenderer ile birebir eşleştiğini doğrula
+- [x] `InkLine.cs` â€” EdgeCollider2D gÃ¼ncelleme optimizasyonu
+- [x] World â†’ Local dÃ¶nÃ¼ÅŸÃ¼mÃ¼ doÄŸrulamasÄ±: `transform.InverseTransformPoint()`
+- [x] Ã‡izgi objesinin pozisyonu (0,0,0) olmalÄ± veya offset hesaplanmalÄ±
+- [x] Collider noktalarÄ±nÄ±n LineRenderer ile birebir eÅŸleÅŸtiÄŸini doÄŸrula
 
 ### Segment Limiti
-- [x] `maxPoints` aşılınca çizimi otomatik bitir (pointer up simüle)
-- [x] Toplam aktif çizgi sayısı kontrolü: `maxActiveLines` (30)
-- [x] Limit aşılınca en eski çizgiyi kaldır veya yeni çizim engelle
+- [x] `maxPoints` aÅŸÄ±lÄ±nca Ã§izimi otomatik bitir (pointer up simÃ¼le)
+- [x] Toplam aktif Ã§izgi sayÄ±sÄ± kontrolÃ¼: `maxActiveLines` (30)
+- [x] Limit aÅŸÄ±lÄ±nca en eski Ã§izgiyi kaldÄ±r veya yeni Ã§izim engelle
 
-### Çizim Kalitesi
+### Ã‡izim Kalitesi
 - [x] `minPointDist` parametresini GameConfig'den oku
-- [x] Çok kısa çizgileri (< 3 nokta) otomatik sil
-- [x] LineRenderer corner vertices ve end cap ayarları (Round)
+- [x] Ã‡ok kÄ±sa Ã§izgileri (< 3 nokta) otomatik sil
+- [x] LineRenderer corner vertices ve end cap ayarlarÄ± (Round)
 
-### Doğrulama
-- [x] Collider tam olarak çizginin üstünde
-- [x] Ball çizginin her noktasında çarpışıyor
-- [x] Segment patlaması yok (çok fazla nokta oluşmuyor)
-- [x] 30+ çizgi çizilince sistem stabil
+### DoÄŸrulama
+- [x] Collider tam olarak Ã§izginin Ã¼stÃ¼nde
+- [x] Ball Ã§izginin her noktasÄ±nda Ã§arpÄ±ÅŸÄ±yor
+- [x] Segment patlamasÄ± yok (Ã§ok fazla nokta oluÅŸmuyor)
+- [x] 30+ Ã§izgi Ã§izilince sistem stabil
 
 ---
 
-## Step 5 — Ink Tipleri ve Fizik Materyalleri
+## Step 5 â€” Ink Tipleri ve Fizik Materyalleri
 **Branch:** `feature/step5-ink-types`
 
-### PhysicsMaterial2D Oluşturma
-- [x] `Assets/_Game/PhysicsMaterials/Ice.physicsMaterial2D` — friction: 0.02, bounciness: 0.05
-- [x] `Assets/_Game/PhysicsMaterials/Sticky.physicsMaterial2D` — friction: 0.9, bounciness: 0
-- [x] `Assets/_Game/PhysicsMaterials/Bouncy.physicsMaterial2D` — friction: 0.1, bounciness: 0.9
+### PhysicsMaterial2D OluÅŸturma
+- [x] `Assets/_Game/PhysicsMaterials/Ice.physicsMaterial2D` â€” friction: 0.02, bounciness: 0.05
+- [x] `Assets/_Game/PhysicsMaterials/Sticky.physicsMaterial2D` â€” friction: 0.9, bounciness: 0
+- [x] `Assets/_Game/PhysicsMaterials/Bouncy.physicsMaterial2D` â€” friction: 0.1, bounciness: 0.9
 
 ### InkLine'a Tip Atama
-- [x] `InkLine.cs` — `InkType currentType` alanı ekle
+- [x] `InkLine.cs` â€” `InkType currentType` alanÄ± ekle
 - [x] `SetInkType(InkType type)` metodu: EdgeCollider2D'ye uygun PhysicsMaterial2D ata
-- [x] Her ink tipi için farklı renk: Ice → Mavi (#00BFFF), Sticky → Turuncu (#FF8C00), Bouncy → Yeşil (#32CD32)
-- [x] LineRenderer rengini ink tipine göre ayarla
+- [x] Her ink tipi iÃ§in farklÄ± renk: Ice â†’ Mavi (#00BFFF), Sticky â†’ Turuncu (#FF8C00), Bouncy â†’ YeÅŸil (#32CD32)
+- [x] LineRenderer rengini ink tipine gÃ¶re ayarla
 
 ### InkInventory Script
-- [x] `Assets/_Game/Scripts/Ink/InkInventory.cs` oluştur
+- [x] `Assets/_Game/Scripts/Ink/InkInventory.cs` oluÅŸtur
 - [x] `[SerializeField] private int totalInkPoints = 100`
-- [x] `ConsumeInk(int amount)` — çizim sırasında her segment için puan düş
-- [x] `HasInk()` — kontrol
-- [x] `ResetInk()` — level restart
-- [x] `OnInkChanged` event (UI güncelleme için)
-- [x] Seçili ink tipi takibi: `currentInkType`
+- [x] `ConsumeInk(int amount)` â€” Ã§izim sÄ±rasÄ±nda her segment iÃ§in puan dÃ¼ÅŸ
+- [x] `HasInk()` â€” kontrol
+- [x] `ResetInk()` â€” level restart
+- [x] `OnInkChanged` event (UI gÃ¼ncelleme iÃ§in)
+- [x] SeÃ§ili ink tipi takibi: `currentInkType`
 
-### DrawSystem — Ink Entegrasyonu
-- [x] DrawSystem'e `InkInventory` referansı ekle
-- [x] Çizim sırasında ink puanı tüket (her yeni nokta = 1 puan)
-- [x] Ink bitince çizimi durdur
-- [x] Yeni InkLine spawn'larken seçili ink tipini ata
+### DrawSystem â€” Ink Entegrasyonu
+- [x] DrawSystem'e `InkInventory` referansÄ± ekle
+- [x] Ã‡izim sÄ±rasÄ±nda ink puanÄ± tÃ¼ket (her yeni nokta = 1 puan)
+- [x] Ink bitince Ã§izimi durdur
+- [x] Yeni InkLine spawn'larken seÃ§ili ink tipini ata
 
-### UI — Ink Seçim Butonları (Temel)
+### UI â€” Ink SeÃ§im ButonlarÄ± (Temel)
 - [x] UI Canvas'a 3 buton ekle (alt bar): Ice / Sticky / Bouncy
-- [x] Buton sprite'ları: `kenney_ui-pack` butonları (mavi, turuncu, yeşil)
-- [x] Seçili buton vurgusu (scale veya border)
-- [x] Buton tıklama → `InkInventory.currentInkType` değiştir
+- [x] Buton sprite'larÄ±: `kenney_ui-pack` butonlarÄ± (mavi, turuncu, yeÅŸil)
+- [x] SeÃ§ili buton vurgusu (scale veya border)
+- [x] Buton tÄ±klama â†’ `InkInventory.currentInkType` deÄŸiÅŸtir
 
-### Doğrulama
-- [x] 3 farklı renkle çizgi çizilebiliyor
-- [x] Ice çizgisinde Ball kayıyor (düşük sürtünme)
-- [x] Sticky çizgisinde Ball yavaşlıyor/duruyor
-- [x] Bouncy çizgisinde Ball belirgin şekilde sekiyor
-- [x] Ink puanı azalıyor, bitince çizim duruyor
-- [x] UI'dan ink tipi değiştirilebiliyor
+### DoÄŸrulama
+- [x] 3 farklÄ± renkle Ã§izgi Ã§izilebiliyor
+- [x] Ice Ã§izgisinde Ball kayÄ±yor (dÃ¼ÅŸÃ¼k sÃ¼rtÃ¼nme)
+- [x] Sticky Ã§izgisinde Ball yavaÅŸlÄ±yor/duruyor
+- [x] Bouncy Ã§izgisinde Ball belirgin ÅŸekilde sekiyor
+- [x] Ink puanÄ± azalÄ±yor, bitince Ã§izim duruyor
+- [x] UI'dan ink tipi deÄŸiÅŸtirilebiliyor
 
 ---
 
-## Step 6 — Lifetime, Fade ve Object Pooling
+## Step 6 â€” Lifetime, Fade ve Object Pooling
 **Branch:** `feature/step6-lifetime-pooling`
 
 ### InkLineLifetime Script
-- [x] `Assets/_Game/Scripts/Drawing/InkLineLifetime.cs` oluştur
-- [x] `lifeSeconds` (5–10 sn, GameConfig'den oku)
+- [x] `Assets/_Game/Scripts/Drawing/InkLineLifetime.cs` oluÅŸtur
+- [x] `lifeSeconds` (5â€“10 sn, GameConfig'den oku)
 - [x] `fadeDuration` (0.5 sn)
-- [x] `spawnTime` kaydı
-- [x] Ömür dolunca fade başlat: LineRenderer alpha 1→0 (Coroutine veya Update)
+- [x] `spawnTime` kaydÄ±
+- [x] Ã–mÃ¼r dolunca fade baÅŸlat: LineRenderer alpha 1â†’0 (Coroutine veya Update)
 - [x] Fade bitince EdgeCollider2D disable
 - [x] Pool'a iade: `gameObject.SetActive(false)` + pool'a geri koy
 
 ### InkLinePool Script
-- [x] `Assets/_Game/Scripts/Drawing/InkLinePool.cs` oluştur
-- [x] `Queue<InkLine>` pool yapısı
-- [x] `Get()` — pool'dan al veya yeni oluştur
-- [x] `Return(InkLine line)` — sıfırla ve pool'a koy
-- [x] Başlangıçta `initialPoolSize` (10) kadar pre-spawn
-- [x] InkLine sıfırlama: pozisyon, nokta sayısı, renk, collider temizle
+- [x] `Assets/_Game/Scripts/Drawing/InkLinePool.cs` oluÅŸtur
+- [x] `Queue<InkLine>` pool yapÄ±sÄ±
+- [x] `Get()` â€” pool'dan al veya yeni oluÅŸtur
+- [x] `Return(InkLine line)` â€” sÄ±fÄ±rla ve pool'a koy
+- [x] BaÅŸlangÄ±Ã§ta `initialPoolSize` (10) kadar pre-spawn
+- [x] InkLine sÄ±fÄ±rlama: pozisyon, nokta sayÄ±sÄ±, renk, collider temizle
 
-### DrawSystem — Pool Entegrasyonu
+### DrawSystem â€” Pool Entegrasyonu
 - [x] `Instantiate` yerine `InkLinePool.Get()` kullan
-- [x] Çizgi ömrü dolunca otomatik pool'a dönüş
-- [x] Aktif çizgi sayısı takibi
+- [x] Ã‡izgi Ã¶mrÃ¼ dolunca otomatik pool'a dÃ¶nÃ¼ÅŸ
+- [x] Aktif Ã§izgi sayÄ±sÄ± takibi
 
 ### Performans Kontrolleri
-- [x] `Update`/`FixedUpdate` içinde allocation olmaması
-- [x] `List<Vector3>` yeniden kullanımı (clear + reuse)
-- [x] Profiler ile GC spike kontrolü
+- [x] `Update`/`FixedUpdate` iÃ§inde allocation olmamasÄ±
+- [x] `List<Vector3>` yeniden kullanÄ±mÄ± (clear + reuse)
+- [x] Profiler ile GC spike kontrolÃ¼
 
-### Doğrulama
-- [x] Çizgiler 5–10 sn sonra fade oluyor
-- [x] Fade sırasında görsel yumuşak geçiş
-- [x] Collider fade bitince kapanıyor (Ball artık geçiyor)
-- [x] Aynı çizgiyi tekrar çizince pool'dan alınıyor (Instantiate yok)
-- [x] 50+ çizgi çizip silme döngüsünde performans stabil
+### DoÄŸrulama
+- [x] Ã‡izgiler 5â€“10 sn sonra fade oluyor
+- [x] Fade sÄ±rasÄ±nda gÃ¶rsel yumuÅŸak geÃ§iÅŸ
+- [x] Collider fade bitince kapanÄ±yor (Ball artÄ±k geÃ§iyor)
+- [x] AynÄ± Ã§izgiyi tekrar Ã§izince pool'dan alÄ±nÄ±yor (Instantiate yok)
+- [x] 50+ Ã§izgi Ã§izip silme dÃ¶ngÃ¼sÃ¼nde performans stabil
 
 ---
 
-## Step 7 — Fail Koşulları ve Sınır Sistemi
+## Step 7 â€” Fail KoÅŸullarÄ± ve SÄ±nÄ±r Sistemi
 **Branch:** `feature/step7-fail-conditions`
 
 ### Hazard Prefab
-- [x] `Assets/_Game/Prefabs/Hazard.prefab` oluştur
-- [x] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kırmızı tint uygulanmış blok
-- [x] Bileşenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
+- [x] `Assets/_Game/Prefabs/Hazard.prefab` oluÅŸtur
+- [x] Sprite: `kenney_physics-assets/PNG/Glass Elements/` veya kÄ±rmÄ±zÄ± tint uygulanmÄ±ÅŸ blok
+- [x] BileÅŸenler: `SpriteRenderer`, `BoxCollider2D (isTrigger = true)`
 - [x] "Hazard" tag'i ata
 
-### Out-of-Bounds Algılama
-- [x] Kamera sınırlarını hesapla veya sabit sınır collider'ları oluştur
-- [x] 4 kenar trigger (ekran dışı) — büyük BoxCollider2D (isTrigger)
+### Out-of-Bounds AlgÄ±lama
+- [x] Kamera sÄ±nÄ±rlarÄ±nÄ± hesapla veya sabit sÄ±nÄ±r collider'larÄ± oluÅŸtur
+- [x] 4 kenar trigger (ekran dÄ±ÅŸÄ±) â€” bÃ¼yÃ¼k BoxCollider2D (isTrigger)
 - [x] "Boundary" tag'i ata
 
-### BallController — Fail Tetikleme
-- [x] `OnTriggerEnter2D` — "Hazard" veya "Boundary" tag'i kontrolü
-- [x] Temas → `GameManager.Instance.OnFail()`
+### BallController â€” Fail Tetikleme
+- [x] `OnTriggerEnter2D` â€” "Hazard" veya "Boundary" tag'i kontrolÃ¼
+- [x] Temas â†’ `GameManager.Instance.OnFail()`
 
-### GameManager — Fail State
-- [x] `OnFail()` → state = Fail, event tetikle
+### GameManager â€” Fail State
+- [x] `OnFail()` â†’ state = Fail, event tetikle
 - [x] Ball hareketi durdur (veya kinematic yap)
 - [x] Retry butonu aktif
 
-### Doğrulama
-- [x] Ball hazard'a değince Fail state
-- [x] Ball ekran dışına çıkınca Fail state
+### DoÄŸrulama
+- [x] Ball hazard'a deÄŸince Fail state
+- [x] Ball ekran dÄ±ÅŸÄ±na Ã§Ä±kÄ±nca Fail state
 - [x] Fail durumunda Ball duruyor
 - [x] Console'da Fail log'u
 
 ---
 
-## Step 8 — UI/HUD: Tam Arayüz
+## Step 8 â€” UI/HUD: Tam ArayÃ¼z
 **Branch:** `feature/step8-ui-hud`
 
 ### UIHudController Script
-- [x] `Assets/_Game/Scripts/UI/UIHudController.cs` oluştur
+- [x] `Assets/_Game/Scripts/UI/UIHudController.cs` oluÅŸtur
 - [x] GameManager state event'lerini dinle
-- [x] Panelleri state'e göre göster/gizle
+- [x] Panelleri state'e gÃ¶re gÃ¶ster/gizle
 
-### HUD Elemanları
-- [x] **Ink Seçim Bar (Alt):** 3 buton — her biri ink rengiyle, seçili olan büyük/parlak
-- [x] **Ink Miktarı Göstergesi:** Slider veya fill bar — kalan ink puanı
-- [x] **Retry Butonu:** Sağ üst köşe, her zaman görünür
-- [x] **Pause Butonu (Opsiyonel):** Sol üst köşe — oyunu duraklat, devam et, ana menü
-- [x] **Win Paneli:** "Level Complete!" + Next Level butonu + yıldız gösterimi
+### HUD ElemanlarÄ±
+- [x] **Ink SeÃ§im Bar (Alt):** 3 buton â€” her biri ink rengiyle, seÃ§ili olan bÃ¼yÃ¼k/parlak
+- [x] **Ink MiktarÄ± GÃ¶stergesi:** Slider veya fill bar â€” kalan ink puanÄ±
+- [x] **Retry Butonu:** SaÄŸ Ã¼st kÃ¶ÅŸe, her zaman gÃ¶rÃ¼nÃ¼r
+- [x] **Pause Butonu (Opsiyonel):** Sol Ã¼st kÃ¶ÅŸe â€” oyunu duraklat, devam et, ana menÃ¼
+- [x] **Win Paneli:** "Level Complete!" + Next Level butonu + yÄ±ldÄ±z gÃ¶sterimi
 - [x] **Fail Paneli:** "Failed!" + Retry butonu
-- [x] **Game Complete Paneli:** Son level sonrası tebrik ekranı
+- [x] **Game Complete Paneli:** Son level sonrasÄ± tebrik ekranÄ±
 
-### UI Sprite Atamaları
-- [x] Butonlar: `kenney_ui-pack/PNG/Blue/button_rectangle_flat.png` (ve renk varyantları)
+### UI Sprite AtamalarÄ±
+- [x] Butonlar: `kenney_ui-pack/PNG/Blue/button_rectangle_flat.png` (ve renk varyantlarÄ±)
 - [x] Retry ikon: `kenney_ui-pack/PNG/Grey/icon_circle.png` (R harfi overlay)
 - [x] Next ikon: `kenney_ui-pack/PNG/Green/Default/arrow_basic_e.png`
 - [x] Star: `kenney_rolling-ball-assets/PNG/Default/star.png`
 - [x] Font: `kenney_ui-pack/Font/Kenney Future.ttf`
 
-### UI Fonksiyonelliği
-- [x] Retry butonu → `GameManager.Retry()` → level sıfırla, ink sıfırla, ball sıfırla
-- [x] Next butonu → `GameManager.NextLevel()` → sonraki level yükle
-- [x] Ink butonları → `InkInventory.currentInkType` değiştir
-- [x] Ink bar → `InkInventory.OnInkChanged` event'ini dinle, fill güncelle
+### UI FonksiyonelliÄŸi
+- [x] Retry butonu â†’ `GameManager.Retry()` â†’ level sÄ±fÄ±rla, ink sÄ±fÄ±rla, ball sÄ±fÄ±rla
+- [x] Next butonu â†’ `GameManager.NextLevel()` â†’ sonraki level yÃ¼kle
+- [x] Ink butonlarÄ± â†’ `InkInventory.currentInkType` deÄŸiÅŸtir
+- [x] Ink bar â†’ `InkInventory.OnInkChanged` event'ini dinle, fill gÃ¼ncelle
 
-### State'e Göre UI
-- [x] **Ready/Playing:** HUD görünür, Win/Fail panelleri gizli
-- [x] **Win:** Win paneli göster, HUD butonları devre dışı
-- [x] **Fail:** Fail paneli göster, HUD butonları devre dışı
+### State'e GÃ¶re UI
+- [x] **Ready/Playing:** HUD gÃ¶rÃ¼nÃ¼r, Win/Fail panelleri gizli
+- [x] **Win:** Win paneli gÃ¶ster, HUD butonlarÄ± devre dÄ±ÅŸÄ±
+- [x] **Fail:** Fail paneli gÃ¶ster, HUD butonlarÄ± devre dÄ±ÅŸÄ±
 
-### Doğrulama
-- [x] Tüm butonlar çalışıyor
-- [x] Ink bar doğru güncelleniyor
-- [x] Win/Fail panelleri doğru zamanda görünüyor
-- [x] Retry level'ı tamamen sıfırlıyor
-- [x] UI üstünde çizim başlamıyor
+### DoÄŸrulama
+- [x] TÃ¼m butonlar Ã§alÄ±ÅŸÄ±yor
+- [x] Ink bar doÄŸru gÃ¼ncelleniyor
+- [x] Win/Fail panelleri doÄŸru zamanda gÃ¶rÃ¼nÃ¼yor
+- [x] Retry level'Ä± tamamen sÄ±fÄ±rlÄ±yor
+- [x] UI Ã¼stÃ¼nde Ã§izim baÅŸlamÄ±yor
 
 ---
 
-## Step 9 — Level Sistemi ve 10 Level Tasarımı
+## Step 9 â€” Level Sistemi ve 10 Level TasarÄ±mÄ±
 **Branch:** `feature/step9-levels`
 
 ### LevelManager Script
-- [ ] `Assets/_Game/Scripts/Core/LevelManager.cs` oluştur
-- [ ] Level prefab listesi: `[SerializeField] private GameObject[] levelPrefabs`
-- [ ] `LoadLevel(int index)` — mevcut level'ı sil, yenisini `LevelRoot` altına instantiate et
-- [ ] `currentLevelIndex` takibi
-- [ ] `RestartLevel()` — aynı level'ı yeniden yükle
-- [ ] `NextLevel()` — index++, yükle
-- [ ] Son level sonrası: başa dön veya "Game Complete" göster
+- [x] `Assets/_Game/Scripts/Core/LevelManager.cs` oluÅŸtur
+- [x] Level prefab listesi: `[SerializeField] private GameObject[] levelPrefabs`
+- [x] `LoadLevel(int index)` â€” mevcut level'Ä± sil, yenisini `LevelRoot` altÄ±na instantiate et
+- [x] `currentLevelIndex` takibi
+- [x] `RestartLevel()` â€” aynÄ± level'Ä± yeniden yÃ¼kle
+- [x] `NextLevel()` â€” index++, yÃ¼kle
+- [x] Son level sonrasÄ±: baÅŸa dÃ¶n veya "Game Complete" gÃ¶ster
 
 ### LevelDefinition (ScriptableObject)
-- [ ] `Assets/_Game/Scripts/Config/LevelDefinition.cs` oluştur
-- [ ] Alanlar: `levelName`, `levelPrefab`, `availableInks` (Ice/Sticky/Bouncy hangilerini kullanabilir), `inkBudget`, `targetTime` (opsiyonel)
-- [ ] 10 adet asset oluştur: `Level_01_Def.asset` … `Level_10_Def.asset`
+- [x] `Assets/_Game/Scripts/Config/LevelDefinition.cs` oluÅŸtur
+- [x] Alanlar: `levelName`, `levelPrefab`, `availableInks` (Ice/Sticky/Bouncy hangilerini kullanabilir), `inkBudget`, `targetTime` (opsiyonel)
+- [x] 10 adet asset oluÅŸtur: `Level_01_Def.asset` â€¦ `Level_10_Def.asset`
 
-### Level Prefab Yapısı
-Her level prefab şunları içerir:
-- [ ] Ball spawn noktası (Transform marker)
-- [ ] Target pozisyonu
-- [ ] Duvarlar (BoxCollider2D)
-- [ ] Hazard'lar (isTrigger)
-- [ ] Arka plan sprite
+### Level Prefab YapÄ±sÄ±
+Her level prefab ÅŸunlarÄ± iÃ§erir:
+- [x] Ball spawn noktasÄ± (Transform marker)
+- [x] Target pozisyonu
+- [x] Duvarlar (BoxCollider2D)
+- [x] Hazard'lar (isTrigger)
+- [x] Arka plan sprite
 
-### 10 Level Tasarımı
+### 10 Level TasarÄ±mÄ±
 
-**Level 01 — Düz Yol (Tutorial: Çizim Öğretici)**
-- [ ] Basit koridor, Ball solda → Target sağda
-- [ ] Engel yok, sadece çizim pratiği
-- [ ] Kullanılabilir ink: **Sticky** — fren etkisini göster
-- [ ] Ink bütçesi: 100 (cömert)
-- [ ] Ball başlangıç yönü: → (sağa)
+**Level 01 â€” DÃ¼z Yol (Tutorial: Ã‡izim Ã–ÄŸretici)**
+- [x] Basit koridor, Ball solda â†’ Target saÄŸda
+- [x] Engel yok, sadece Ã§izim pratiÄŸi
+- [x] KullanÄ±labilir ink: **Sticky** â€” fren etkisini gÃ¶ster
+- [x] Ink bÃ¼tÃ§esi: 100 (cÃ¶mert)
+- [x] Ball baÅŸlangÄ±Ã§ yÃ¶nÃ¼: â†’ (saÄŸa)
 
-**Level 02 — İlk Dönüş (Bouncy Tanıtım)**
-- [ ] L şeklinde koridor
-- [ ] Ball düz gidiyor, köşeyi dönmesi gerek
-- [ ] Kullanılabilir ink: **Bouncy** — yön değiştirme öğretisi
-- [ ] Ink bütçesi: 80
-- [ ] Ball başlangıç yönü: → (sağa)
+**Level 02 â€” Ä°lk DÃ¶nÃ¼ÅŸ (Bouncy TanÄ±tÄ±m)**
+- [x] L ÅŸeklinde koridor
+- [x] Ball dÃ¼z gidiyor, kÃ¶ÅŸeyi dÃ¶nmesi gerek
+- [x] KullanÄ±labilir ink: **Bouncy** â€” yÃ¶n deÄŸiÅŸtirme Ã¶ÄŸretisi
+- [x] Ink bÃ¼tÃ§esi: 80
+- [x] Ball baÅŸlangÄ±Ã§ yÃ¶nÃ¼: â†’ (saÄŸa)
 
-**Level 03 — Kaygan Zemin (Ice Tanıtım)**
-- [ ] Geniş alan, Ball yavaş başlıyor
-- [ ] Ice çizgisiyle hızlandırma
-- [ ] Kullanılabilir ink: **Ice** — hızlandırma öğretisi
-- [ ] Ink bütçesi: 80
-- [ ] Target uzak köşede
+**Level 03 â€” Kaygan Zemin (Ice TanÄ±tÄ±m)**
+- [x] GeniÅŸ alan, Ball yavaÅŸ baÅŸlÄ±yor
+- [x] Ice Ã§izgisiyle hÄ±zlandÄ±rma
+- [x] KullanÄ±labilir ink: **Ice** â€” hÄ±zlandÄ±rma Ã¶ÄŸretisi
+- [x] Ink bÃ¼tÃ§esi: 80
+- [x] Target uzak kÃ¶ÅŸede
 
-**Level 04 — Üçünü Birleştir**
-- [ ] Ball → duvar → boşluk → Target
-- [ ] Bouncy ile yön ver, Ice ile hızlandır, Sticky ile durdur
-- [ ] Kullanılabilir ink: **Ice, Sticky, Bouncy** — ilk kombine puzzle
-- [ ] Ink bütçesi: 100
+**Level 04 â€” ÃœÃ§Ã¼nÃ¼ BirleÅŸtir**
+- [x] Ball â†’ duvar â†’ boÅŸluk â†’ Target
+- [x] Bouncy ile yÃ¶n ver, Ice ile hÄ±zlandÄ±r, Sticky ile durdur
+- [x] KullanÄ±labilir ink: **Ice, Sticky, Bouncy** â€” ilk kombine puzzle
+- [x] Ink bÃ¼tÃ§esi: 100
 
-**Level 05 — Labirent Başlangıcı**
-- [ ] Basit labirent, 2-3 dönüş
-- [ ] Hazard'lar dar geçitlerde
-- [ ] Kullanılabilir ink: **Bouncy, Sticky**
-- [ ] Ink bütçesi: 80
+**Level 05 â€” Labirent BaÅŸlangÄ±cÄ±**
+- [x] Basit labirent, 2-3 dÃ¶nÃ¼ÅŸ
+- [x] Hazard'lar dar geÃ§itlerde
+- [x] KullanÄ±labilir ink: **Bouncy, Sticky**
+- [x] Ink bÃ¼tÃ§esi: 80
 
-**Level 06 — Hız Tuzağı**
-- [ ] Uzun düz koridor + sonunda hazard
-- [ ] Ice ile hızlanma → Sticky ile frenleme zamanlaması
-- [ ] Kullanılabilir ink: **Ice, Sticky** — zamanlama öğretisi
-- [ ] Ink bütçesi: 60
+**Level 06 â€” HÄ±z TuzaÄŸÄ±**
+- [x] Uzun dÃ¼z koridor + sonunda hazard
+- [x] Ice ile hÄ±zlanma â†’ Sticky ile frenleme zamanlamasÄ±
+- [x] KullanÄ±labilir ink: **Ice, Sticky** â€” zamanlama Ã¶ÄŸretisi
+- [x] Ink bÃ¼tÃ§esi: 60
 
-**Level 07 — Pinball Köşeleri**
-- [ ] Kare arena, Target ortada (erişilmesi zor)
-- [ ] Bouncy duvarlarla sekme hesaplama
-- [ ] Kullanılabilir ink: **Bouncy, Ice**
-- [ ] Ink bütçesi: 70
+**Level 07 â€” Pinball KÃ¶ÅŸeleri**
+- [x] Kare arena, Target ortada (eriÅŸilmesi zor)
+- [x] Bouncy duvarlarla sekme hesaplama
+- [x] KullanÄ±labilir ink: **Bouncy, Ice**
+- [x] Ink bÃ¼tÃ§esi: 70
 
-**Level 08 — Dar Geçit**
-- [ ] Dar koridor + hazard'lı bölge
-- [ ] Hassas Sticky kullanımı
-- [ ] Kullanılabilir ink: **Sticky, Bouncy**
-- [ ] Ink bütçesi: **50** (kısıtlı)
+**Level 08 â€” Dar GeÃ§it**
+- [x] Dar koridor + hazard'lÄ± bÃ¶lge
+- [x] Hassas Sticky kullanÄ±mÄ±
+- [x] KullanÄ±labilir ink: **Sticky, Bouncy**
+- [x] Ink bÃ¼tÃ§esi: **50** (kÄ±sÄ±tlÄ±)
 
-**Level 09 — Spiral**
-- [ ] Spiral şekil, Ball dıştan içe
-- [ ] Kullanılabilir ink: **Ice, Sticky, Bouncy** — hepsi gerekli
-- [ ] Ink bütçesi: 60
-- [ ] Yüksek zorluk
+**Level 09 â€” Spiral**
+- [x] Spiral ÅŸekil, Ball dÄ±ÅŸtan iÃ§e
+- [x] KullanÄ±labilir ink: **Ice, Sticky, Bouncy** â€” hepsi gerekli
+- [x] Ink bÃ¼tÃ§esi: 60
+- [x] YÃ¼ksek zorluk
 
-**Level 10 — Final**
-- [ ] Büyük harita, birden fazla yol
-- [ ] Tüm mekanikler devrede
-- [ ] Kullanılabilir ink: **Ice, Sticky, Bouncy**
-- [ ] Ink bütçesi: 80
-- [ ] En az ink ile çözüm ödüllendirilir (yıldız sistemi)
+**Level 10 â€” Final**
+- [x] BÃ¼yÃ¼k harita, birden fazla yol
+- [x] TÃ¼m mekanikler devrede
+- [x] KullanÄ±labilir ink: **Ice, Sticky, Bouncy**
+- [x] Ink bÃ¼tÃ§esi: 80
+- [x] En az ink ile Ã§Ã¶zÃ¼m Ã¶dÃ¼llendirilir (yÄ±ldÄ±z sistemi)
 
-### Level Geçiş Sistemi
-- [ ] GameManager'a LevelManager entegrasyonu
-- [ ] Win → Next buton → `LevelManager.NextLevel()`
-- [ ] Fail → Retry → `LevelManager.RestartLevel()`
-- [ ] **"Game Complete" ekranı:** Level 10 sonrası tebrik paneli göster (basit UI)
-- [ ] PlayerPrefs ile ilerleme kaydetme: `LastUnlockedLevel` key
-- [ ] LevelDefinition'daki `availableInks` alanına göre UI'da sadece o level'ın ink butonlarını göster
+### Level GeÃ§iÅŸ Sistemi
+- [x] GameManager'a LevelManager entegrasyonu
+- [x] Win â†’ Next buton â†’ `LevelManager.NextLevel()`
+- [x] Fail â†’ Retry â†’ `LevelManager.RestartLevel()`
+- [x] **"Game Complete" ekranÄ±:** Level 10 sonrasÄ± tebrik paneli gÃ¶ster (basit UI)
+- [x] PlayerPrefs ile ilerleme kaydetme: `LastUnlockedLevel` key
+- [x] LevelDefinition'daki `availableInks` alanÄ±na gÃ¶re UI'da sadece o level'Ä±n ink butonlarÄ±nÄ± gÃ¶ster
 
-### Doğrulama
-- [ ] 10 level sırasıyla yüklenip oynanıyor
-- [ ] Her level'da Ball spawn doğru pozisyonda
-- [ ] Her level'da Target erişilebilir (çözülebilir)
-- [ ] Level geçişleri sorunsuz
-- [ ] Retry her level'da çalışıyor
+### DoÄŸrulama
+- [x] 10 level sÄ±rasÄ±yla yÃ¼klenip oynanÄ±yor
+- [x] Her level'da Ball spawn doÄŸru pozisyonda
+- [x] Her level'da Target eriÅŸilebilir (Ã§Ã¶zÃ¼lebilir)
+- [x] Level geÃ§iÅŸleri sorunsuz
+- [x] Retry her level'da Ã§alÄ±ÅŸÄ±yor
 
 ---
 
-## Step 10 — Audio: Ses Efektleri
+## Step 10 â€” Audio: Ses Efektleri
 **Branch:** `feature/step10-audio`
 
 ### AudioManager Script
-- [ ] `Assets/_Game/Scripts/Audio/AudioManager.cs` oluştur
+- [ ] `Assets/_Game/Scripts/Audio/AudioManager.cs` oluÅŸtur
 - [ ] Singleton pattern
-- [ ] `AudioSource` bileşeni (veya birden fazla — SFX + UI)
+- [ ] `AudioSource` bileÅŸeni (veya birden fazla â€” SFX + UI)
 - [ ] `PlaySFX(AudioClip clip)` metodu
-- [ ] Ses referansları: `[SerializeField]` ile inspector'dan atanacak
+- [ ] Ses referanslarÄ±: `[SerializeField]` ile inspector'dan atanacak
 
-### Ses Eşleştirmeleri
-- [ ] Çizim başlangıcı: `scratch_003.ogg`
-- [ ] Çizim bitişi: `drop_002.ogg`
-- [ ] Ink seçim değişikliği: `switch_003.ogg`
-- [ ] Ball-çizgi çarpışması (Bouncy): `glass_002.ogg`
+### Ses EÅŸleÅŸtirmeleri
+- [ ] Ã‡izim baÅŸlangÄ±cÄ±: `scratch_003.ogg`
+- [ ] Ã‡izim bitiÅŸi: `drop_002.ogg`
+- [ ] Ink seÃ§im deÄŸiÅŸikliÄŸi: `switch_003.ogg`
+- [ ] Ball-Ã§izgi Ã§arpÄ±ÅŸmasÄ± (Bouncy): `glass_002.ogg`
 - [ ] Win: `confirmation_002.ogg`
 - [ ] Fail: `error_004.ogg`
-- [ ] Buton tıklama: `click_003.ogg`
-- [ ] Level başlangıcı: `maximize_003.ogg`
+- [ ] Buton tÄ±klama: `click_003.ogg`
+- [ ] Level baÅŸlangÄ±cÄ±: `maximize_003.ogg`
 
 ### Entegrasyon
-- [ ] DrawSystem → çizim başlangıç/bitiş sesi
-- [ ] InkInventory → ink değişim sesi
-- [ ] GameManager → Win/Fail sesleri
-- [ ] UIHudController → buton tıklama sesleri
-- [ ] BallController → Bouncy çarpışma sesi (opsiyonel)
+- [ ] DrawSystem â†’ Ã§izim baÅŸlangÄ±Ã§/bitiÅŸ sesi
+- [ ] InkInventory â†’ ink deÄŸiÅŸim sesi
+- [ ] GameManager â†’ Win/Fail sesleri
+- [ ] UIHudController â†’ buton tÄ±klama sesleri
+- [ ] BallController â†’ Bouncy Ã§arpÄ±ÅŸma sesi (opsiyonel)
 
-### Doğrulama
-- [ ] Tüm ses efektleri doğru zamanda çalıyor
-- [ ] Sesler üst üste bindiğinde bozulma yok
+### DoÄŸrulama
+- [ ] TÃ¼m ses efektleri doÄŸru zamanda Ã§alÄ±yor
+- [ ] Sesler Ã¼st Ã¼ste bindiÄŸinde bozulma yok
 - [ ] Ses seviyesi dengeli
 
 ---
 
-## Step 11 — Mobil Optimizasyon ve Son Polish
+## Step 11 â€” Mobil Optimizasyon ve Son Polish
 **Branch:** `feature/step11-polish`
 
 ### Mobil Input
 - [ ] Touch input test: `Input.GetTouch(0)` veya Input System touch
-- [ ] Multi-touch engelleme (sadece tek parmak çizim)
-- [ ] Touch → mouse simülasyonu editörde çalışıyor
+- [ ] Multi-touch engelleme (sadece tek parmak Ã§izim)
+- [ ] Touch â†’ mouse simÃ¼lasyonu editÃ¶rde Ã§alÄ±ÅŸÄ±yor
 
 ### Performans
-- [ ] Profiler ile GC allocation kontrolü
-- [ ] Pooling çalışıyor (Instantiate/Destroy çağrısı yok oyun içinde)
+- [ ] Profiler ile GC allocation kontrolÃ¼
+- [ ] Pooling Ã§alÄ±ÅŸÄ±yor (Instantiate/Destroy Ã§aÄŸrÄ±sÄ± yok oyun iÃ§inde)
 - [ ] `maxActiveLines` limiti aktif (30)
-- [ ] `maxPoints` limiti aktif (60/çizgi)
+- [ ] `maxPoints` limiti aktif (60/Ã§izgi)
 - [ ] Frame rate stabil (60 FPS hedef)
 
 ### VfxManager Script (Opsiyonel MVP)
-- [ ] `Assets/_Game/Scripts/Vfx/VfxManager.cs` oluştur
+- [ ] `Assets/_Game/Scripts/Vfx/VfxManager.cs` oluÅŸtur
 - [ ] Singleton pattern
-- [ ] Win efekti: `ParticlePack` → konfeti/ışık patlaması
-- [ ] Fail efekti: küçük patlama/duman
-- [ ] Ball-çizgi teması: küçük splash (ink renginde)
+- [ ] Win efekti: `ParticlePack` â†’ konfeti/Ä±ÅŸÄ±k patlamasÄ±
+- [ ] Fail efekti: kÃ¼Ã§Ã¼k patlama/duman
+- [ ] Ball-Ã§izgi temasÄ±: kÃ¼Ã§Ã¼k splash (ink renginde)
 - [ ] `PlayVfx(VfxType type, Vector3 position)` metodu
 
-### Görsel Polish
+### GÃ¶rsel Polish
 - [ ] Ball'a hafif trail efekti (TrailRenderer)
 - [ ] Target pulse animasyonu (scale veya glow)
-- [ ] Ink çizgilerinde kalınlık varyasyonu (başlangıç/bitiş incelmesi — LineRenderer widthCurve)
-- [ ] Win/Fail ekranında basit parçacık efekti (Particle Pack'ten)
-- [ ] Duvar koyu, zemin açık renk kontrastı (okunabilirlik)
+- [ ] Ink Ã§izgilerinde kalÄ±nlÄ±k varyasyonu (baÅŸlangÄ±Ã§/bitiÅŸ incelmesi â€” LineRenderer widthCurve)
+- [ ] Win/Fail ekranÄ±nda basit parÃ§acÄ±k efekti (Particle Pack'ten)
+- [ ] Duvar koyu, zemin aÃ§Ä±k renk kontrastÄ± (okunabilirlik)
 
-### Build Ayarları
+### Build AyarlarÄ±
 - [ ] Platform: Android/iOS
-- [ ] Resolution: Portrait veya Landscape (GDD'ye göre — top-down → landscape önerilir)
-- [ ] Quality Settings mobil için optimize
-- [ ] Splash screen ayarları
+- [ ] Resolution: Portrait veya Landscape (GDD'ye gÃ¶re â€” top-down â†’ landscape Ã¶nerilir)
+- [ ] Quality Settings mobil iÃ§in optimize
+- [ ] Splash screen ayarlarÄ±
 
 ### Son Kontrol Listesi (Kabul Kriterleri)
-- [ ] Ball level başlar başlamaz otomatik hareket ediyor
-- [ ] Çizim tek parmakla pürüzsüz; minPointDist ile segment patlamıyor
-- [ ] 3 ink birbirinden belirgin: Ice kaydırıyor, Sticky frenliyor, Bouncy sektiriyor
-- [ ] Çizgiler 5–10 sn sonra fade olup siliniyor; collider kapanıyor
-- [ ] Pooling çalışıyor (GC spike yok / minimal)
-- [ ] Win: Target'a girince state Win, UI Next açılıyor
-- [ ] Fail: hazard/out-of-bounds state Fail, Retry çalışıyor
+- [ ] Ball level baÅŸlar baÅŸlamaz otomatik hareket ediyor
+- [ ] Ã‡izim tek parmakla pÃ¼rÃ¼zsÃ¼z; minPointDist ile segment patlamÄ±yor
+- [ ] 3 ink birbirinden belirgin: Ice kaydÄ±rÄ±yor, Sticky frenliyor, Bouncy sektiriyor
+- [ ] Ã‡izgiler 5â€“10 sn sonra fade olup siliniyor; collider kapanÄ±yor
+- [ ] Pooling Ã§alÄ±ÅŸÄ±yor (GC spike yok / minimal)
+- [ ] Win: Target'a girince state Win, UI Next aÃ§Ä±lÄ±yor
+- [ ] Fail: hazard/out-of-bounds state Fail, Retry Ã§alÄ±ÅŸÄ±yor
 - [ ] 10 level oynanabilir
 - [ ] Mobilde stabil performans
 
 ---
 
-## Özet Zaman Çizelgesi
+## Ã–zet Zaman Ã‡izelgesi
 
-| Adım | Branch | Kapsam | Bağımlılık |
+| AdÄ±m | Branch | Kapsam | BaÄŸÄ±mlÄ±lÄ±k |
 |---|---|---|---|
-| Step 1 | `feature/step1-bootstrap` | Proje yapısı, GameManager, GameConfig | — |
+| Step 1 | `feature/step1-bootstrap` | Proje yapÄ±sÄ±, GameManager, GameConfig | â€” |
 | Step 2 | `feature/step2-ball-target` | Ball auto-move, Target, Win | Step 1 |
-| Step 3 | `feature/step3-draw-system` | Çizim mekaniği, InkLine | Step 2 |
-| Step 4 | `feature/step4-collider-polish` | Collider doğruluğu, segment limiti | Step 3 |
-| Step 5 | `feature/step5-ink-types` | 3 ink tipi, PhysicsMaterial2D, UI seçim | Step 4 |
+| Step 3 | `feature/step3-draw-system` | Ã‡izim mekaniÄŸi, InkLine | Step 2 |
+| Step 4 | `feature/step4-collider-polish` | Collider doÄŸruluÄŸu, segment limiti | Step 3 |
+| Step 5 | `feature/step5-ink-types` | 3 ink tipi, PhysicsMaterial2D, UI seÃ§im | Step 4 |
 | Step 6 | `feature/step6-lifetime-pooling` | Fade, lifetime, object pooling | Step 5 |
 | Step 7 | `feature/step7-fail-conditions` | Hazard, out-of-bounds, Fail state | Step 6 |
 | Step 8 | `feature/step8-ui-hud` | Tam UI/HUD sistemi | Step 7 |
-| Step 9 | `feature/step9-levels` | LevelManager, 10 level tasarımı | Step 8 |
+| Step 9 | `feature/step9-levels` | LevelManager, 10 level tasarÄ±mÄ± | Step 8 |
 | Step 10 | `feature/step10-audio` | Ses efektleri entegrasyonu | Step 9 |
-| Step 11 | `feature/step11-polish` | VfxManager, mobil optimizasyon, görsel polish, final test | Step 10 |
+| Step 11 | `feature/step11-polish` | VfxManager, mobil optimizasyon, gÃ¶rsel polish, final test | Step 10 |
 
 ---
 
-## Teslim Kontrol Listesi (AGENT.md Bölüm 12)
+## Teslim Kontrol Listesi (AGENT.md BÃ¶lÃ¼m 12)
 
-Her step tamamlandığında şu çıktılar doğrulanmalı:
+Her step tamamlandÄ±ÄŸÄ±nda ÅŸu Ã§Ä±ktÄ±lar doÄŸrulanmalÄ±:
 
-- [ ] **Proje tree:** hangi klasörde ne var (güncel)
-- [ ] **Script listesi:** oluşturulan / değiştirilen script'ler
-- [ ] **Kurulum adımları:** scene/prefab bağlamaları (inspector referanslar)
-- [ ] **Oynanış test adımları:** Level 01'den 10'a nasıl test edilir
-- [ ] **Bilinen riskler / TODO'lar:** MVP dışı kalan maddeler
+- [ ] **Proje tree:** hangi klasÃ¶rde ne var (gÃ¼ncel)
+- [ ] **Script listesi:** oluÅŸturulan / deÄŸiÅŸtirilen script'ler
+- [ ] **Kurulum adÄ±mlarÄ±:** scene/prefab baÄŸlamalarÄ± (inspector referanslar)
+- [ ] **OynanÄ±ÅŸ test adÄ±mlarÄ±:** Level 01'den 10'a nasÄ±l test edilir
+- [ ] **Bilinen riskler / TODO'lar:** MVP dÄ±ÅŸÄ± kalan maddeler
 
 ---
 
-## MVP Sonrası (Backlog)
+## MVP SonrasÄ± (Backlog)
 
 - [ ] Rewarded reklam: +ink / undo / hint
 - [ ] Interstitial reklam pacing
 - [ ] Gate / button / moving obstacle mekanikleri
 - [ ] Tutorial pop-up'lar (ilk 3 level)
-- [ ] Müzik ekleme
+- [ ] MÃ¼zik ekleme
 - [ ] Haptic feedback (mobil)
 - [ ] Analytics entegrasyonu
-- [ ] Leaderboard / yıldız sistemi
+- [ ] Leaderboard / yÄ±ldÄ±z sistemi
 - [ ] Daha fazla level (20+)
 - [ ] Tema/skin sistemi
