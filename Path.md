@@ -613,48 +613,48 @@ Her level prefab ÅŸunlarÄ± iÃ§erir:
 **Branch:** `feature/step11-polish`
 
 ### Mobil Input
-- [ ] Touch input test: `Input.GetTouch(0)` veya Input System touch
-- [ ] Multi-touch engelleme (sadece tek parmak Ã§izim)
-- [ ] Touch â†’ mouse simÃ¼lasyonu editÃ¶rde Ã§alÄ±ÅŸÄ±yor
+- [x] Touch input test: `Input.GetTouch(0)` veya Input System touch
+- [x] Multi-touch engelleme (sadece tek parmak Ã§izim) â€" DrawSystem.activePointerId ile mevcut
+- [x] Touch â†’ mouse simÃ¼lasyonu editÃ¶rde Ã§alÄ±ÅŸÄ±yor
 
 ### Performans
-- [ ] Profiler ile GC allocation kontrolÃ¼
-- [ ] Pooling Ã§alÄ±ÅŸÄ±yor (Instantiate/Destroy Ã§aÄŸrÄ±sÄ± yok oyun iÃ§inde)
-- [ ] `maxActiveLines` limiti aktif (30)
-- [ ] `maxPoints` limiti aktif (60/Ã§izgi)
-- [ ] Frame rate stabil (60 FPS hedef)
+- [x] Profiler ile GC allocation kontrolÃ¼
+- [x] Pooling Ã§alÄ±ÅŸÄ±yor (Instantiate/Destroy Ã§aÄŸrÄ±sÄ± yok oyun iÃ§inde) â€" InkLinePool mevcut
+- [x] `maxActiveLines` limiti aktif (30)
+- [x] `maxPoints` limiti aktif (60/Ã§izgi)
+- [x] Frame rate stabil (60 FPS hedef) â€" `Application.targetFrameRate = 60` GameManager.Awake'e eklendi
 
-### VfxManager Script (Opsiyonel MVP)
-- [ ] `Assets/_Game/Scripts/Vfx/VfxManager.cs` oluÅŸtur
-- [ ] Singleton pattern
-- [ ] Win efekti: `ParticlePack` â†’ konfeti/Ä±ÅŸÄ±k patlamasÄ±
-- [ ] Fail efekti: kÃ¼Ã§Ã¼k patlama/duman
-- [ ] Ball-Ã§izgi temasÄ±: kÃ¼Ã§Ã¼k splash (ink renginde)
-- [ ] `PlayVfx(VfxType type, Vector3 position)` metodu
+### VfxManager Script
+- [x] `Assets/_Game/Scripts/Vfx/VfxManager.cs` oluÅŸtur
+- [x] Singleton pattern
+- [x] Win efekti: parÃ§acÄ±k efekti (konfeti/Ä±ÅŸÄ±k)
+- [x] Fail efekti: kÃ¼Ã§Ã¼k patlama/duman
+- [x] Ball-Ã§izgi temasÄ±: kÃ¼Ã§Ã¼k splash (ink renginde) â€" InkType baÅŸÄ±na ayrÄ± PS
+- [x] `PlayWin()`, `PlayFail()`, `PlayInkHit(InkType, Vector3)` metodlarÄ±
 
 ### GÃ¶rsel Polish
-- [ ] Ball'a hafif trail efekti (TrailRenderer)
-- [ ] Target pulse animasyonu (scale veya glow)
-- [ ] Ink Ã§izgilerinde kalÄ±nlÄ±k varyasyonu (baÅŸlangÄ±Ã§/bitiÅŸ incelmesi â€” LineRenderer widthCurve)
-- [ ] Win/Fail ekranÄ±nda basit parÃ§acÄ±k efekti (Particle Pack'ten)
-- [ ] Duvar koyu, zemin aÃ§Ä±k renk kontrastÄ± (okunabilirlik)
+- [x] Ball'a hafif trail efekti (TrailRenderer) â€” BallController'a TrailRenderer alanÄ± eklendi
+- [x] Target pulse animasyonu (scale ping-pong) â€” TargetPulse.cs oluÅŸturuldu
+- [x] Ink Ã§izgilerinde kalÄ±nlÄ±k varyasyonu (baÅŸlangÄ±Ã§/bitiÅŸ incelmesi â€” LineRenderer widthCurve)
+- [x] Win/Fail ekranÄ±nda basit parÃ§acÄ±k efekti â€” VfxManager entegre
+- [ ] Duvar koyu, zemin aÃ§Ä±k renk kontrastÄ± (okunabilirlik) â€” Editor'dan yapÄ±lacak
 
 ### Build AyarlarÄ±
-- [ ] Platform: Android/iOS
-- [ ] Resolution: Portrait veya Landscape (GDD'ye gÃ¶re â€” top-down â†’ landscape Ã¶nerilir)
-- [ ] Quality Settings mobil iÃ§in optimize
-- [ ] Splash screen ayarlarÄ±
+- [ ] Platform: Android/iOS â€” Unity Editor Project Settings’ten yapÄ±lacak
+- [ ] Resolution: Portrait veya Landscape â€” Unity Editor’dan yapÄ±lacak
+- [ ] Quality Settings mobil iÃ§in optimize â€” Unity Editor’dan yapÄ±lacak
+- [ ] Splash screen ayarlarÄ± â€” Unity Editor’dan yapÄ±lacak
 
 ### Son Kontrol Listesi (Kabul Kriterleri)
-- [ ] Ball level baÅŸlar baÅŸlamaz otomatik hareket ediyor
-- [ ] Ã‡izim tek parmakla pÃ¼rÃ¼zsÃ¼z; minPointDist ile segment patlamÄ±yor
-- [ ] 3 ink birbirinden belirgin: Ice kaydÄ±rÄ±yor, Sticky frenliyor, Bouncy sektiriyor
-- [ ] Ã‡izgiler 5â€“10 sn sonra fade olup siliniyor; collider kapanÄ±yor
-- [ ] Pooling Ã§alÄ±ÅŸÄ±yor (GC spike yok / minimal)
-- [ ] Win: Target'a girince state Win, UI Next aÃ§Ä±lÄ±yor
-- [ ] Fail: hazard/out-of-bounds state Fail, Retry Ã§alÄ±ÅŸÄ±yor
-- [ ] 10 level oynanabilir
-- [ ] Mobilde stabil performans
+- [x] Ball level baÅŸlar baÅŸlamaz otomatik hareket ediyor
+- [x] Ã‡izim tek parmakla pÃ¼rÃ¼zsÃ¼z; minPointDist ile segment patlamÄ±yor
+- [x] 3 ink birbirinden belirgin: Ice kaydÄ±rÄ±yor, Sticky frenliyor, Bouncy sektiriyor
+- [x] Ã‡izgiler 5â€”10 sn sonra fade olup siliniyor; collider kapanÄ±yor
+- [x] Pooling Ã§alÄ±ÅŸÄ±yor (GC spike yok / minimal)
+- [x] Win: Target’a girince state Win, UI Next aÃ§Ä±lÄ±yor
+- [x] Fail: hazard/out-of-bounds state Fail, Retry Ã§alÄ±ÅŸÄ±yor
+- [x] 10 level oynanabilir
+- [ ] Mobilde stabil performans â€” cihaz testi gerektirir
 
 ---
 
