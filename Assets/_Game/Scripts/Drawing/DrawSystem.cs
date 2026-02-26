@@ -28,6 +28,7 @@ namespace TriInkTrack.Drawing
         [SerializeField] private bool removeOldestLineWhenLimitReached = true;
         [SerializeField] private float lineLifetimeSeconds = 7f;
         [SerializeField] private float lineFadeDuration = 0.5f;
+        [SerializeField] private bool expireLinesOverTime = false;
 
         [Header("Play Area")]
         [SerializeField] private bool restrictDrawingToPlayArea = true;
@@ -480,6 +481,11 @@ namespace TriInkTrack.Drawing
         private void StartLineLifetime(InkLine line)
         {
             if (line == null)
+            {
+                return;
+            }
+
+            if (!expireLinesOverTime)
             {
                 return;
             }

@@ -470,13 +470,20 @@ namespace TriInkTrack.UI
 
             if (eventSystem == null)
             {
-                return;
+                GameObject eventSystemObject = new GameObject("EventSystem");
+                eventSystem = eventSystemObject.AddComponent<EventSystem>();
+            }
+
+            StandaloneInputModule legacyModule = eventSystem.GetComponent<StandaloneInputModule>();
+            if (legacyModule != null)
+            {
+                Object.Destroy(legacyModule);
             }
 
             InputSystemUIInputModule inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
             if (inputModule == null)
             {
-                return;
+                inputModule = eventSystem.gameObject.AddComponent<InputSystemUIInputModule>();
             }
 
             bool hasMissingRequiredActions =
