@@ -10,6 +10,9 @@ namespace TriInkTrack.Ink
 
         [SerializeField] private int totalInkPoints = 100;
         [SerializeField] private InkType currentInkType = InkType.Ice;
+        [SerializeField] private bool allowIce = true;
+        [SerializeField] private bool allowSticky = true;
+        [SerializeField] private bool allowBouncy = true;
 
         private int currentInkPoints;
 
@@ -18,6 +21,9 @@ namespace TriInkTrack.Ink
         public int CurrentInkPoints => currentInkPoints;
         public int TotalInkPoints => totalInkPoints;
         public InkType CurrentInkType => currentInkType;
+        public bool AllowIce => allowIce;
+        public bool AllowSticky => allowSticky;
+        public bool AllowBouncy => allowBouncy;
 
         private void Awake()
         {
@@ -78,6 +84,11 @@ namespace TriInkTrack.Ink
 
         public void SetInkType(InkType type)
         {
+            if (!IsInkAllowed(type))
+            {
+                return;
+            }
+
             if (currentInkType == type)
             {
                 return;
@@ -85,6 +96,37 @@ namespace TriInkTrack.Ink
 
             currentInkType = type;
             NotifyInkChanged();
+        }
+
+        public bool IsInkAllowed(InkType type)
+        {
+            return type switch
+            {
+                InkType.Ice => allowIce,
+                InkType.Sticky => allowSticky,
+                InkType.Bouncy => allowBouncy,
+                _ => true
+            };
+        }
+
+        public void ConfigureLevelInk(int inkBudget, bool iceAllowed, bool stickyAllowed, bool bouncyAllowed)
+        {
+            totalInkPoints = Mathf.Max(1, inkBudget);
+            allowIce = iceAllowed;
+            allowSticky = stickyAllowed;
+            allowBouncy = bouncyAllowed;
+
+            if (!allowIce && !allowSticky && !allowBouncy)
+            {
+                allowIce = true;
+            }
+
+            if (!IsInkAllowed(currentInkType))
+            {
+                currentInkType = ResolveFallbackInkType();
+            }
+
+            ResetInk();
         }
 
         private void HandleGameStateChanged(GameState state)
@@ -103,6 +145,21 @@ namespace TriInkTrack.Ink
             }
 
             totalInkPoints = Mathf.Max(1, GameManager.Instance.Config.TotalInkPoints);
+        }
+
+        private InkType ResolveFallbackInkType()
+        {
+            if (allowIce)
+            {
+                return InkType.Ice;
+            }
+
+            if (allowSticky)
+            {
+                return InkType.Sticky;
+            }
+
+            return InkType.Bouncy;
         }
 
         private void NotifyInkChanged()

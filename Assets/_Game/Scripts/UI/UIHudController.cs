@@ -53,6 +53,9 @@ namespace TriInkTrack.UI
         private CanvasGroup stickyCanvasGroup;
         private CanvasGroup bouncyCanvasGroup;
         private bool isPaused;
+        private bool allowIce = true;
+        private bool allowSticky = true;
+        private bool allowBouncy = true;
 
         private void Awake()
         {
@@ -152,6 +155,40 @@ namespace TriInkTrack.UI
             }
         }
 
+        public void SetInkAvailability(bool iceAllowed, bool stickyAllowed, bool bouncyAllowed)
+        {
+            allowIce = iceAllowed;
+            allowSticky = stickyAllowed;
+            allowBouncy = bouncyAllowed;
+
+            if (!allowIce && !allowSticky && !allowBouncy)
+            {
+                allowIce = true;
+            }
+
+            SetButtonVisible(iceButton, true);
+            SetButtonVisible(stickyButton, true);
+            SetButtonVisible(bouncyButton, true);
+
+            if (inkInventory != null && !inkInventory.IsInkAllowed(inkInventory.CurrentInkType))
+            {
+                if (allowIce)
+                {
+                    inkInventory.SetInkType(InkType.Ice);
+                }
+                else if (allowSticky)
+                {
+                    inkInventory.SetInkType(InkType.Sticky);
+                }
+                else
+                {
+                    inkInventory.SetInkType(InkType.Bouncy);
+                }
+            }
+
+            RefreshState();
+        }
+
         private void HandleGameStateChanged(GameState state)
         {
             if (state == GameState.Win || state == GameState.Fail)
@@ -235,17 +272,17 @@ namespace TriInkTrack.UI
         {
             if (iceButton != null)
             {
-                iceButton.interactable = interactable;
+                iceButton.interactable = interactable && allowIce;
             }
 
             if (stickyButton != null)
             {
-                stickyButton.interactable = interactable;
+                stickyButton.interactable = interactable && allowSticky;
             }
 
             if (bouncyButton != null)
             {
-                bouncyButton.interactable = interactable;
+                bouncyButton.interactable = interactable && allowBouncy;
             }
         }
 
@@ -409,6 +446,19 @@ namespace TriInkTrack.UI
             }
         }
 
+        private static void SetButtonVisible(Button button, bool visible)
+        {
+            if (button == null)
+            {
+                return;
+            }
+
+            if (button.gameObject.activeSelf != visible)
+            {
+                button.gameObject.SetActive(visible);
+            }
+        }
+
         private static void EnsureEventSystemInputBindings()
         {
 #if ENABLE_INPUT_SYSTEM
@@ -420,13 +470,20 @@ namespace TriInkTrack.UI
 
             if (eventSystem == null)
             {
-                return;
+                GameObject eventSystemObject = new GameObject("EventSystem");
+                eventSystem = eventSystemObject.AddComponent<EventSystem>();
+            }
+
+            StandaloneInputModule legacyModule = eventSystem.GetComponent<StandaloneInputModule>();
+            if (legacyModule != null)
+            {
+                Object.Destroy(legacyModule);
             }
 
             InputSystemUIInputModule inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
             if (inputModule == null)
             {
-                return;
+                inputModule = eventSystem.gameObject.AddComponent<InputSystemUIInputModule>();
             }
 
             bool hasMissingRequiredActions =

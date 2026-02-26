@@ -28,6 +28,7 @@ namespace TriInkTrack.Drawing
         [SerializeField] private bool removeOldestLineWhenLimitReached = true;
         [SerializeField] private float lineLifetimeSeconds = 7f;
         [SerializeField] private float lineFadeDuration = 0.5f;
+        [SerializeField] private bool expireLinesOverTime = false;
 
         [Header("Play Area")]
         [SerializeField] private bool restrictDrawingToPlayArea = true;
@@ -484,6 +485,11 @@ namespace TriInkTrack.Drawing
                 return;
             }
 
+            if (!expireLinesOverTime)
+            {
+                return;
+            }
+
             InkLineLifetime lifetime = line.GetComponent<InkLineLifetime>();
             if (lifetime == null)
             {
@@ -585,6 +591,11 @@ namespace TriInkTrack.Drawing
                 computedPlayAreaBounds = bounds;
                 hasComputedPlayAreaBounds = true;
             }
+        }
+
+        public void RebuildPlayAreaBounds()
+        {
+            ResolvePlayAreaBoundsIfNeeded();
         }
     }
 }

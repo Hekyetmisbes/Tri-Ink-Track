@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1241827603888685302
+--- !u!1 &7553678524969591471
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1893702307743300358}
-  - component: {fileID: 8991788574205130638}
-  - component: {fileID: 8127813515236029952}
-  - component: {fileID: 8555783560855855951}
+  - component: {fileID: 4106937660663297645}
+  - component: {fileID: 3632724206235750867}
+  - component: {fileID: 7612576210702139388}
+  - component: {fileID: 7119753164423352260}
   m_Layer: 0
   m_Name: InkLine
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1893702307743300358
+--- !u!4 &4106937660663297645
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241827603888685302}
+  m_GameObject: {fileID: 7553678524969591471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,14 +34,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &8991788574205130638
+--- !u!120 &3632724206235750867
 LineRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241827603888685302}
+  m_GameObject: {fileID: 7553678524969591471}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -151,13 +151,13 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!68 &8127813515236029952
+--- !u!68 &7612576210702139388
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241827603888685302}
+  m_GameObject: {fileID: 7553678524969591471}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -194,13 +194,13 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &8555783560855855951
+--- !u!114 &7119753164423352260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241827603888685302}
+  m_GameObject: {fileID: 7553678524969591471}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6f4f715bcf4d1ba59f3fcbdd41940a, type: 3}
@@ -211,11 +211,11 @@ MonoBehaviour:
   lineWidth: 0.1
   roundCapVertices: 8
   roundCornerVertices: 6
-  iceColor: {r: 0, g: 0.7490196, b: 1, a: 1}
-  stickyColor: {r: 1, g: 0.54901963, b: 0, a: 1}
-  bouncyColor: {r: 0.19607843, g: 0.8039216, b: 0.19607843, a: 1}
+  iceColor: {r: 0, g: 0.749, b: 1, a: 1}
+  stickyColor: {r: 1, g: 0.549, b: 0, a: 1}
+  bouncyColor: {r: 0.196, g: 0.804, b: 0.196, a: 1}
   maxPoints: 60
   currentType: 0
-  iceMaterial: {fileID: 6200000, guid: b6762c2e4a11dd24590696c56f18e1a9, type: 2}
-  stickyMaterial: {fileID: 6200000, guid: f22adc4f7d73d164a9523a0c538d3af2, type: 2}
-  bouncyMaterial: {fileID: 6200000, guid: df87b52f0abcbe247a25bb8117e8f825, type: 2}
+  iceMaterial: {fileID: 0}
+  stickyMaterial: {fileID: 0}
+  bouncyMaterial: {fileID: 0}

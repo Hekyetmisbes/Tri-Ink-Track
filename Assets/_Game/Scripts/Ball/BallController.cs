@@ -18,6 +18,7 @@ namespace TriInkTrack.Ball
         private Rigidbody2D rb;
         private Vector3 spawnPosition;
         private Vector2 spawnDirection;
+        private Vector2 moveDirection;
         private Camera gameplayCamera;
 
         private const string HazardTag = "Hazard";
@@ -26,8 +27,10 @@ namespace TriInkTrack.Ball
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
             gameplayCamera = Camera.main;
             CacheSpawnData();
+            moveDirection = GetFallbackDirection();
         }
 
         private void OnEnable()
@@ -65,15 +68,15 @@ namespace TriInkTrack.Ball
 
             if (speed < minSpeedThreshold)
             {
-                Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
-                rb.linearVelocity = fallback.normalized * minSpeedThreshold;
-                return;
+                Vector2 fallback = moveDirection.sqrMagnitude > 0f ? moveDirection : GetFallbackDirection();
+                rb.linearVelocity = fallback.normalized * targetSpeed;
             }
-
-            if (speed > maxSpeed)
+            else
             {
                 Vector2 normalized = velocity / speed;
-                rb.linearVelocity = normalized * maxSpeed;
+                float desiredSpeed = Mathf.Min(targetSpeed, maxSpeed);
+                rb.linearVelocity = normalized * desiredSpeed;
+                moveDirection = normalized;
             }
 
             if (failWhenOutOfCameraBounds && IsOutOfBounds())
@@ -89,7 +92,27 @@ namespace TriInkTrack.Ball
             rb.angularVelocity = 0f;
 
             Vector2 fallback = spawnDirection.sqrMagnitude > 0f ? spawnDirection : initialDirection;
-            rb.linearVelocity = fallback.normalized * targetSpeed;
+            moveDirection = fallback.sqrMagnitude > 0f ? fallback.normalized : Vector2.right;
+            rb.linearVelocity = moveDirection * targetSpeed;
+        }
+
+        public void RefreshSpawnPointFromScene(bool resetBall = true)
+        {
+            CacheSpawnData();
+            if (resetBall)
+            {
+                ResetBall();
+            }
+        }
+
+        public void SetSpawnData(Vector3 position, Vector2 direction, bool resetBall = true)
+        {
+            spawnPosition = position;
+            spawnDirection = direction.sqrMagnitude > 0f ? direction.normalized : initialDirection.normalized;
+            if (resetBall)
+            {
+                ResetBall();
+            }
         }
 
         private bool CanMove()
@@ -184,6 +207,21 @@ namespace TriInkTrack.Ball
             }
 
             GameManager.Instance.OnFail();
+        }
+
+        private Vector2 GetFallbackDirection()
+        {
+            if (spawnDirection.sqrMagnitude > 0f)
+            {
+                return spawnDirection.normalized;
+            }
+
+            if (initialDirection.sqrMagnitude > 0f)
+            {
+                return initialDirection.normalized;
+            }
+
+            return Vector2.right;
         }
 
         private static void EnsureBoundarySystemExists()
