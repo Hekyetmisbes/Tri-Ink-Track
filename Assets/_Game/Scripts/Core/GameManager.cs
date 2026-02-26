@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TriInkTrack.Core
 {
@@ -17,6 +18,7 @@ namespace TriInkTrack.Core
 
         [SerializeField] private GameConfig config;
         [SerializeField] private bool autoStartOnSceneLoad = true;
+        [SerializeField] private bool reloadSceneOnRetry = true;
 
         public GameState CurrentState { get; private set; }
         public event Action<GameState> OnGameStateChanged;
@@ -72,12 +74,29 @@ namespace TriInkTrack.Core
 
         public void Retry()
         {
+            if (reloadSceneOnRetry)
+            {
+                Time.timeScale = 1f;
+                Scene activeScene = SceneManager.GetActiveScene();
+                if (activeScene.buildIndex >= 0)
+                {
+                    SceneManager.LoadScene(activeScene.buildIndex);
+                }
+                else
+                {
+                    SceneManager.LoadScene(activeScene.name);
+                }
+                return;
+            }
+
             SetState(GameState.Ready);
+            StartGame();
         }
 
         public void NextLevel()
         {
             SetState(GameState.Ready);
+            StartGame();
         }
     }
 }

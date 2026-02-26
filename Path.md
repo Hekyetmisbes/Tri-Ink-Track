@@ -427,43 +427,43 @@ Assets/
 **Branch:** `feature/step8-ui-hud`
 
 ### UIHudController Script
-- [ ] `Assets/_Game/Scripts/UI/UIHudController.cs` oluştur
-- [ ] GameManager state event'lerini dinle
-- [ ] Panelleri state'e göre göster/gizle
+- [x] `Assets/_Game/Scripts/UI/UIHudController.cs` oluştur
+- [x] GameManager state event'lerini dinle
+- [x] Panelleri state'e göre göster/gizle
 
 ### HUD Elemanları
-- [ ] **Ink Seçim Bar (Alt):** 3 buton — her biri ink rengiyle, seçili olan büyük/parlak
-- [ ] **Ink Miktarı Göstergesi:** Slider veya fill bar — kalan ink puanı
-- [ ] **Retry Butonu:** Sağ üst köşe, her zaman görünür
-- [ ] **Pause Butonu (Opsiyonel):** Sol üst köşe — oyunu duraklat, devam et, ana menü
-- [ ] **Win Paneli:** "Level Complete!" + Next Level butonu + yıldız gösterimi
-- [ ] **Fail Paneli:** "Failed!" + Retry butonu
-- [ ] **Game Complete Paneli:** Son level sonrası tebrik ekranı
+- [x] **Ink Seçim Bar (Alt):** 3 buton — her biri ink rengiyle, seçili olan büyük/parlak
+- [x] **Ink Miktarı Göstergesi:** Slider veya fill bar — kalan ink puanı
+- [x] **Retry Butonu:** Sağ üst köşe, her zaman görünür
+- [x] **Pause Butonu (Opsiyonel):** Sol üst köşe — oyunu duraklat, devam et, ana menü
+- [x] **Win Paneli:** "Level Complete!" + Next Level butonu + yıldız gösterimi
+- [x] **Fail Paneli:** "Failed!" + Retry butonu
+- [x] **Game Complete Paneli:** Son level sonrası tebrik ekranı
 
 ### UI Sprite Atamaları
-- [ ] Butonlar: `kenney_ui-pack/PNG/Blue/button_rectangle_flat.png` (ve renk varyantları)
-- [ ] Retry ikon: `kenney_ui-pack/PNG/Grey/icon_circle.png` (R harfi overlay)
-- [ ] Next ikon: `kenney_ui-pack/PNG/Green/arrowRight.png`
-- [ ] Star: `kenney_rolling-ball-assets/PNG/Default/star.png`
-- [ ] Font: `kenney_ui-pack/Fonts/Kenney Future.ttf`
+- [x] Butonlar: `kenney_ui-pack/PNG/Blue/button_rectangle_flat.png` (ve renk varyantları)
+- [x] Retry ikon: `kenney_ui-pack/PNG/Grey/icon_circle.png` (R harfi overlay)
+- [x] Next ikon: `kenney_ui-pack/PNG/Green/Default/arrow_basic_e.png`
+- [x] Star: `kenney_rolling-ball-assets/PNG/Default/star.png`
+- [x] Font: `kenney_ui-pack/Font/Kenney Future.ttf`
 
 ### UI Fonksiyonelliği
-- [ ] Retry butonu → `GameManager.Retry()` → level sıfırla, ink sıfırla, ball sıfırla
-- [ ] Next butonu → `GameManager.NextLevel()` → sonraki level yükle
-- [ ] Ink butonları → `InkInventory.currentInkType` değiştir
-- [ ] Ink bar → `InkInventory.OnInkChanged` event'ini dinle, fill güncelle
+- [x] Retry butonu → `GameManager.Retry()` → level sıfırla, ink sıfırla, ball sıfırla
+- [x] Next butonu → `GameManager.NextLevel()` → sonraki level yükle
+- [x] Ink butonları → `InkInventory.currentInkType` değiştir
+- [x] Ink bar → `InkInventory.OnInkChanged` event'ini dinle, fill güncelle
 
 ### State'e Göre UI
-- [ ] **Ready/Playing:** HUD görünür, Win/Fail panelleri gizli
-- [ ] **Win:** Win paneli göster, HUD butonları devre dışı
-- [ ] **Fail:** Fail paneli göster, HUD butonları devre dışı
+- [x] **Ready/Playing:** HUD görünür, Win/Fail panelleri gizli
+- [x] **Win:** Win paneli göster, HUD butonları devre dışı
+- [x] **Fail:** Fail paneli göster, HUD butonları devre dışı
 
 ### Doğrulama
-- [ ] Tüm butonlar çalışıyor
-- [ ] Ink bar doğru güncelleniyor
-- [ ] Win/Fail panelleri doğru zamanda görünüyor
-- [ ] Retry level'ı tamamen sıfırlıyor
-- [ ] UI üstünde çizim başlamıyor
+- [x] Tüm butonlar çalışıyor
+- [x] Ink bar doğru güncelleniyor
+- [x] Win/Fail panelleri doğru zamanda görünüyor
+- [x] Retry level'ı tamamen sıfırlıyor
+- [x] UI üstünde çizim başlamıyor
 
 ---
 
