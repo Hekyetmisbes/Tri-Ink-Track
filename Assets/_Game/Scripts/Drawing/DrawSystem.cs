@@ -1,3 +1,4 @@
+using TriInkTrack.Audio;
 using TriInkTrack.Core;
 using TriInkTrack.Ink;
 using System;
@@ -274,6 +275,8 @@ namespace TriInkTrack.Drawing
             lastPoint = worldPoint;
             activePointerId = pointerId;
             isDrawing = true;
+
+            AudioManager.Instance?.PlayDrawStart();
         }
 
         private void ContinueDrawing(Vector2 screenPosition)
@@ -338,6 +341,7 @@ namespace TriInkTrack.Drawing
             {
                 activeLine.LockLine();
                 StartLineLifetime(activeLine);
+                AudioManager.Instance?.PlayDrawEnd();
             }
 
             ResetDrawingState();

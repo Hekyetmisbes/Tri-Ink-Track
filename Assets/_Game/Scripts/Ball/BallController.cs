@@ -1,4 +1,7 @@
+using TriInkTrack.Audio;
 using TriInkTrack.Core;
+using TriInkTrack.Drawing;
+using TriInkTrack.Ink;
 using TriInkTrack.Level;
 using UnityEngine;
 
@@ -23,6 +26,9 @@ namespace TriInkTrack.Ball
 
         private const string HazardTag = "Hazard";
         private const string BoundaryTag = "Boundary";
+        private const float BouncyHitCooldown = 0.12f;
+
+        private float nextBouncyHitTime;
 
         private void Awake()
         {
@@ -153,6 +159,21 @@ namespace TriInkTrack.Ball
             if (state == GameState.Ready)
             {
                 ResetBall();
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (Time.time < nextBouncyHitTime)
+            {
+                return;
+            }
+
+            InkLine inkLine = collision.collider.GetComponent<InkLine>();
+            if (inkLine != null && inkLine.CurrentType == InkType.Bouncy)
+            {
+                AudioManager.Instance?.PlayBouncyHit();
+                nextBouncyHitTime = Time.time + BouncyHitCooldown;
             }
         }
 

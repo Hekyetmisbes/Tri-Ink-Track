@@ -1,4 +1,5 @@
 using System;
+using TriInkTrack.Audio;
 using TriInkTrack.Core;
 using UnityEngine;
 
@@ -96,6 +97,7 @@ namespace TriInkTrack.Ink
 
             currentInkType = type;
             NotifyInkChanged();
+            AudioManager.Instance?.PlayInkSwitch();
         }
 
         public bool IsInkAllowed(InkType type)

@@ -1,4 +1,5 @@
 using System;
+using TriInkTrack.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -55,6 +56,16 @@ namespace TriInkTrack.Core
         {
             CurrentState = newState;
             OnGameStateChanged?.Invoke(newState);
+
+            if (newState == GameState.Win)
+            {
+                AudioManager.Instance?.PlayWin();
+            }
+            else if (newState == GameState.Fail)
+            {
+                AudioManager.Instance?.PlayFail();
+            }
+
 #if UNITY_EDITOR
             Debug.Log($"[GameManager] State: {newState}");
 #endif
