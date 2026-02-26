@@ -53,7 +53,17 @@ namespace TriInkTrack.EditorTools
 
         private static void AddTargetPulseToTargets()
         {
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+            GameObject[] targets;
+            try
+            {
+                targets = GameObject.FindGameObjectsWithTag("Target");
+            }
+            catch (UnityException)
+            {
+                Debug.LogWarning("[Step11SetupTool] Tag 'Target' is not defined. Add it via Edit > Project Settings > Tags and Layers, then re-run this tool.");
+                return;
+            }
+
             int added = 0;
             foreach (GameObject target in targets)
             {
