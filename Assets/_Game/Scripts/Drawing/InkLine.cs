@@ -151,6 +151,7 @@ namespace TriInkTrack.Drawing
                 new Keyframe(1f, 0.6f)
             );
             lineRenderer.widthCurve = widthCurve;
+            lineRenderer.widthMultiplier = lineWidth;
 
             if (lineRenderer.sharedMaterial == null)
             {
