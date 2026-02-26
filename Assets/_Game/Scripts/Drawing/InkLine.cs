@@ -144,6 +144,14 @@ namespace TriInkTrack.Drawing
             lineRenderer.numCornerVertices = roundCornerVertices;
             lineRenderer.alignment = LineAlignment.View;
 
+            AnimationCurve widthCurve = new AnimationCurve(
+                new Keyframe(0f, 0.6f),
+                new Keyframe(0.12f, 1f),
+                new Keyframe(0.88f, 1f),
+                new Keyframe(1f, 0.6f)
+            );
+            lineRenderer.widthCurve = widthCurve;
+
             if (lineRenderer.sharedMaterial == null)
             {
                 Shader shader = Shader.Find("Sprites/Default");
